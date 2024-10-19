@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { FaDiscord, FaInstagram, FaLinkedin, FaThreads } from "react-icons/fa6";
 import { GiRoundStar } from "react-icons/gi";
 import Link from "next/link";
-import { useState } from "react";
 
 export default function Home() {
   // Variáveis para animações
