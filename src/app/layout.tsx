@@ -1,11 +1,14 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import NavbarComponent from "./components/navbar/NavbarComponent";
 import WhatsAppButton from "./components/Whatsapp";
 
+
+export const viewport: Viewport = {
+  themeColor: "#4F46E5",
+}
 export const metadata: Metadata = {
   title: "Spacefy - Soluções Digitais",
-    themeColor: "#4F46E5",
   description:
     "Explorando novos horizontes digitais. Inove com tecnologia de ponta e leve sua visão além do esperado com a Spacefy.",
   alternates: {
@@ -30,7 +33,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     title: "Spacefy - Soluções Digitais",
-   description:
+    description:
       "Explorando novos horizontes digitais. Inove com tecnologia de ponta e leve sua visão além do esperado com a Spacefy.",
     card: "summary_large_image",
     images: ["/logo/website-banner.png"],
@@ -44,6 +47,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-br">
+
       <body>
         <NavbarComponent />
 
