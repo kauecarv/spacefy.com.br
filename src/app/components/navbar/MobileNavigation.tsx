@@ -35,13 +35,12 @@ const MobileNavigation = () => {
       >
         <button
           className="py-3 px-3 bg-[#101010] rounded-xl border border-[#272727] inline-flex items-center"
-          id="ButtonMobile"
           onClick={() => setIsOpen(!isOpen)}
         >
           {isOpen ? (
-            <IoMdCloseCircle className="text-white" size={20} id="CloseMenu" />
+            <IoMdCloseCircle className="text-white" size={20} />
           ) : (
-            <AiOutlineMenu className="text-white" size={16} id="OpenMenu" />
+            <AiOutlineMenu className="text-white" size={16}  />
           )}
         </button>
       </motion.ul>
