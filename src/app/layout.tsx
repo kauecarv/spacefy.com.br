@@ -20,8 +20,8 @@ export const metadata: Metadata = {
   keywords: ["spacefy", "soluções digitais"],
   openGraph: {
     title: "Spacefy - Soluções Digitais",
-    siteName: "Spacefy",
-    url: "https://embermarket.com.br",
+    siteName: "Spacefy - Solução Rápida e Eficaz",
+    url: "https://spacefy.com.br",
     locale: "pt_BR",
     description:
       "Explorando novos horizontes digitais. Inove com tecnologia de ponta e leve sua visão além do esperado com a Spacefy.",

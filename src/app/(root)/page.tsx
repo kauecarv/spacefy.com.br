@@ -99,7 +99,7 @@ export default function Home() {
                 height={10}
                   src="https://randomuser.me/api/portraits/men/32.jpg"
                   alt="Avatar 1"
-                  className="w-10 h-10 rounded-full border-2 border-[#101010]"
+                  className="w-10 h-10 transition duration-200 hover:border-spacefy rounded-full border-2 border-[#101010]"
               
                 />
               </Link>
@@ -110,7 +110,7 @@ export default function Home() {
                 height={10}
                   src="https://randomuser.me/api/portraits/women/44.jpg"
                   alt="Avatar 2"
-                  className="w-10 h-10 rounded-full border-2 border-[#101010]"
+                  className="w-10 h-10  transition duration-200 hover:border-spacefy rounded-full border-2 border-[#101010]"
                 />
               </Link>
 
@@ -120,7 +120,7 @@ export default function Home() {
                 height={10}
                   src="https://randomuser.me/api/portraits/men/52.jpg"
                   alt="Avatar 3"
-                  className="w-10 h-10 rounded-full border-2 border-[#101010]"
+                  className="w-10 h-10 transition duration-200 hover:border-spacefy rounded-full border-2 border-[#101010]"
                 />
               </Link>
 
@@ -130,7 +130,7 @@ export default function Home() {
                 height={10}
                   src="https://randomuser.me/api/portraits/men/64.jpg"
                   alt="Avatar 4"
-                  className="w-10 h-10 rounded-full border-2 border-[#101010]"
+                  className="w-10 h-10 transition duration-200 hover:border-spacefy rounded-full border-2 border-[#101010]"
                 />
               </Link>
             </div>
