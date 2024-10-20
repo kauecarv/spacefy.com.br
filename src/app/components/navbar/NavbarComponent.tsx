@@ -16,7 +16,7 @@ const NavbarComponent = () => {
         <div className="hidden xl:block absolute top-0 left-0 w-1/2 h-full">
           <Image
             src="/assets/blurs/white.png"
-            alt="blur"
+            alt="Blur Branco"
             width={64}
             height={64}
             className="absolute top-[-350px] left-[-190px] !w-full h-[850px] object-cover opacity-70 mix-blend-lighten"
@@ -25,7 +25,7 @@ const NavbarComponent = () => {
         <div className="hidden xl:block absolute top-0 right-0 w-full h-full">
           <Image
             src="/assets/blurs/purple.png"
-            alt="purple blur"
+            alt="Blur Roxo"
             width={64}
             height={64}
             className="absolute top-[-100px] right-[-240px] !w-[600px] h-[600px] object-cover opacity-60 mix-blend-lighten"
