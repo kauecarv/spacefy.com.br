@@ -8,12 +8,11 @@ import MobileNavigation from "./MobileNavigation";
 import NavbarNavigation from "./Navigation";
 
 const NavbarComponent = () => {
-  const userAdmin = false;
+  const userAdmin = true;
 
   return (
     <>
       <header className="w-full bg-black py-6 relative z-10">
-        {/* Imagens Blur Desktop */}
         <div className="hidden xl:block absolute top-0 left-0 w-1/2 h-full">
           <Image
             src="/assets/blurs/white.png"
@@ -33,24 +32,17 @@ const NavbarComponent = () => {
           />
         </div>
         <div className="flex flex-wrap gap-4 xs:gap-0 items-center justify-center xl:justify-around py-4 h-fit px-4 md:px-24">
-          {/* Logo Navbar*/}
-
           <NavbarLogo />
 
           <div className="block xl:hidden px-8">
-            {/* Navegação no Mobile */}
-
             <MobileNavigation />
           </div>
 
           <div className="hidden xl:flex items-center gap-4">
-            {/* Navegação no Desktop */}
-
             <NavbarNavigation />
           </div>
 
-          {/* Botão de Fazer Orçamento / Painel Admin */}
-          <div className="flex gap-3">
+          <div className="flex gap-2">
             <MakeBudge />
 
             {userAdmin ? <AdminButton /> : null}

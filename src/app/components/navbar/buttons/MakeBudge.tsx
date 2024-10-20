@@ -1,4 +1,4 @@
-"use client";  // Garante que este componente seja renderizado no lado do cliente
+"use client";  
 
 import { motion } from "framer-motion";
 import Link from "next/link";

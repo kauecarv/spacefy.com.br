@@ -1,26 +1,26 @@
-"use client";  // Garante que este componente seja renderizado no lado do cliente
+"use client"; 
 
 import { motion } from "framer-motion";
+import { BsIncognito } from "react-icons/bs";
 import Link from "next/link";
-import { FaUserAstronaut } from "react-icons/fa6";
 
 const AdminButton = () => {
   return (
     <motion.div
-      initial={{ opacity: 0, y: -20 }}  // Entrada semelhante à logo
-      animate={{ opacity: 1, y: 0 }}  // Chegada suave
+      initial={{ opacity: 0, y: -20 }}  
+      animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3, ease: "easeOut" }}
     >
       <Link
         href="/wppcontact"
-        className="py-3 px-5 hidden xs:inline-flex bg-white text-black rounded-xl text-sm font-poppins font-medium items-center gap-2 transition duration-300 hover:scale-105 hover:bg-spacefy hover:text-white"  // Escala e mudança de fundo no hover
+        className="py-2.5 px-5 sm:py-3.5 hidden xs:inline-flex bg-white text-black rounded-xl text-md font-poppins font-medium items-center gap-2 transition duration-300 hover:scale-105 hover:bg-spacefy hover:text-white"  // Escala e mudança de fundo no hover
       >
         <motion.div
     
         >
-          <FaUserAstronaut />
+          <BsIncognito />
         </motion.div> 
-        Painel
+      
       </Link>
     </motion.div>
   );
