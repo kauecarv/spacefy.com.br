@@ -35,12 +35,13 @@ const MobileNavigation = () => {
       >
         <button
           className="py-3 px-3 bg-[#101010] rounded-xl border border-[#272727] inline-flex items-center"
+          id="ButtonMobile"
           onClick={() => setIsOpen(!isOpen)}
         >
           {isOpen ? (
-            <IoMdCloseCircle className="text-white" size={20} />
+            <IoMdCloseCircle className="text-white" size={20} id="CloseMenu" />
           ) : (
-            <AiOutlineMenu className="text-white" size={16} />
+            <AiOutlineMenu className="text-white" size={16} id="OpenMenu" />
           )}
         </button>
       </motion.ul>
@@ -48,7 +49,7 @@ const MobileNavigation = () => {
       {isOpen && (
         <>
           <motion.div
-            className="fixed inset-0 bg-black bg-opacity-60 z-40"
+            className="fixed inset-0 bg-black  z-40"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
@@ -56,7 +57,7 @@ const MobileNavigation = () => {
           />
 
           <motion.div
-            className="fixed inset-0 bg-[#101010] z-50 p-6 flex flex-col justify-center items-center"
+            className="fixed inset-0 bg-black z-50 p-6 flex flex-col justify-center items-center"
             initial="hidden"
             animate="visible"
             exit="hidden"
@@ -80,6 +81,7 @@ const MobileNavigation = () => {
               animate="visible"
               variants={staggerVariants}
               custom={0} 
+              id="CloseMenuMobile"
             >
               <IoMdCloseCircle size={24} />
             </motion.button>
@@ -111,6 +113,7 @@ const MobileNavigation = () => {
                 >
                   <Link
                     href="/"
+                    id="LinkNavigation"
                     className="flex items-center justify-center text-white transition hover:text-[#4F46E5] hover:before:absolute hover:before:bottom-0 hover:before:left-0 hover:before:w-full hover:before:h-[2px] hover:before:bg-[#4F46E5]"
                   >
                     {item}
@@ -127,7 +130,7 @@ const MobileNavigation = () => {
               custom={6}
             >
               <Link
-                href="/wppcontact"
+                href="/"
                 className="py-2 px-3 inline-flex mb-2 bg-white text-black rounded-xl text-sm font-poppins font-medium items-center gap-2 " 
               >
           
