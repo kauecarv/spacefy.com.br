@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import "./globals.css";
 import NavbarComponent from "./components/navbar/NavbarComponent";
 import WhatsAppButton from "./components/Whatsapp";
