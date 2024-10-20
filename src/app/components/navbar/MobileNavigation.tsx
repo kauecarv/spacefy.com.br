@@ -80,7 +80,6 @@ const MobileNavigation = () => {
               animate="visible"
               variants={staggerVariants}
               custom={0} 
-              id="CloseMenuMobile"
             >
               <IoMdCloseCircle size={24} />
             </motion.button>
@@ -112,7 +111,6 @@ const MobileNavigation = () => {
                 >
                   <Link
                     href="/"
-                    id="LinkNavigation"
                     className="flex items-center justify-center text-white transition hover:text-[#4F46E5] hover:before:absolute hover:before:bottom-0 hover:before:left-0 hover:before:w-full hover:before:h-[2px] hover:before:bg-[#4F46E5]"
                   >
                     {item}

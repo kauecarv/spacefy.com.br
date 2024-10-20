@@ -13,7 +13,6 @@ const AdminButton = () => {
     >
       <Link
         href="/"
-        id="ButtonPainelAdmin"
         className="py-2.5 px-5 sm:py-3.5 hidden xs:inline-flex bg-white text-black rounded-xl text-md font-poppins font-medium items-center gap-2 transition duration-300 hover:scale-105 hover:bg-spacefy hover:text-white"  // Escala e mudança de fundo no hover
       >
         <motion.div

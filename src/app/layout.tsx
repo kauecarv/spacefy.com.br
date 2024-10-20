@@ -2,11 +2,25 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import NavbarComponent from "./components/navbar/NavbarComponent";
 import WhatsAppButton from "./components/Whatsapp";
+import { DM_Sans, Poppins } from "next/font/google";
 
+
+const dmsans = DM_Sans({
+  subsets: ['latin'],
+  weight: ['200', '300', '400', '500', '600', '700'],
+  variable: '--font-dmsans', 
+});
+
+const poppins = Poppins({
+  subsets: ['latin'],
+  weight: ['200', '300', '400', '500', '600', '700'],
+  variable: '--font-poppins', 
+});
 
 export const viewport: Viewport = {
   themeColor: "#4F46E5",
 }
+
 export const metadata: Metadata = {
   title: "Spacefy - Soluções Digitais",
   description:
@@ -40,17 +54,18 @@ export const metadata: Metadata = {
   },
 };
 
+
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-br">
+    <html lang="pt-br" className={`${poppins.variable} ${dmsans.variable}`}>
 
-      <body>
+      <body  className={`${poppins.variable} ${dmsans.variable}`}>
         <NavbarComponent />
-
         {children}
         <WhatsAppButton />
       </body>
