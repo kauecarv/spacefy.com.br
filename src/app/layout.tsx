@@ -5,6 +5,7 @@ import WhatsAppButton from "./components/Whatsapp";
 
 export const metadata: Metadata = {
   title: "Spacefy - Soluções Digitais",
+    themeColor: "#4F46E5",
   description:
     "Explorando novos horizontes digitais. Inove com tecnologia de ponta e leve sua visão além do esperado com a Spacefy.",
   alternates: {
