@@ -2,8 +2,14 @@
 
 import { motion } from "framer-motion";
 import { BsStars } from "react-icons/bs";
+import { useInView } from "react-intersection-observer";
 
 export default function AboutUs() {
+  const [ref, inView] = useInView({
+    threshold: 0.2,
+    triggerOnce: false
+  });
+
   const containerVariants = {
     hidden: { opacity: 0, y: 50 },
     visible: { 
@@ -29,12 +35,11 @@ export default function AboutUs() {
   };
 
   return (
-    <section className="bg-black py-4 px-6 lg:py-10 z-10">
+    <section ref={ref} className="bg-black py-4 px-6 lg:py-10 z-10">
       <motion.div
         variants={containerVariants}
         initial="hidden"
-        whileInView="visible"
-        viewport={{ once: false, amount: 0.3 }}
+        animate={inView ? "visible" : "hidden"}
         className="mx-auto justify-center flex flex-col lg:flex-row bg-white rounded-xl p-4 lg:p-10 w-full max-w-5xl"
       >
         <div className="flex flex-col lg:flex-row space-y-6 lg:space-y-0 lg:space-x-24 flex-grow text-black">

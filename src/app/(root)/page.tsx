@@ -7,6 +7,7 @@ import { GiRoundStar } from "react-icons/gi";
 import Image from "next/image";
 import MoreSales from "./sections/more-sales/page";
 import AboutUs from "./sections/about-us/page";
+import Features from "./sections/features/page";
 
 const words = ["Inovador", "Exclusivo", "Moderno", "Eficiente"];
 
@@ -275,6 +276,7 @@ export default function Home() {
 
         <MoreSales />
         <AboutUs />
+        <Features/>
  </main>
   );
 }
