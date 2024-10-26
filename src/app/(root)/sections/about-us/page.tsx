@@ -1,3 +1,5 @@
+"use client"
+
 import { motion } from "framer-motion";
 import { BsStars } from "react-icons/bs";
 
