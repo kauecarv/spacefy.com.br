@@ -1,6 +1,5 @@
 "use client"
 
-import { BsStars } from "react-icons/bs";
 import { useMediaQuery } from 'react-responsive';
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
