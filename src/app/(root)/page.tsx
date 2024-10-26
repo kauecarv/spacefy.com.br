@@ -5,6 +5,8 @@ import { motion } from "framer-motion";
 import { FaDiscord, FaInstagram, FaLinkedin, FaThreads } from "react-icons/fa6";
 import { GiRoundStar } from "react-icons/gi";
 import Image from "next/image";
+import MoreSales from "./sections/more-sales/page";
+import AboutUs from "./sections/about-us/page";
 
 const words = ["Inovador", "Exclusivo", "Moderno", "Eficiente"];
 
@@ -55,8 +57,8 @@ export default function Home() {
   };
 
   return (
-    <>
-      <section className="flex  flex-col md:flex-row justify-start w-full max-w-5xl mx-auto items-center py-4 px-4 min-h-fit bg-black relative">
+    <main className="flex flex-col items-center justify-between">
+      <section className="flex flex-col md:flex-row justify-start w-full max-w-5xl mx-auto items-center py-4 px-4 min-h-fit bg-black relative">
         <motion.div
           className="absolute inset-0 flex items-center justify-center z-0 translate-y-[190px]"
           initial="hidden"
@@ -64,14 +66,14 @@ export default function Home() {
           variants={fadeInDelayed}
           transition={{ delay: 1.5, duration: 0.8, ease: "easeOut" }}
         >
-          <p className="font-poppins uppercase font-semibold text-transparent bg-clip-text bg-gradient-to-b from-transparent to-[#4F46E8] text-[90px] sm:text[110px] md:text-[300px] leading-[0.9]">
+          <p className="font-poppins uppercase font-semibold text-transparent bg-clip-text bg-gradient-to-b from-transparent to-[#4F46E8] text-[90px] sm:text[110px] md:text-[300px] lg:text-[316px] leading-[0.9] whitespace-nowrap mb-20">
             SPACEFY
           </p>
         </motion.div>
 
-        <div className="flex flex-col text-center lg:text-start text-white mt-16 lg:z-50">
+        <div className="flex flex-col text-center lg:text-start text-white mt-2 gap-2 lg:mt-16 lg:z-50">
           <motion.div
-            className="flex md:hidden mx-auto xl:mx-0 gap-10 py-4 px-2 items-center"
+            className="flex md:hidden mx-auto xl:mx-0 gap-10 py-2 px-2 items-center"
             initial="hidden"
             animate="visible"
             variants={fadeInUp}
@@ -270,6 +272,9 @@ export default function Home() {
           </p>
         </motion.div>
       </section>
-    </>
+
+        <MoreSales />
+        <AboutUs />
+ </main>
   );
 }
