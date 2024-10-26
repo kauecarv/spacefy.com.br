@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import NavbarComponent from "./components/navbar/NavbarComponent";
 import WhatsAppButton from "./components/Whatsapp";
-import { DM_Sans, Outfit, Poppins } from "next/font/google";
+import { DM_Sans, Poppins } from "next/font/google";
 
 
 const dmsans = DM_Sans({
@@ -11,11 +11,6 @@ const dmsans = DM_Sans({
   variable: '--font-dmsans', 
 });
 
-const outfit = Outfit({
-  subsets: ['latin'],
-  weight: ['200', '300', '400', '500', '600', '700'],
-  variable: '--font-outfit', 
-});
 
 const poppins = Poppins({
   subsets: ['latin'],
