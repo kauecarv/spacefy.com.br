@@ -264,7 +264,7 @@ const FeatureCard = ({
       <AnimatePresence>
         {isHovered && (
           <motion.div
-            className={`absolute ${getTooltipClass()} bg-[#121212] text-white p-3 rounded-md shadow-lg w-48 z-50`}
+            className={`absolute ${getTooltipClass()} bg-[#121212] text-white p-3.5 rounded-md shadow-lg w-64 z-50`}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
