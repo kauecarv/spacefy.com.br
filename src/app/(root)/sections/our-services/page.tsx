@@ -19,8 +19,8 @@ const OurServices = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3
+        staggerChildren: 0.1, // Reduzido de 0.2 para 0.1
+        delayChildren: 0.1 // Reduzido de 0.3 para 0.1
       }
     }
   };
@@ -31,7 +31,7 @@ const OurServices = () => {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.5,
+        duration: 0.3, // Reduzido de 0.5 para 0.3
         ease: "easeOut"
       }
     }
@@ -145,7 +145,7 @@ const ServiceItem = ({ number, title, description, image, time, client, views, i
     <motion.div 
       className={`group flex flex-col w-full sm:w-screen sm:max-w-4xl rounded-xl px-4 sm:px-8 py-4 sm:py-6 transition-all duration-500 border bg-[#111111] border-[#181818] ${isExpanded ? '' : 'hover:bg-indigo-600'}`}
       layout
-      transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+      transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
       whileHover={{ scale: isExpanded ? 1 : 1.02 }}
     >
       <div className="flex justify-between items-center w-full cursor-pointer" onClick={onToggle}>
@@ -161,7 +161,7 @@ const ServiceItem = ({ number, title, description, image, time, client, views, i
         <motion.div 
           className={`rounded-xl p-2 sm:p-3 transition-all duration-500 ${isExpanded ? 'bg-indigo-600 text-white' : 'bg-[#181818] text-[#CCC] group-hover:bg-indigo-500 group-hover:text-white'}`}
           animate={{ rotate: isExpanded ? 180 : 0 }}
-          transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+          transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
           whileHover={{ scale: 1.1 }}
         >
           <CgArrowsExpandUpRight size={20} className="sm:hidden" />
@@ -174,7 +174,7 @@ const ServiceItem = ({ number, title, description, image, time, client, views, i
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+            transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
             className="mt-4 overflow-hidden"
           >
             <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-center sm:items-start">
@@ -183,7 +183,7 @@ const ServiceItem = ({ number, title, description, image, time, client, views, i
                   className="text-[#ccc] text-sm sm:text-md max-w-2xl ml-4 mb-4 font-dmsans font-normal leading-relaxed text-left"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2 }}
+                  transition={{ delay: 0.1 }}
                 >
                   {description}
                 </motion.p>
@@ -207,7 +207,7 @@ const ServiceItem = ({ number, title, description, image, time, client, views, i
                     className="flex flex-row sm:flex-col justify-between w-full sm:w-1/4 space-y-0 sm:space-y-4"
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.4 }}
+                    transition={{ delay: 0.2 }}
                   >
                     <InfoCard icon={<RiTimerLine />} title="Tempo" value={time} />
                     <InfoCard icon={<MdOutlineEmojiPeople />} title="Cliente" value={client} />
