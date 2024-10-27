@@ -19,8 +19,8 @@ const OurServices = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1, // Reduzido de 0.2 para 0.1
-        delayChildren: 0.1 // Reduzido de 0.3 para 0.1
+        staggerChildren: 0.1, 
+        delayChildren: 0.1 
       }
     }
   };
@@ -51,7 +51,7 @@ const OurServices = () => {
       number: "02",
       title: "Sistemas",
       description: "Desenvolvemos sistemas robustos e escaláveis para otimizar seus processos de negócio e aumentar a eficiência operacional.",
-      image: "/path/to/sistemas-image.jpg",
+      image: "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671b25477be2a508e0342e75_10c8b478-b389-48df-93cb-299dae72141d.jpeg",
       time: "60 dias",
       client: "TechCorp Ltda.",
       views: "15.8K+"
@@ -60,7 +60,7 @@ const OurServices = () => {
       number: "03", 
       title: "Modelos Estáticos",
       description: "Oferecemos modelos estáticos elegantes e de alto desempenho, perfeitos para apresentar informações de forma clara e eficaz.",
-      image: "/path/to/modelos-estaticos-image.jpg",
+      image: "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671b25477be2a508e0342e75_10c8b478-b389-48df-93cb-299dae72141d.jpeg",
       time: "21 dias",
       client: "Design Studio",
       views: "42.5K+"
@@ -69,7 +69,7 @@ const OurServices = () => {
       number: "04",
       title: "Modelos Interativos",
       description: "Nossos modelos interativos proporcionam uma experiência envolvente e dinâmica, permitindo que seus usuários interajam de forma intuitiva com seu conteúdo.",
-      image: "/path/to/modelos-interativos-image.jpg",
+      image: "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671b25477be2a508e0342e75_10c8b478-b389-48df-93cb-299dae72141d.jpeg",
       time: "45 dias",
       client: "Interativa S.A.",
       views: "38.9K+"
