@@ -15,6 +15,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'framerusercontent.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'cdn.prod.website-files.com',
+      },
     ],
   },
 };

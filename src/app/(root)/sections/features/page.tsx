@@ -1,25 +1,28 @@
-"use client"
+"use client";
 
-import { useMediaQuery } from 'react-responsive';
-import { motion } from "framer-motion";
+import { useMediaQuery } from "react-responsive";
+import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import { useState } from "react";
+import { TbSquareRoundedPercentage } from "react-icons/tb";
+import { FaHeadphonesSimple } from "react-icons/fa6";
 
 const Features = () => {
   const isMobile = useMediaQuery({ maxWidth: 767 });
   const [ref, inView] = useInView({
     threshold: 0.2,
-    triggerOnce: false
+    triggerOnce: false,
   });
 
   const containerVariants = {
     hidden: { opacity: 0 },
-    visible: { 
+    visible: {
       opacity: 1,
-      transition: { 
+      transition: {
         staggerChildren: 0.1,
-        delayChildren: 0.3
-      }
-    }
+        delayChildren: 0.3,
+      },
+    },
   };
 
   const itemVariants = {
@@ -29,96 +32,252 @@ const Features = () => {
       y: 0,
       transition: {
         duration: 0.5,
-        ease: "easeOut"
-      }
-    }
+        ease: "easeOut",
+      },
+    },
   };
 
   return (
     <section ref={ref} className="bg-black text-white py-16">
       <div className="max-w-6xl mx-auto px-4">
         <motion.div
-          className="text-center mb-4"
+          className="flex justify-center space-x-4 mb-6"
           variants={itemVariants}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          <span className="inline-block text-xs md:text-sm font-poppins font-semibold text-indigo-600">
-          <span className="text-lg">500+</span> sites lançados com <span className="text-lg">98%</span> de satisfação dos clientes
+          <span className="inline-flex items-center bg-transparent bg-opacity-20 text-[#ccc] px-3 py-1 rounded-full text-sm font-medium font-dmsans">
+            <TbSquareRoundedPercentage className="mr-2 w-5 h-5 text-indigo-600" />
+            <span className="text-md text-[#ccc] mr-1">98%</span> de
+            satisfação
+          </span>
+          <span className="inline-flex items-center bg-transparent bg-opacity-20 text-[#ccc] px-3 py-1 rounded-full text-sm font-medium font-dmsans">
+            <FaHeadphonesSimple className="mr-2 w-5 h-5 text-indigo-600" />
+            <span className="text-md text-[#ccc] mr-1">500+</span> clientes
+            atendidos
           </span>
         </motion.div>
-        
-        <motion.h2 
-          className='text-center text-3xl md:text-5xl max-w-2xl mx-auto font-poppins font-semibold mb-8 md:mb-12'
+
+        <motion.h2
+          className="text-center text-3xl md:text-5xl max-w-2xl mx-auto font-poppins font-semibold mb-8 md:mb-12"
           variants={itemVariants}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          Detalhes que <span className='text-indigo-600'>impulsionam</span> seu <span className='text-indigo-600'>sucesso.</span>
+          Soluções que{" "}
+          <span className="text-indigo-600">
+            Elevam <span className="text-white">suas</span> Visitas
+          </span>{" "}
+          em <span className="text-indigo-600">Até 62%. </span>
         </motion.h2>
-        
+
         {isMobile ? (
-          <motion.div 
-            className="grid grid-cols-2 gap-4 justify-items-center"
+          <motion.div
+            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"
             variants={containerVariants}
             initial="hidden"
             animate={inView ? "visible" : "hidden"}
           >
-            <FeatureCard title="Segurança" />
-            <FeatureCard title="Desempenho Rápido" />
-            <FeatureCard title="Compatibilidade" />
-            <FeatureCard title="Manutenção" />
-            <FeatureCard title="Hospedagem Gratuita" icon={<img src="https://framerusercontent.com/images/X9rSPrFBr6Qh4qsMnmARaX1VN3Q.png?scale-down-to=512" alt="Ícone" className="w-4 h-4" />} />
-            <FeatureCard title="Aparecer no Google" icon={<img src="https://framerusercontent.com/images/X9rSPrFBr6Qh4qsMnmARaX1VN3Q.png?scale-down-to=512" alt="Ícone" className="w-4 h-4" />} />
-            <FeatureCard title="Interface Atraente" icon={<img src="https://framerusercontent.com/images/X9rSPrFBr6Qh4qsMnmARaX1VN3Q.png?scale-down-to=512" alt="Ícone" className="w-4 h-4" />} />
+            <FeatureCard
+              title="Segurança"
+              description="Garantimos a segurança do seu site com as mais recentes tecnologias de proteção."
+              position="top"
+            />
+            <FeatureCard
+              title="Desempenho Rápido"
+              description="Otimizamos seu site para carregar rapidamente, melhorando a experiência do usuário."
+              position="top"
+            />
+            <FeatureCard
+              title="Compatibilidade"
+              description="Seu site funcionará perfeitamente em todos os dispositivos e navegadores."
+              position="top"
+            />
+            <FeatureCard
+              title="Manutenção"
+              description="Oferecemos suporte contínuo para manter seu site atualizado e funcionando sem problemas."
+              position="top"
+            />
+            <FeatureCard
+              title="Hospedagem Gratuita"
+              description="Economize com nossa hospedagem gratuita de alta qualidade."
+              icon={
+                <img
+                  src="https://framerusercontent.com/images/X9rSPrFBr6Qh4qsMnmARaX1VN3Q.png?scale-down-to=512"
+                  alt="Ícone"
+                  className="w-4 h-4"
+                />
+              }
+              position="top"
+            />
+            <FeatureCard
+              title="Aparecer no Google"
+              description="Otimizamos seu site para os mecanismos de busca, aumentando sua visibilidade online."
+              icon={
+                <img
+                  src="https://framerusercontent.com/images/X9rSPrFBr6Qh4qsMnmARaX1VN3Q.png?scale-down-to=512"
+                  alt="Ícone"
+                  className="w-4 h-4"
+                />
+              }
+              position="top"
+            />
+            <FeatureCard
+              title="Interface Atraente"
+              description="Criamos designs modernos e atraentes que cativam seus visitantes."
+              icon={
+                <img
+                  src="https://framerusercontent.com/images/X9rSPrFBr6Qh4qsMnmARaX1VN3Q.png?scale-down-to=512"
+                  alt="Ícone"
+                  className="w-4 h-4"
+                />
+              }
+              position="top"
+            />
           </motion.div>
         ) : (
-          <motion.div 
+          <motion.div
             className="relative h-[300px]"
             variants={containerVariants}
             initial="hidden"
             animate={inView ? "visible" : "hidden"}
           >
-            <FeatureCard title="Segurança" className="absolute top-0 left-0" />
-            <FeatureCard title="Desempenho Rápido" className="absolute top-0 left-[35%] transform -translate-x-1/2" />
-            <FeatureCard title="Compatibilidade" className="absolute top-0 right-0" />
-            <FeatureCard title="Manutenção" className="absolute top-1/3 right-[70%] transform -translate-y-1/2 -translate-x-1/2" />
-            <FeatureCard title="Hospedagem Gratuita" className="absolute top-1/3 left-[60%] transform -translate-y-1/2 translate-x-1/2" icon={<img src="https://framerusercontent.com/images/X9rSPrFBr6Qh4qsMnmARaX1VN3Q.png?scale-down-to=512" alt="Ícone" className="w-4 h-4" />} />
-            <FeatureCard title="Aparecer no Google" className="absolute bottom-16 right-[10%] transform -translate-x-1/2" icon={<img src="https://framerusercontent.com/images/X9rSPrFBr6Qh4qsMnmARaX1VN3Q.png?scale-down-to=512" alt="Ícone" className="w-4 h-4" />} />
-            <FeatureCard title="Interface Atraente" className="absolute bottom-16 right-[60%] transform translate-x-1/2" icon={<img src="https://framerusercontent.com/images/X9rSPrFBr6Qh4qsMnmARaX1VN3Q.png?scale-down-to=512" alt="Ícone" className="w-4 h-4" />} />
+            <FeatureCard
+              title="Segurança"
+              className="absolute top-0 left-0"
+              description="Garantimos a segurança do seu site com as mais recentes tecnologias de proteção."
+              position="top"
+            />
+            <FeatureCard
+              title="Desempenho Rápido"
+              className="absolute top-0 left-[35%] transform -translate-x-1/2"
+              description="Otimizamos seu site para carregar rapidamente, melhorando a experiência do usuário."
+              position="top"
+            />
+            <FeatureCard
+              title="Compatibilidade"
+              className="absolute top-0 right-0"
+              description="Seu site funcionará perfeitamente em todos os dispositivos e navegadores."
+              position="top"
+            />
+            <FeatureCard
+              title="Manutenção"
+              className="absolute top-1/3 right-[70%] transform -translate-y-1/2 -translate-x-1/2"
+              description="Oferecemos suporte contínuo para manter seu site atualizado e funcionando sem problemas."
+              position="top"
+            />
+            <FeatureCard
+              title="Hospedagem Gratuita"
+              className="absolute top-1/3 left-[60%] transform -translate-y-1/2 translate-x-1/2"
+              description="Economize com nossa hospedagem gratuita de alta qualidade."
+              icon={
+                <img
+                  src="https://framerusercontent.com/images/X9rSPrFBr6Qh4qsMnmARaX1VN3Q.png?scale-down-to=512"
+                  alt="Ícone"
+                  className="w-4 h-4"
+                />
+              }
+              position="top"
+            />
+            <FeatureCard
+              title="Aparecer no Google"
+              className="absolute bottom-16 right-[10%] transform -translate-x-1/2"
+              description="Otimizamos seu site para os mecanismos de busca, aumentando sua visibilidade online."
+              icon={
+                <img
+                  src="https://framerusercontent.com/images/X9rSPrFBr6Qh4qsMnmARaX1VN3Q.png?scale-down-to=512"
+                  alt="Ícone"
+                  className="w-4 h-4"
+                />
+              }
+              position="top"
+            />
+            <FeatureCard
+              title="Interface Atraente"
+              className="absolute bottom-16 right-[60%] transform translate-x-1/2"
+              description="Criamos designs modernos e atraentes que cativam seus visitantes."
+              icon={
+                <img
+                  src="https://framerusercontent.com/images/X9rSPrFBr6Qh4qsMnmARaX1VN3Q.png?scale-down-to=512"
+                  alt="Ícone"
+                  className="w-4 h-4"
+                />
+              }
+              position="top"
+            />
           </motion.div>
         )}
       </div>
     </section>
-  )
+  );
 };
 
-const FeatureCard = ({ title, className, icon }: { title: string, className?: string, icon?: React.ReactNode }) => (
-  <motion.div 
-    className={`bg-[#121212] p-[8px] px-4 rounded-lg inline-flex items-center justify-center cursor-pointer w-full ${className || ''}`}
-    variants={{
-      hidden: { opacity: 0, scale: 0.8 },
-      visible: { 
-        opacity: 1, 
-        scale: 1,
+const FeatureCard = ({
+  title,
+  className,
+  icon,
+  description,
+  position,
+}: {
+  title: string;
+  className?: string;
+  icon?: React.ReactNode;
+  description: string;
+  position: "top";
+}) => {
+  const [isHovered, setIsHovered] = useState(false);
+
+  const getTooltipClass = () => {
+    return "left-1/2 bottom-full mb-2 transform -translate-x-1/2";
+  };
+
+  return (
+    <motion.div
+      id={title}
+      className={`bg-[#121212] p-[8px] px-4 rounded-lg inline-flex items-center justify-center cursor-pointer ${
+        className || ""
+      }`}
+      variants={{
+        hidden: { opacity: 0, scale: 0.8 },
+        visible: {
+          opacity: 1,
+          scale: 1,
+          transition: {
+            duration: 0.5,
+            ease: "easeOut",
+          },
+        },
+      }}
+      whileHover={{
+        backgroundColor: "#4F46E5",
+        scale: 1.02,
         transition: {
-          duration: 0.5,
-          ease: "easeOut"
-        }
-      }
-    }}
-    whileHover={{
-      backgroundColor: "#4F46E5",
-      scale: 1.02,
-      transition: {
-        duration: 0.3,
-        ease: "easeInOut"
-      }
-    }}
-  >
-    {icon && <span className="mr-2">{icon}</span>}
-    <h3 className="text-sm font-poppins font-medium">{title}</h3>
-  </motion.div>
-);
+          duration: 0.3,
+          ease: "easeInOut",
+        },
+      }}
+      onHoverStart={() => setIsHovered(true)}
+      onHoverEnd={() => setIsHovered(false)}
+    >
+      {icon && <span className="mr-2">{icon}</span>}
+      <h3 className="text-sm font-poppins font-medium">{title}</h3>
+      <AnimatePresence>
+        {isHovered && (
+          <motion.div
+            className={`absolute ${getTooltipClass()} bg-[#121212] text-white p-3 rounded-md shadow-lg w-48 z-50`}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 10 }}
+            transition={{ duration: 0.2 }}
+          >
+            <p className="text-sm font-normal font-dmsans text-[#ccc] leading-relaxed">
+              {description}
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
+  );
+};
 
 export default Features;

@@ -8,6 +8,7 @@ import Image from "next/image";
 import MoreSales from "./sections/more-sales/page";
 import AboutUs from "./sections/about-us/page";
 import Features from "./sections/features/page";
+import OurServices from "./sections/our-services/page";
 
 const words = ["Inovador", "Exclusivo", "Moderno", "Eficiente"];
 
@@ -277,6 +278,7 @@ export default function Home() {
         <MoreSales />
         <AboutUs />
         <Features/>
- </main>
+        <OurServices />
+         </main>
   );
 }

@@ -79,7 +79,7 @@ export default function AboutUs() {
               variants={itemVariants}
             >
               {[
-                { number: "45%", text: "aumento em vendas" },
+                { number: "45%", text: "aumento em leads" },
                 { number: "99%", text: "feedback positivo" },
                 { number: "97.4k", text: "visitas geradas" }
               ].map((item, index) => (
