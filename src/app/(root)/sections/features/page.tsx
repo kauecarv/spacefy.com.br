@@ -59,7 +59,7 @@ const Features = () => {
         
         {isMobile ? (
           <motion.div 
-            className="flex flex-wrap justify-center gap-4"
+            className="grid grid-cols-2 gap-4 justify-items-center"
             variants={containerVariants}
             initial="hidden"
             animate={inView ? "visible" : "hidden"}
@@ -95,7 +95,7 @@ const Features = () => {
 
 const FeatureCard = ({ title, className, icon }: { title: string, className?: string, icon?: React.ReactNode }) => (
   <motion.div 
-    className={`bg-[#121212] p-[8px] px-4 rounded-lg inline-flex items-center justify-center cursor-pointer ${className || ''}`}
+    className={`bg-[#121212] p-[8px] px-4 rounded-lg inline-flex items-center justify-center cursor-pointer w-full ${className || ''}`}
     variants={{
       hidden: { opacity: 0, scale: 0.8 },
       visible: { 
