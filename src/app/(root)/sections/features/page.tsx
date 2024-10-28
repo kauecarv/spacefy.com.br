@@ -75,17 +75,17 @@ const Features = () => {
     <section ref={ref} className="bg-black text-white py-16">
       <div className="max-w-6xl mx-auto px-4">
         <motion.div
-          className="flex flex-col sm:flex-row justify-center sm:justify-start sm:space-x-4 space-y-4 sm:space-y-0 mb-6"
+          className="flex flex-col sm:flex-row justify-center sm:justify-center sm:space-x-4 space-y-4 sm:space-y-0 mb-6"
           variants={itemVariants}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          <span className="inline-flex items-center justify-center sm:justify-start bg-transparent bg-opacity-20 text-[#ccc] px-3 py-1 rounded-full text-sm font-medium font-dmsans">
+          <span className="inline-flex items-center justify-center sm:justify-center bg-transparent bg-opacity-20 text-[#ccc] px-3 py-1 rounded-full text-sm font-medium font-dmsans">
             <TbSquareRoundedPercentage className="mr-2 w-5 h-5 text-indigo-600" />
             <span className="text-md text-[#ccc] mr-1">98%</span> de
             satisfação
           </span>
-          <span className="inline-flex items-center justify-center sm:justify-start bg-transparent bg-opacity-20 text-[#ccc] px-3 py-1 rounded-full text-sm font-medium font-dmsans">
+          <span className="inline-flex items-center justify-center sm:justify-center bg-transparent bg-opacity-20 text-[#ccc] px-3 py-1 rounded-full text-sm font-medium font-dmsans">
             <FaHeadphonesSimple className="mr-2 w-5 h-5 text-indigo-600" />
             <span className="text-md text-[#ccc] mr-1">500+</span> clientes
             atendidos
