@@ -1,3 +1,5 @@
+"use client"
+
 import { PiHandSwipeRightBold } from "react-icons/pi";
 import { HiOutlineViewGrid } from "react-icons/hi";
 import { CgWebsite } from "react-icons/cg";
