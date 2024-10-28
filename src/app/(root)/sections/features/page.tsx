@@ -254,7 +254,6 @@ const FeatureCard = ({
   icon,
   description,
   isShaking,
-  position,
 }: {
   title: string;
   className?: string;
