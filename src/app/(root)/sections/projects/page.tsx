@@ -16,7 +16,7 @@ const Projects = () => {
 
   const [ref, inView] = useInView({
     threshold: 0.1,
-    triggerOnce: true
+    triggerOnce: false
   });
 
   const itemVariants = {
@@ -60,7 +60,11 @@ const Projects = () => {
     },
     visible: {
       opacity: 1,
-      y: 0
+      y: 0,
+      transition: {
+        duration: 0.4,
+        ease: "easeOut"
+      }
     }
   };
 
@@ -70,7 +74,8 @@ const Projects = () => {
       opacity: 1,
       transition: {
         staggerChildren: 0.15,
-        ease: "easeOut"
+        ease: "easeOut",
+        duration: 0.4
       }
     }
   };
@@ -90,13 +95,26 @@ const Projects = () => {
   };
 
   const sectionVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { 
+      opacity: 0, 
+      y: 20 
+    },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
         duration: 0.6,
-        ease: "easeOut"
+        ease: "easeOut",
+        when: "beforeChildren",
+        staggerChildren: 0.2
+      }
+    },
+    exit: {
+      opacity: 0,
+      y: -20,
+      transition: {
+        duration: 0.3,
+        ease: "easeIn"
       }
     }
   };
@@ -127,6 +145,7 @@ const Projects = () => {
       ref={ref}
       initial="hidden"
       animate={inView ? "visible" : "hidden"}
+      exit="exit"
       variants={sectionVariants}
       className="bg-black w-full h-full flex flex-col py-16"
     >
