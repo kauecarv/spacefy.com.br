@@ -41,7 +41,7 @@ const Features = () => {
     <section ref={ref} className="bg-black text-white py-16">
       <div className="max-w-6xl mx-auto px-4">
         <motion.div
-          className="flex justify-center space-x-4 mb-6"
+          className="flex flex-col sm:flex-row justify-center sm:space-x-4 space-y-4 sm:space-y-0 mb-6"
           variants={itemVariants}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
@@ -71,9 +71,9 @@ const Features = () => {
           em <span className="text-indigo-600">Até 62%. </span>
         </motion.h2>
 
-        {isMobile ? (
+        {window.innerWidth <= 767 ? (
           <motion.div
-            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"
+            className="grid grid-cols-1 gap-4"
             variants={containerVariants}
             initial="hidden"
             animate={inView ? "visible" : "hidden"}

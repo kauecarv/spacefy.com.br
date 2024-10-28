@@ -7,7 +7,7 @@ const NavbarNavigation = () => {
 
   return (
     <motion.ul
-      className="hidden xl:flex text-white w-full max-w-4xl bg-[#101010] rounded-full border border-[#272727] py-4 px-6"
+      className="hidden xl:flex text-white w-full max-w-4xl bg-[#101010] rounded-full border border-[#272727] py-4 px-6 z-50"
       initial={{ opacity: 0, y: 20, scale: 0.95 }}  
       animate={{ opacity: 1, y: 0, scale: 1 }}  
       transition={{ duration: 0.3, ease: "easeOut" }}

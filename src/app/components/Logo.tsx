@@ -9,8 +9,9 @@ const NavbarLogo = () => {
       initial={{ opacity: 0, y: -20 }}  
       animate={{ opacity: 1, y: 0 }}  
       transition={{ duration: 0.5, ease: "easeOut" }}
+      className="z-50"
     >
-      <Link href="https://spacefy.com.br" className="font-bold whitespace-nowrap flex-nowrap flex font-poppins text-2xl md:text-3xl text-white transition duration-300 hover:text-spacefy hover:scale-105">
+      <Link href="https://spacefy.com.br" className="font-bold !z-50 whitespace-nowrap flex-nowrap flex font-poppins text-2xl md:text-3xl text-white transition duration-300 hover:text-spacefy hover:scale-105">
         Spacefy
       </Link>
     </motion.div>
