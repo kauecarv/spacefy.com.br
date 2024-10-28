@@ -8,7 +8,6 @@ import { TbSquareRoundedPercentage } from "react-icons/tb";
 import { FaHeadphonesSimple } from "react-icons/fa6";
 
 const Features = () => {
-  const isMobile = useMediaQuery({ maxWidth: 767 });
   const [ref, inView] = useInView({
     threshold: 0.2,
     triggerOnce: false,
