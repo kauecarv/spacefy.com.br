@@ -1,9 +1,8 @@
 "use client";
 
-import { useMediaQuery } from "react-responsive";
 import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { TbSquareRoundedPercentage } from "react-icons/tb";
 import { FaHeadphonesSimple } from "react-icons/fa6";
 
@@ -12,6 +11,30 @@ const Features = () => {
     threshold: 0.2,
     triggerOnce: false,
   });
+
+  const [activeShakeIndex, setActiveShakeIndex] = useState(0);
+
+  const featureCards = [
+    "Segurança",
+    "Desempenho Rápido", 
+    "Compatibilidade",
+    "Manutenção",
+    "Hospedagem Gratuita",
+    "Aparecer no Google",
+    "Interface Atraente"
+  ];
+
+  useEffect(() => {
+    if (inView) {
+      const interval = setInterval(() => {
+        setActiveShakeIndex((prevIndex) => 
+          prevIndex === featureCards.length - 1 ? 0 : prevIndex + 1
+        );
+      }, 3000);
+
+      return () => clearInterval(interval);
+    }
+  }, [inView]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -81,21 +104,25 @@ const Features = () => {
               title="Segurança"
               description="Garantimos a segurança do seu site com as mais recentes tecnologias de proteção."
               position="top"
+              isShaking={activeShakeIndex === 0}
             />
             <FeatureCard
               title="Desempenho Rápido"
               description="Otimizamos seu site para carregar rapidamente, melhorando a experiência do usuário."
               position="top"
+              isShaking={activeShakeIndex === 1}
             />
             <FeatureCard
               title="Compatibilidade"
               description="Seu site funcionará perfeitamente em todos os dispositivos e navegadores."
               position="top"
+              isShaking={activeShakeIndex === 2}
             />
             <FeatureCard
               title="Manutenção"
               description="Oferecemos suporte contínuo para manter seu site atualizado e funcionando sem problemas."
               position="top"
+              isShaking={activeShakeIndex === 3}
             />
             <FeatureCard
               title="Hospedagem Gratuita"
@@ -108,6 +135,7 @@ const Features = () => {
                 />
               }
               position="top"
+              isShaking={activeShakeIndex === 4}
             />
             <FeatureCard
               title="Aparecer no Google"
@@ -120,6 +148,7 @@ const Features = () => {
                 />
               }
               position="top"
+              isShaking={activeShakeIndex === 5}
             />
             <FeatureCard
               title="Interface Atraente"
@@ -132,6 +161,7 @@ const Features = () => {
                 />
               }
               position="top"
+              isShaking={activeShakeIndex === 6}
             />
           </motion.div>
         ) : (
@@ -146,24 +176,28 @@ const Features = () => {
               className="absolute top-0 left-0"
               description="Garantimos a segurança do seu site com as mais recentes tecnologias de proteção."
               position="top"
+              isShaking={activeShakeIndex === 0}
             />
             <FeatureCard
               title="Desempenho Rápido"
               className="absolute top-0 left-[35%] transform -translate-x-1/2"
               description="Otimizamos seu site para carregar rapidamente, melhorando a experiência do usuário."
               position="top"
+              isShaking={activeShakeIndex === 1}
             />
             <FeatureCard
               title="Compatibilidade"
               className="absolute top-0 right-0"
               description="Seu site funcionará perfeitamente em todos os dispositivos e navegadores."
               position="top"
+              isShaking={activeShakeIndex === 2}
             />
             <FeatureCard
               title="Manutenção"
               className="absolute top-1/3 right-[70%] transform -translate-y-1/2 -translate-x-1/2"
               description="Oferecemos suporte contínuo para manter seu site atualizado e funcionando sem problemas."
               position="top"
+              isShaking={activeShakeIndex === 3}
             />
             <FeatureCard
               title="Hospedagem Gratuita"
@@ -177,6 +211,7 @@ const Features = () => {
                 />
               }
               position="top"
+              isShaking={activeShakeIndex === 4}
             />
             <FeatureCard
               title="Aparecer no Google"
@@ -190,6 +225,7 @@ const Features = () => {
                 />
               }
               position="top"
+              isShaking={activeShakeIndex === 5}
             />
             <FeatureCard
               title="Interface Atraente"
@@ -203,6 +239,7 @@ const Features = () => {
                 />
               }
               position="top"
+              isShaking={activeShakeIndex === 6}
             />
           </motion.div>
         )}
@@ -216,15 +253,26 @@ const FeatureCard = ({
   className,
   icon,
   description,
-  
+  isShaking,
+  position,
 }: {
   title: string;
   className?: string;
   icon?: React.ReactNode;
   description: string;
+  isShaking?: boolean;
   position: "top";
 }) => {
   const [isHovered, setIsHovered] = useState(false);
+
+  const shakeAnimation = {
+    rotate: [0, -2, 2, -2, 0],
+    transition: {
+      duration: 0.5,
+      repeat: 2,
+      ease: "easeInOut",
+    },
+  };
 
   const getTooltipClass = () => {
     return "left-1/2 bottom-full mb-2 transform -translate-x-1/2";
@@ -237,7 +285,7 @@ const FeatureCard = ({
         className || ""
       }`}
       variants={{
-        hidden: { opacity: 0, scale: 0.8 },
+        hidden: { opacity: 0, scale: 1 },
         visible: {
           opacity: 1,
           scale: 1,
@@ -247,6 +295,7 @@ const FeatureCard = ({
           },
         },
       }}
+      initial={{ scale: 1 }}
       whileHover={{
         backgroundColor: "#4F46E5",
         scale: 1.02,
@@ -255,11 +304,12 @@ const FeatureCard = ({
           ease: "easeInOut",
         },
       }}
+      animate={isShaking ? shakeAnimation : { scale: 1 }}
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
     >
       {icon && <span className="mr-2">{icon}</span>}
-      <h3 className="text-sm font-poppins font-medium">{title}</h3>
+      <h3 className="text-md font-poppins font-medium">{title}</h3>
       <AnimatePresence>
         {isHovered && (
           <motion.div
@@ -269,7 +319,7 @@ const FeatureCard = ({
             exit={{ opacity: 0, y: 10 }}
             transition={{ duration: 0.2 }}
           >
-            <p className="text-sm font-normal font-dmsans text-[#ccc] leading-relaxed">
+            <p className="text-md font-normal font-dmsans text-[#ccc] leading-relaxed">
               {description}
             </p>
           </motion.div>

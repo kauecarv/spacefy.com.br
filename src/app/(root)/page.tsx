@@ -9,6 +9,7 @@ import MoreSales from "./sections/more-sales/page";
 import AboutUs from "./sections/about-us/page";
 import Features from "./sections/features/page";
 import OurServices from "./sections/our-services/page";
+import Projects from "./sections/projects/page";
 
 const words = ["Inovador", "Exclusivo", "Moderno", "Eficiente"];
 
@@ -279,6 +280,7 @@ export default function Home() {
         <AboutUs />
         <Features/>
         <OurServices />
+        <Projects />
          </main>
   );
 }
