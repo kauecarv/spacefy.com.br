@@ -17,32 +17,34 @@ const MobileNavigation = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth >= 1024 && isOpen) {
+      if (typeof window !== 'undefined' && window.innerWidth >= 1024 && isOpen) {
         setIsOpen(false);
       }
     };
 
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-      document.body.style.height = '100vh';
-      document.body.style.position = 'fixed';
-      document.body.style.width = '100%';
-    } else {
-      document.body.style.overflow = '';
-      document.body.style.height = '';
-      document.body.style.position = '';
-      document.body.style.width = '';
+    if (typeof window !== 'undefined') {
+      if (isOpen) {
+        document.body.style.overflow = 'hidden';
+        document.body.style.height = '100vh';
+        document.body.style.position = 'fixed';
+        document.body.style.width = '100%';
+      } else {
+        document.body.style.overflow = '';
+        document.body.style.height = '';
+        document.body.style.position = '';
+        document.body.style.width = '';
+      }
+
+      window.addEventListener('resize', handleResize);
+
+      return () => {
+        document.body.style.overflow = '';
+        document.body.style.height = '';
+        document.body.style.position = '';
+        document.body.style.width = '';
+        window.removeEventListener('resize', handleResize);
+      };
     }
-
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      document.body.style.overflow = '';
-      document.body.style.height = '';
-      document.body.style.position = '';
-      document.body.style.width = '';
-      window.removeEventListener('resize', handleResize);
-    };
   }, [isOpen]);
 
   const menuItems = [

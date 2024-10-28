@@ -13,6 +13,7 @@ const Features = () => {
   });
 
   const [activeShakeIndex, setActiveShakeIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
 
   const featureCards = [
     "Segurança",
@@ -35,6 +36,17 @@ const Features = () => {
       return () => clearInterval(interval);
     }
   }, [inView]);
+
+  useEffect(() => {
+    setIsMobile(window.innerWidth <= 767);
+    
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 767);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -93,7 +105,7 @@ const Features = () => {
           em <span className="text-indigo-600">Até 62%. </span>
         </motion.h2>
 
-        {window.innerWidth <= 767 ? (
+        {isMobile ? (
           <motion.div
             className="grid grid-cols-1 gap-4"
             variants={containerVariants}
