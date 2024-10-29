@@ -2,13 +2,11 @@
 
 import Image from "next/image";
 import NavbarLogo from "../Logo";
-import AdminButton from "./buttons/AdminButton";
 import MakeBudge from "./buttons/MakeBudge";
 import MobileNavigation from "./MobileNavigation";
 import NavbarNavigation from "./Navigation";
 
 const NavbarComponent = () => {
-  const userAdmin = true;
 
   return (
     <>

@@ -35,27 +35,6 @@ const ContactUs = () => {
     }
   };
 
-  const buttonHoverVariants = {
-    rest: { scale: 1 },
-    hover: {
-      scale: 1.02,
-      transition: {
-        duration: 0.3,
-        ease: "easeOut"
-      }
-    }
-  };
-
-  const glowVariants = {
-    rest: { opacity: 0 },
-    hover: {
-      opacity: 0.3,
-      transition: {
-        duration: 0.4,
-        ease: "easeOut"
-      }
-    }
-  };
 
   return (
     <section ref={ref} className="bg-black w-full h-full max-w-5xl py-8 px-4 sm:px-6 mx-auto justify-center z-50">
