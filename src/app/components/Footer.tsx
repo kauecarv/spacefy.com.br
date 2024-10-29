@@ -1,3 +1,5 @@
+"use client"
+
 import Link from "next/link";
 import { FaDiscord, FaInstagram, FaLinkedin, FaThreads } from "react-icons/fa6";
 

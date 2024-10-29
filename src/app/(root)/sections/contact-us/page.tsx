@@ -1,3 +1,5 @@
+"use client"
+
 import Link from "next/link";
 import { MdOutlineCallMissedOutgoing } from "react-icons/md";
 import { motion, useInView } from "framer-motion";
