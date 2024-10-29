@@ -155,13 +155,13 @@ const Projects = () => {
           className="flex flex-col sm:flex-row justify-center sm:justify-start sm:space-x-4 space-y-4 sm:space-y-0 mb-6"
           variants={itemVariants}
         >
-          <span className="inline-flex items-center bg-transparent bg-opacity-20 text-[#ccc] px-3 py-1 rounded-full text-sm font-medium font-dmsans">
-            <TbMessage2Star className="mr-2 w-5 h-5 text-indigo-600" />
-            <span className="text-md text-[#ccc] mr-1">127+</span> projetos entregues
+          <span className="inline-flex items-center justify-center sm:justify-start bg-transparent bg-opacity-20 text-[#ccc] px-3 py-2 sm:py-1 rounded-full text-xs sm:text-sm font-medium font-dmsans w-full sm:w-auto">
+            <TbMessage2Star className="mr-2 w-4 h-4 sm:w-5 sm:h-5 text-indigo-600" />
+            <span className="text-sm sm:text-md text-[#ccc] mr-1">127+</span> projetos entregues
           </span>
-          <span className="inline-flex items-center bg-transparent bg-opacity-20 text-[#ccc] px-3 py-1 rounded-full text-sm font-medium font-dmsans">
-            <MdOutlineSwitchAccessShortcutAdd className="mr-2 w-5 h-5 text-indigo-600" />
-            <span className="text-md text-[#ccc] mr-1">119.4k</span> views geradas
+          <span className="inline-flex items-center justify-center sm:justify-start bg-transparent bg-opacity-20 text-[#ccc] px-3 py-2 sm:py-1 rounded-full text-xs sm:text-sm font-medium font-dmsans w-full sm:w-auto">
+            <MdOutlineSwitchAccessShortcutAdd className="mr-2 w-4 h-4 sm:w-5 sm:h-5 text-indigo-600" />
+            <span className="text-sm sm:text-md text-[#ccc] mr-1">119.4k</span> views geradas
           </span>
         </motion.div>
           

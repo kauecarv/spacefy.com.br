@@ -10,6 +10,8 @@ import AboutUs from "./sections/about-us/page";
 import Features from "./sections/features/page";
 import OurServices from "./sections/our-services/page";
 import Projects from "./sections/projects/page";
+import ContactUs from "./sections/contact-us/page";
+import Footer from "../components/Footer";
 
 const words = ["Inovador", "Exclusivo", "Moderno", "Eficiente"];
 
@@ -281,6 +283,8 @@ export default function Home() {
         <Features/>
         <OurServices />
         <Projects />
+        <ContactUs />
+        <Footer />
          </main>
   );
 }

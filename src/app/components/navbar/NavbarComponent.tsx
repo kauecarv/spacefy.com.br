@@ -44,7 +44,6 @@ const NavbarComponent = () => {
           <div className="gap-2 hidden lg:flex">
             <MakeBudge />
 
-            {userAdmin ? <AdminButton /> : null}
           </div>
         </div>
       </header>

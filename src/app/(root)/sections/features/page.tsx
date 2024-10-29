@@ -14,6 +14,7 @@ const Features = () => {
 
   const [activeShakeIndex, setActiveShakeIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
+  const [activeTooltip, setActiveTooltip] = useState<string | null>(null);
 
   const featureCards = [
     "Segurança",
@@ -38,15 +39,40 @@ const Features = () => {
   }, [inView]);
 
   useEffect(() => {
-    setIsMobile(window.innerWidth <= 767);
+    const checkMobile = () => {
+      const userAgent = navigator.userAgent.toLowerCase();
+      const isMobileDevice = /mobile|android|iphone|ipad|ipod/.test(userAgent);
+      setIsMobile(isMobileDevice || window.innerWidth <= 767);
+    };
+
+    checkMobile();
     
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 767);
+      checkMobile();
     };
 
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  useEffect(() => {
+    if (isMobile) {
+      const handleClickOutside = (event: TouchEvent | MouseEvent) => {
+        const target = event.target as HTMLElement;
+        if (!target.closest('.feature-card')) {
+          setActiveTooltip(null);
+        }
+      };
+
+      document.addEventListener('touchstart', handleClickOutside as EventListener);
+      document.addEventListener('click', handleClickOutside as EventListener);
+      
+      return () => {
+        document.removeEventListener('touchstart', handleClickOutside as EventListener);
+        document.removeEventListener('click', handleClickOutside as EventListener);
+      };
+    }
+  }, [isMobile]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -117,24 +143,36 @@ const Features = () => {
               description="Garantimos a segurança do seu site com as mais recentes tecnologias de proteção."
               position="top"
               isShaking={activeShakeIndex === 0}
+              isMobile={isMobile}
+              isActive={activeTooltip === "Segurança"}
+              onCardClick={() => setActiveTooltip(activeTooltip === "Segurança" ? null : "Segurança")}
             />
             <FeatureCard
               title="Desempenho Rápido"
               description="Otimizamos seu site para carregar rapidamente, melhorando a experiência do usuário."
               position="top"
               isShaking={activeShakeIndex === 1}
+              isMobile={isMobile}
+              isActive={activeTooltip === "Desempenho Rápido"}
+              onCardClick={() => setActiveTooltip(activeTooltip === "Desempenho Rápido" ? null : "Desempenho Rápido")}
             />
             <FeatureCard
               title="Compatibilidade"
               description="Seu site funcionará perfeitamente em todos os dispositivos e navegadores."
               position="top"
               isShaking={activeShakeIndex === 2}
+              isMobile={isMobile}
+              isActive={activeTooltip === "Compatibilidade"}
+              onCardClick={() => setActiveTooltip(activeTooltip === "Compatibilidade" ? null : "Compatibilidade")}
             />
             <FeatureCard
               title="Manutenção"
               description="Oferecemos suporte contínuo para manter seu site atualizado e funcionando sem problemas."
               position="top"
               isShaking={activeShakeIndex === 3}
+              isMobile={isMobile}
+              isActive={activeTooltip === "Manutenção"}
+              onCardClick={() => setActiveTooltip(activeTooltip === "Manutenção" ? null : "Manutenção")}
             />
             <FeatureCard
               title="Hospedagem Gratuita"
@@ -148,6 +186,9 @@ const Features = () => {
               }
               position="top"
               isShaking={activeShakeIndex === 4}
+              isMobile={isMobile}
+              isActive={activeTooltip === "Hospedagem Gratuita"}
+              onCardClick={() => setActiveTooltip(activeTooltip === "Hospedagem Gratuita" ? null : "Hospedagem Gratuita")}
             />
             <FeatureCard
               title="Aparecer no Google"
@@ -161,6 +202,9 @@ const Features = () => {
               }
               position="top"
               isShaking={activeShakeIndex === 5}
+              isMobile={isMobile}
+              isActive={activeTooltip === "Aparecer no Google"}
+              onCardClick={() => setActiveTooltip(activeTooltip === "Aparecer no Google" ? null : "Aparecer no Google")}
             />
             <FeatureCard
               title="Interface Atraente"
@@ -174,6 +218,9 @@ const Features = () => {
               }
               position="top"
               isShaking={activeShakeIndex === 6}
+              isMobile={isMobile}
+              isActive={activeTooltip === "Interface Atraente"}
+              onCardClick={() => setActiveTooltip(activeTooltip === "Interface Atraente" ? null : "Interface Atraente")}
             />
           </motion.div>
         ) : (
@@ -266,6 +313,9 @@ const FeatureCard = ({
   icon,
   description,
   isShaking,
+  isMobile,
+  isActive,
+  onCardClick,
 }: {
   title: string;
   className?: string;
@@ -273,6 +323,9 @@ const FeatureCard = ({
   description: string;
   isShaking?: boolean;
   position: "top";
+  isMobile?: boolean;
+  isActive?: boolean;
+  onCardClick?: () => void;
 }) => {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -289,10 +342,20 @@ const FeatureCard = ({
     return "left-1/2 bottom-full mb-2 transform -translate-x-1/2";
   };
 
+  const handleClick = (e: React.MouseEvent | React.TouchEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (isMobile && onCardClick) {
+      onCardClick();
+    }
+  };
+
+  const showTooltip = isMobile ? isActive : isHovered;
+
   return (
     <motion.div
       id={title}
-      className={`bg-[#121212] p-[8px] px-4 rounded-lg inline-flex items-center justify-center cursor-pointer ${
+      className={`feature-card bg-[#121212] p-[8px] px-4 rounded-lg inline-flex items-center justify-center cursor-pointer ${
         className || ""
       }`}
       variants={{
@@ -316,13 +379,15 @@ const FeatureCard = ({
         },
       }}
       animate={isShaking ? shakeAnimation : { scale: 1 }}
-      onHoverStart={() => setIsHovered(true)}
-      onHoverEnd={() => setIsHovered(false)}
+      onHoverStart={() => !isMobile && setIsHovered(true)}
+      onHoverEnd={() => !isMobile && setIsHovered(false)}
+      onClick={handleClick}
+      onTouchStart={handleClick}
     >
       {icon && <span className="mr-2">{icon}</span>}
       <h3 className="text-md font-poppins font-medium">{title}</h3>
       <AnimatePresence>
-        {isHovered && (
+        {showTooltip && (
           <motion.div
             className={`absolute ${getTooltipClass()} bg-[#121212] text-white p-3.5 rounded-md shadow-lg w-64 z-50`}
             initial={{ opacity: 0, y: 10 }}
