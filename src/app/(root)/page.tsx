@@ -1,9 +1,11 @@
 "use client";
+
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { FaDiscord, FaInstagram, FaLinkedin, FaThreads } from "react-icons/fa6";
 import { GiRoundStar } from "react-icons/gi";
+import { PiStarFourFill } from "react-icons/pi";
 import Image from "next/image";
 import MoreSales from "./sections/more-sales/page";
 import AboutUs from "./sections/about-us/page";
@@ -15,6 +17,29 @@ import Footer from "../components/Footer";
 
 const words = ["Inovador", "Exclusivo", "Moderno", "Eficiente"];
 
+const STAR_POSITIONS = [
+  { x: "10%", y: "10%" },
+  { x: "20%", y: "15%" },
+  { x: "30%", y: "5%" },
+  { x: "40%", y: "20%" },
+  { x: "50%", y: "10%" },
+  { x: "60%", y: "30%" },
+  { x: "70%", y: "25%" },
+  { x: "80%", y: "35%" },
+  { x: "90%", y: "30%" },
+  { x: "15%", y: "40%" },
+  { x: "25%", y: "50%" },
+  { x: "35%", y: "45%" },
+  { x: "45%", y: "55%" },
+  { x: "55%", y: "50%" },
+  { x: "65%", y: "60%" },
+  { x: "75%", y: "65%" },
+  { x: "85%", y: "70%" },
+  { x: "95%", y: "75%" },
+  { x: "40%", y: "80%" },
+  { x: "60%", y: "85%" }
+];
+
 export default function Home() {
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
 
@@ -23,10 +48,9 @@ export default function Home() {
       setCurrentWordIndex((prevIndex) =>
         prevIndex === words.length - 1 ? 0 : prevIndex + 1
       );
-    }, 6000);
+    }, 4500); 
 
     return () => clearInterval(interval);
-
   }, []);
 
   const fadeInUp = {
@@ -39,19 +63,25 @@ export default function Home() {
     visible: { opacity: 1 },
   };
 
-  const [reviewCount, setReviewCount] = useState(1000); 
-  const targetValue = 1876; 
+  const wordAnimation = {
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 },
+    exit: { opacity: 0, y: -20 }
+  };
+
+  const [reviewCount, setReviewCount] = useState(1000);
+  const targetValue = 1876;
 
   useEffect(() => {
     let currentCount = reviewCount;
     const interval = setInterval(() => {
       if (currentCount < targetValue) {
-        currentCount += Math.ceil((targetValue - currentCount) / 10); 
+        currentCount += Math.ceil((targetValue - currentCount) / 10);
         setReviewCount(currentCount);
       } else {
-        clearInterval(interval); 
+        clearInterval(interval);
       }
-    }, 80); 
+    }, 80);
 
     return () => clearInterval(interval);
   }, [reviewCount]);
@@ -62,8 +92,36 @@ export default function Home() {
   };
 
   return (
-    <main className="flex flex-col items-center justify-between">
-      <section className="flex flex-col md:flex-row justify-start w-full max-w-5xl mx-auto items-center py-4 px-4 min-h-fit bg-black relative">
+    <main className="flex flex-col items-center justify-between relative min-h-screen bg-black overflow-hidden">
+      <div className="fixed inset-0 pointer-events-none">
+        {STAR_POSITIONS.map((position, index) => (
+          <motion.div
+            key={index}
+            className="absolute"
+            style={{
+              left: position.x,
+              top: position.y
+            }}
+            initial={{ opacity: 0 }}
+            whileInView={{
+              opacity: [0, 0.6, 0],
+              scale: [0.5, 1, 0.5]
+            }}
+            viewport={{ once: false, amount: 0.3 }}
+            transition={{
+              duration: 5,
+              repeat: Infinity,
+              repeatType: "reverse",
+              ease: "easeInOut",
+              delay: index * 0.4
+            }}
+          >
+            <PiStarFourFill className="text-spacefy w-4 h-4" />
+          </motion.div>
+        ))}
+      </div>
+
+      <section className="flex flex-col md:flex-row justify-start w-full max-w-5xl mx-auto items-center py-4 px-4 min-h-fit relative z-10">
         <motion.div
           className="absolute inset-0 flex items-center justify-center z-0 translate-y-[190px]"
           initial="hidden"
@@ -71,7 +129,7 @@ export default function Home() {
           variants={fadeInDelayed}
           transition={{ delay: 1.5, duration: 0.8, ease: "easeOut" }}
         >
-          <p className="font-poppins uppercase font-semibold text-transparent bg-clip-text bg-gradient-to-b from-transparent to-[#4F46E8] text-[90px] sm:text[110px] md:text-[300px] lg:text-[316px] leading-[0.9] whitespace-nowrap mb-20">
+          <p className="font-poppins uppercase font-semibold text-transparent bg-clip-text bg-gradient-to-b from-transparent to-[#4F46E8] text-[90px] sm:text[110px] md:text-[300px] text-8xl leading-[0.9] whitespace-nowrap mb-20">
             SPACEFY
           </p>
         </motion.div>
@@ -167,21 +225,23 @@ export default function Home() {
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
             <span className="text-white">Explore</span> o{" "}
-            <motion.span
-              key={currentWordIndex}
-              className="text-[#4F46E5] inline-block"
-              initial={{ y: 30, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: -30, opacity: 0 }}
-              transition={{ duration: 0.6, ease: "easeInOut" }}
-              style={{ minWidth: "150px", textAlign: "center" }}
-            >
-              {words[currentWordIndex]}.
-            </motion.span>
+            <AnimatePresence mode="wait">
+              <motion.span
+                key={currentWordIndex}
+                className="text-[#4F46E5] inline-block"
+                variants={wordAnimation}
+                initial="initial"
+                animate="animate"
+                exit="exit"
+                transition={{ duration: 0.5, ease: "easeInOut" }}
+              >
+                {words[currentWordIndex]}
+              </motion.span>
+            </AnimatePresence>
           </motion.h1>
 
           <motion.div
-            className="hidden md:flex mx-auto   xl:mx-0 gap-10 py-4 px-2 items-center"
+            className="hidden md:flex mx-auto xl:mx-0 gap-10 py-4 px-2 items-center"
             initial="hidden"
             animate="visible"
             variants={fadeInUp}
