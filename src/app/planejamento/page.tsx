@@ -3,7 +3,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { PiStarFourFill } from "react-icons/pi";
 import { IoMdHelp } from "react-icons/io";
-import { RiCodeLine, RiGlobalLine } from "react-icons/ri";
 import Link from "next/link";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { TbHandClick, TbMessage2Star } from "react-icons/tb";
