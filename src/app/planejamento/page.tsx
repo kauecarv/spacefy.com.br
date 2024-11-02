@@ -196,7 +196,6 @@ const scrollbarStyles = `
 const Planejamento = () => {
   const [isMounted, setIsMounted] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("todos");
-  const [, setHoveredIndex] = useState<number | null>(null);
   const [hiddenTooltips, setHiddenTooltips] = useState<{[key: number]: boolean}>({});
   const [tooltipHoveredIndex, setTooltipHoveredIndex] = useState<number | null>(null);
   const [modalOpen, setModalOpen] = useState(false);

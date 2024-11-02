@@ -1,7 +1,6 @@
 "use client"
 
 import Link from "next/link";
-import { MdOutlineCallMissedOutgoing } from "react-icons/md";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { IoArrowForward, IoVideocam } from "react-icons/io5";

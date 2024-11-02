@@ -5,6 +5,7 @@ import { useInView } from "react-intersection-observer";
 import { useState, useEffect } from "react";
 import { TbSquareRoundedPercentage } from "react-icons/tb";
 import { FaHeadphonesSimple } from "react-icons/fa6";
+import Image from "next/image";
 
 const Features = () => {
   const [ref, inView] = useInView({
@@ -178,9 +179,11 @@ const Features = () => {
               title="Hospedagem Gratuita"
               description="Economize com nossa hospedagem gratuita de alta qualidade."
               icon={
-                <img
+                <Image
                   src="https://framerusercontent.com/images/X9rSPrFBr6Qh4qsMnmARaX1VN3Q.png?scale-down-to=512"
                   alt="Ícone"
+                  width={16}
+                  height={16}
                   className="w-4 h-4"
                 />
               }
@@ -194,9 +197,11 @@ const Features = () => {
               title="Aparecer no Google"
               description="Otimizamos seu site para os mecanismos de busca, aumentando sua visibilidade online."
               icon={
-                <img
+                <Image
                   src="https://framerusercontent.com/images/X9rSPrFBr6Qh4qsMnmARaX1VN3Q.png?scale-down-to=512"
                   alt="Ícone"
+                  width={16}
+                  height={16}
                   className="w-4 h-4"
                 />
               }
@@ -210,9 +215,11 @@ const Features = () => {
               title="Interface Atraente"
               description="Criamos designs modernos e atraentes que cativam seus visitantes."
               icon={
-                <img
+                <Image
                   src="https://framerusercontent.com/images/X9rSPrFBr6Qh4qsMnmARaX1VN3Q.png?scale-down-to=512"
                   alt="Ícone"
+                  width={16}
+                  height={16}
                   className="w-4 h-4"
                 />
               }
@@ -263,9 +270,11 @@ const Features = () => {
               className="absolute top-1/3 left-[60%] transform -translate-y-1/2 translate-x-1/2"
               description="Economize com nossa hospedagem gratuita de alta qualidade."
               icon={
-                <img
+                <Image
                   src="https://framerusercontent.com/images/X9rSPrFBr6Qh4qsMnmARaX1VN3Q.png?scale-down-to=512"
                   alt="Ícone"
+                  width={16}
+                  height={16}
                   className="w-4 h-4"
                 />
               }
@@ -277,9 +286,11 @@ const Features = () => {
               className="absolute bottom-16 right-[10%] transform -translate-x-1/2"
               description="Otimizamos seu site para os mecanismos de busca, aumentando sua visibilidade online."
               icon={
-                <img
+                <Image
                   src="https://framerusercontent.com/images/X9rSPrFBr6Qh4qsMnmARaX1VN3Q.png?scale-down-to=512"
                   alt="Ícone"
+                  width={16}
+                  height={16}
                   className="w-4 h-4"
                 />
               }
@@ -291,9 +302,11 @@ const Features = () => {
               className="absolute bottom-16 right-[60%] transform translate-x-1/2"
               description="Criamos designs modernos e atraentes que cativam seus visitantes."
               icon={
-                <img
+                <Image
                   src="https://framerusercontent.com/images/X9rSPrFBr6Qh4qsMnmARaX1VN3Q.png?scale-down-to=512"
                   alt="Ícone"
+                  width={16}
+                  height={16}
                   className="w-4 h-4"
                 />
               }

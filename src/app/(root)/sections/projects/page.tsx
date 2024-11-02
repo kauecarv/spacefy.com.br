@@ -9,6 +9,7 @@ import { useState } from "react";
 import { CgArrowsExpandUpRight } from "react-icons/cg";
 import { useInView } from "react-intersection-observer";
 import { TbMessage2Star } from "react-icons/tb";
+import Image from "next/image";
 
 const Projects = () => {
   const [selectedCategory, setSelectedCategory] = useState("sites");
@@ -253,10 +254,14 @@ const Projects = () => {
                 onHoverEnd={() => setHoveredIndex(null)}
                 whileHover={{ scale: 1.02 }}
               >
-                <img 
+                <Image 
                   src={image} 
                   alt={`Projeto ${index + 1}`}
-                  className="w-full h-full object-cover transition-transform duration-500"
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  className="object-cover transition-transform duration-500"
+                  priority={index === 0}
+                  quality={90}
                 />
                 <AnimatePresence>
                   {hoveredIndex === index && (
