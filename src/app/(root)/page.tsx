@@ -121,7 +121,7 @@ export default function Home() {
         ))}
       </div>
 
-      <section className="flex flex-col md:flex-row justify-start w-full max-w-5xl mx-auto items-center py-4 px-4 min-h-fit relative z-10">
+      <section className="flex flex-col md:flex-row justify-start w-full max-w-5xl mx-auto items-center py-4 px-4 min-h-fit relative ">
         <motion.div
           className="absolute inset-0 flex items-center justify-center z-0 translate-y-[190px]"
           initial="hidden"

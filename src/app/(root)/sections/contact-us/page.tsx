@@ -4,7 +4,7 @@ import Link from "next/link";
 import { MdOutlineCallMissedOutgoing } from "react-icons/md";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { IoVideocam } from "react-icons/io5";
+import { IoArrowForward, IoVideocam } from "react-icons/io5";
 
 const ContactUs = () => {
   const ref = useRef(null);
@@ -103,7 +103,7 @@ const ContactUs = () => {
                   }
                 }}
               >
-                <MdOutlineCallMissedOutgoing className="text-white text-lg" />
+                <IoArrowForward className="text-white text-lg" />
                 Fazer Orçamento
               </motion.div>
             </Link>

@@ -10,7 +10,7 @@ import { TbSquareRoundedPercentage } from "react-icons/tb";
 import { motion, AnimatePresence } from "framer-motion";
 import { AiOutlineMenu } from "react-icons/ai";
 import { IoMdCloseCircle } from "react-icons/io";
-import { FaHeadset } from "react-icons/fa6";
+import { BsCalculator } from "react-icons/bs";
 
 const MobileNavigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -60,7 +60,7 @@ const MobileNavigation = () => {
   };
 
   return (
-    <div className="lg:hidden">
+    <div className="lg:hidden ">
       <button
         className="p-2 bg-[#101010] rounded-xl border border-[#272727]"
         onClick={() => setIsOpen(true)}
@@ -71,7 +71,7 @@ const MobileNavigation = () => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="fixed inset-0 bg-black z-50 flex flex-col"
+            className="fixed inset-0 bg-black !z-50 flex flex-col"
             initial="hidden"
             animate="visible"
             exit="hidden"
@@ -110,10 +110,10 @@ const MobileNavigation = () => {
               <div className="w-full px-4 mt-8">
                 <Link
                   href="/"
-                  className="w-full py-3 bg-white text-black rounded-xl text-center font-poppins font-medium h-12 inline-flex items-center justify-center"
+                  className="w-full py-3 bg-[#4F46E5] text-white rounded-xl text-center font-poppins font-medium h-12 inline-flex items-center justify-center hover:bg-[#4338CA] transition-colors"
                 >
-                  <FaHeadset className="inline mr-2" />
-                  Entre em Contato
+                  <BsCalculator className="inline mr-2" />
+                  Fazer Orçamento
                 </Link>
                 <p className="mt-3 text-sm font-dmsans font-normal text-center text-[#A3A3A3]">
                   Estamos prontos para ajudar você a alcançar o próximo nível.
