@@ -10,12 +10,20 @@ const ContactUs = () => {
   const ref = useRef(null);
   const inView = useInView(ref);
 
-  useEffect(()=>{
-	  (async function () {
-		const cal = await getCalApi({"namespace":"30min"});
-		cal("ui", {"theme":"dark","styles":{"branding":{"brandColor":"#4F46E5"}},"hideEventTypeDetails":true,"layout":"month_view"});
-	  })();
-	}, [])
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      (async function () {
+        const cal = await getCalApi({ namespace: "30min" });
+        cal("ui", {
+          theme: "dark",
+          styles: { branding: { brandColor: "#4F46E5" } },
+          hideEventTypeDetails: true,
+          layout: "month_view",
+        });
+      })();
+    }
+  }, []);
+  
 
 
   const containerVariants = {
