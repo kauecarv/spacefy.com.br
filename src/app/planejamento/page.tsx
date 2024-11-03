@@ -133,41 +133,6 @@ const categoryDetails = {
   }
 };
 
-// Estilos personalizados para a scrollbar
-const scrollbarStyles = `
-  body.modal-open {
-    overflow: hidden;
-  }
-
-  .modal-scroll {
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE/Edge */
-  }
-
-  .modal-scroll::-webkit-scrollbar {
-    width: 2px;
-    display: block;
-  }
-  
-  .modal-scroll::-webkit-scrollbar-track {
-    background: #1a1a1a;
-    margin: 1rem;
-  }
-  
-  .modal-scroll::-webkit-scrollbar-thumb {
-    background: #4F46E8;
-    border-radius: 4px;
-  }
-  
-  .modal-scroll::-webkit-scrollbar-thumb:hover {
-    background: #6366F1;
-  }
-
-  .modal-scroll::-webkit-scrollbar-button,
-  .modal-scroll::-webkit-scrollbar-corner {
-    display: none;
-  }
-`;
 
 const Modal = ({ 
   isOpen, 
@@ -314,7 +279,6 @@ const Planejamento = () => {
   const [tooltipHoveredIndex, setTooltipHoveredIndex] = useState<number | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedModalContent, setSelectedModalContent] = useState<string | null>(null);
-  const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 });
 
   useEffect(() => {
     setIsMounted(true);
