@@ -1,7 +1,6 @@
 "use client"
 
 import { motion, AnimatePresence } from "framer-motion";
-import { PiStarFourFill } from "react-icons/pi";
 import { IoMdHelp, IoMdClose } from "react-icons/io";
 import Link from "next/link";
 
@@ -13,29 +12,6 @@ import { HiOutlineViewGrid } from "react-icons/hi";
 import { LiaNetworkWiredSolid } from "react-icons/lia";
 import { BsMouseFill, BsStarFill } from "react-icons/bs";
 import { useEffect, useState } from "react";
-
-const STAR_POSITIONS = [
-  { x: "10%", y: "10%" },
-  { x: "20%", y: "15%" },
-  { x: "30%", y: "5%" },
-  { x: "40%", y: "20%" },
-  { x: "50%", y: "10%" },
-  { x: "60%", y: "30%" },
-  { x: "70%", y: "25%" },
-  { x: "80%", y: "35%" },
-  { x: "90%", y: "30%" },
-  { x: "15%", y: "40%" },
-  { x: "25%", y: "50%" },
-  { x: "35%", y: "45%" },
-  { x: "45%", y: "55%" },
-  { x: "55%", y: "50%" },
-  { x: "65%", y: "60%" },
-  { x: "75%", y: "65%" },
-  { x: "85%", y: "70%" },
-  { x: "95%", y: "75%" },
-  { x: "40%", y: "80%" },
-  { x: "60%", y: "85%" }
-];
 
 const categoryDetails = {
   "UI/UX": {
@@ -193,6 +169,144 @@ const scrollbarStyles = `
   }
 `;
 
+const Modal = ({ 
+  isOpen, 
+  onClose, 
+  category 
+}: { 
+  isOpen: boolean; 
+  onClose: () => void; 
+  category: string | null; 
+}) => {
+  if (!isOpen || !category) return null;
+
+  const categoryData = categoryDetails[category as keyof typeof categoryDetails];
+  if (!categoryData) return null;
+
+  return (
+    <div className="fixed inset-0 z-50 overflow-y-auto rounded-t-xl">
+      <div className="min-h-screen px-4 text-center flex items-center justify-center rounded-t-xl">
+        {/* Overlay/Backdrop */}
+        <div 
+          className="fixed inset-0 bg-black/95 transition-opacity duration-200"
+          onClick={onClose}
+        />
+
+        {/* Modal Container */}
+        <motion.div
+          className="inline-block w-full max-w-4xl text-left align-middle transition-all transform bg-black  shadow-xl relative z-50  border border-[#161616]"
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.95 }}
+          transition={{ duration: 0.3 }}
+        >
+          {/* Close Button */}
+          <motion.button
+            onClick={onClose}
+            className="absolute top-6 right-6 text-white z-10 bg-black/20 border border-white/10 hover:bg-spacefy/20 hover:border-spacefy hover:text-spacefy p-2 rounded-lg transition-all duration-200 rounded-t-xl"
+            whileHover={{ rotate: 90 }}
+            transition={{ duration: 0.2 }}
+          >
+            <IoMdClose className="w-6 h-6" />
+          </motion.button>
+
+          {/* Header Image */}
+          <div className="relative w-full h-[300px] ">
+            <motion.div 
+              className="absolute inset-0 rounded-t-xl"
+              initial={{ scale: 1.1 }}
+              animate={{ scale: 1 }}
+              transition={{ duration: 0.5 }}
+              
+            >
+              <img 
+                src={categoryData.image}
+                alt={category}
+                className="w-full h-full object-cover brightness-[0.6]"
+              />
+              <div className="absolute inset-0 bg-gradient-to-b from-black/10 to-black/80" />
+            </motion.div>
+
+            {/* Modal Header Content */}
+            <div className="absolute top-6 left-6 z-10">
+              <Link 
+                href={`/${category.toLowerCase()}`}
+                className="bg-spacefy hover:bg-spacefy/90 text-white px-4 py-1.5 rounded-lg text-sm font-medium transition-all font-poppins duration-200 flex items-center gap-2 hover:scale-105"
+              >
+                <TbPencilPlus className="w-4 h-4" />
+                Fazer Orçamento
+              </Link>
+            </div>
+
+            {/* Title Section */}
+            <div className="absolute bottom-6 left-6 right-6">
+              <div className="flex items-start justify-between">
+                <h3 className="font-poppins text-2xl font-bold text-white/90 tracking-tight mb-1">
+                  {categoryData.title}
+                </h3>
+                
+                <div className="flex items-center gap-2 bg-black/30 px-3 py-1.5 rounded-full">
+                  <span className="text-spacefy font-dmsans font-medium text-sm">
+                    {categoryData.rating}
+                  </span>
+                  <div className="flex gap-0.5">
+                    {[...Array(5)].map((_, i) => (
+                      <BsStarFill 
+                        key={i}
+                        className={`w-3 h-3 ${i < Math.floor(categoryData.rating) ? 'text-spacefy' : 'text-white/10'}`}
+                      />
+                    ))}
+                  </div>
+                  <span className="text-white/50 text-xs ml-1">
+                    ({categoryData.reviews})
+                  </span>
+                </div>
+              </div>
+              
+              <p className="text-white/60 text-sm mt-2 max-w-2xl">
+                {categoryData.description}
+              </p>
+            </div>
+          </div>
+
+          {/* Features Grid */}
+          <div className="p-6 bg-black/100  ">
+            <div className="flex flex-col items-start gap-1 mb-8">
+              <h4 className="font-poppins text-2xl font-semibold text-white tracking-tight">
+                Recursos <span className="text-spacefy font-semibold">Exclusivos</span>
+              </h4>
+              <div className="h-[2px] w-16 bg-gradient-to-r from-spacefy to-transparent rounded-full" />
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              {categoryData.features.map((feature, index) => (
+                <div 
+                  key={index}
+                  className="group flex items-start gap-3 p-4 rounded-xl hover:bg-spacefy/10 transition-all duration-200 bg-black/20"
+                >
+                  <div className="w-10 h-10 rounded-xl bg-spacefy/20 flex items-center justify-center group-hover:scale-110 group-hover:bg-spacefy/30 transition-all duration-200">
+                    <div className="text-spacefy group-hover:text-spacefy">
+                      {feature.icon}
+                    </div>
+                  </div>
+                  <div>
+                    <h5 className="font-poppins text-white font-medium text-sm mb-1 group-hover:text-spacefy transition-colors duration-200">
+                      {feature.title}
+                    </h5>
+                    <p className="font-dmsans text-white/70 text-xs leading-relaxed group-hover:text-white/80 transition-colors duration-200">
+                      {feature.description}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </div>
+  );
+};
+
 const Planejamento = () => {
   const [isMounted, setIsMounted] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("todos");
@@ -200,6 +314,7 @@ const Planejamento = () => {
   const [tooltipHoveredIndex, setTooltipHoveredIndex] = useState<number | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedModalContent, setSelectedModalContent] = useState<string | null>(null);
+  const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 });
 
   useEffect(() => {
     setIsMounted(true);
@@ -321,168 +436,13 @@ const Planejamento = () => {
       animate="visible"
       variants={containerVariants}
     >
-      {STAR_POSITIONS.map((pos, index) => (
-        <motion.div
-          key={index}
-          className="absolute"
-          style={{ left: pos.x, top: pos.y }}
-          initial={{ opacity: 0 }}
-          animate={{ 
-            opacity: [0, 0.8, 0],
-            x: [0, Math.random() * 20 - 10, 0],
-            y: [0, Math.random() * 20 - 10, 0],
-          }}
-          transition={{
-            duration: 3 + Math.random() * 2,
-            repeat: Infinity,
-            delay: Math.random() * 2,
-            ease: "easeInOut"
-          }}
-        >
-          <PiStarFourFill className="text-spacefy w-2 h-2 opacity-70" />
-        </motion.div>
-      ))}
       <AnimatePresence mode="wait">
-        {modalOpen && selectedModalContent && (
-          <motion.div
-            className="fixed inset-0 bg-black/90 backdrop-blur-sm flex items-center justify-center z-50 p-4 overflow-hidden"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.95 }}
-            transition={{ duration: 0.2, ease: "easeOut" }}
-            onClick={() => setModalOpen(false)}
-          >
-            <style>{scrollbarStyles}</style>
-            <motion.div
-              className="bg-black rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto modal-scroll"
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: -20, opacity: 0 }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
-              onClick={e => e.stopPropagation()}
-            >
-              <div className="relative">
-                <div className="absolute top-6 left-6 z-10">
-                  <Link 
-                    href={`/${selectedModalContent.toLowerCase()}`}
-                    className="bg-spacefy hover:bg-spacefy/90 text-white px-4 py-1.5 rounded-lg text-sm font-medium transition-all font-poppins duration-200 flex items-center gap-2 hover:scale-105"
-                  >
-                    <TbPencilPlus className="w-4 h-4" />
-                    Fazer Orçamento
-                  </Link>
-                </div>
-                <motion.button
-                  onClick={() => setModalOpen(false)}
-                  className="absolute top-6 right-6 text-white z-10 bg-black/20 border border-white/10 hover:bg-spacefy/20 hover:border-spacefy hover:text-spacefy p-2 rounded-lg transition-all duration-200 backdrop-blur-sm"
-                  whileHover={{ rotate: 90 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <IoMdClose className="w-6 h-6" />
-                </motion.button>
-                <div className="relative w-full h-[300px]">
-                  <motion.div 
-                    className="absolute inset-0"
-                    initial={{ scale: 1.1 }}
-                    animate={{ scale: 1 }}
-                    transition={{ duration: 0.5 }}
-                  >
-                    <img 
-                      src={categoryDetails[selectedModalContent as keyof typeof categoryDetails].image}
-                      alt={selectedModalContent}
-                      className="w-full h-full object-cover brightness-[0.3]"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-black" />
-                  </motion.div>
-                  
-                  <div className="relative h-full flex flex-col justify-end p-6 pb-2">
-                    <div className="flex items-start justify-between">
-                      <motion.h3 
-                        className="font-poppins text-2xl font-bold text-white/90 tracking-tight mb-1"
-                        initial={{ x: -20, opacity: 0 }}
-                        animate={{ x: 0, opacity: 1 }}
-                        transition={{ delay: 0.2 }}
-                      >
-                        {categoryDetails[selectedModalContent as keyof typeof categoryDetails].title}
-                      </motion.h3>
-                      
-                      <motion.div 
-                        className="flex items-center gap-2 bg-black/30 backdrop-blur-sm px-3 py-1.5 rounded-full"
-                        initial={{ x: 20, opacity: 0 }}
-                        animate={{ x: 0, opacity: 1 }}
-                        transition={{ delay: 0.2 }}
-                      >
-                        <span className="text-spacefy font-dmsans font-medium text-sm">
-                          {categoryDetails[selectedModalContent as keyof typeof categoryDetails].rating}
-                        </span>
-                        <div className="flex gap-0.5">
-                          {[...Array(5)].map((_, i) => (
-                            <BsStarFill 
-                              key={i}
-                              className={`w-3 h-3 ${i < Math.floor(categoryDetails[selectedModalContent as keyof typeof categoryDetails].rating) ? 'text-spacefy font-dmsans'  : 'text-white/10 font-dmsans'}`}
-                            />
-                          ))}
-                        </div>
-                        <span className="text-white/50 text-xs ml-1 font-dmsans">
-                          ({categoryDetails[selectedModalContent as keyof typeof categoryDetails].reviews})
-                        </span>
-                      </motion.div>
-                    </div>
-                    
-                    <motion.p 
-                      className="text-white/60 text-sm mt-2 max-w-2xl"
-                      initial={{ y: 20, opacity: 0 }}
-                      animate={{ y: 0, opacity: 1 }}
-                      transition={{ delay: 0.3 }}
-                    >
-                      {categoryDetails[selectedModalContent as keyof typeof categoryDetails].description}
-                    </motion.p>
-                  </div>
-                </div>
-
-                <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-white/10 to-transparent mt-2" />
-
-                <div className="p-6">
-                  <motion.div 
-                    className="flex flex-col items-start gap-1 mb-8"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.4 }}
-                  >
-                    <h4 className="font-poppins text-xl text-white/90 tracking-tight">
-                      Recursos <span className="text-spacefy font-semibold">Exclusivos</span>
-                    </h4>
-                    <div className="h-[2px] w-16 bg-gradient-to-r from-spacefy/80 to-transparent rounded-full" />
-                  </motion.div>
-
-                  <div className="grid grid-cols-2 gap-4">
-                    {categoryDetails[selectedModalContent as keyof typeof categoryDetails].features.map((feature, index) => (
-                      <motion.div 
-                        key={index}
-                        className="group flex items-start gap-3 p-4 rounded-xl hover:bg-spacefy/5 transition-all duration-200"
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.4 + index * 0.1 }}
-                      >
-                        <div className="w-10 h-10 rounded-xl bg-spacefy/10 flex items-center justify-center group-hover:scale-110 group-hover:bg-spacefy/20 transition-all duration-200">
-                          <div className="text-spacefy group-hover:text-spacefy">
-                            {feature.icon}
-                          </div>
-                        </div>
-                        <div>
-                          <h5 className="font-poppins text-white/90 font-medium text-sm mb-1 group-hover:text-spacefy transition-colors duration-200">
-                            {feature.title}
-                          </h5>
-                          <p className="font-dmsans text-white/50 text-xs leading-relaxed group-hover:text-white/60 transition-colors duration-200">
-                            {feature.description}
-                          </p>
-                        </div>
-                      </motion.div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
+        {modalOpen && (
+          <Modal
+            isOpen={modalOpen}
+            onClose={() => setModalOpen(false)}
+            category={selectedModalContent}
+          />
         )}
       </AnimatePresence>
 

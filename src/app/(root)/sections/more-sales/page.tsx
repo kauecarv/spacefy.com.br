@@ -80,7 +80,7 @@ const MoreSales = () => {
           <Image
             src="/assets/publicity/graphic-line.svg"
             alt="Linha gráfica"
-            layout="fill"
+            fill
             className="opacity-70"
           />
         </div>

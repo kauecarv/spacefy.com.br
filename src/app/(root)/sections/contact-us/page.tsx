@@ -2,29 +2,12 @@
 
 import Link from "next/link";
 import { motion, useInView } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { IoArrowForward, IoVideocam } from "react-icons/io5";
-import { getCalApi } from "@calcom/embed-react";
 
 const ContactUs = () => {
   const ref = useRef(null);
   const inView = useInView(ref);
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      (async function () {
-        const cal = await getCalApi({ namespace: "30min" });
-        cal("ui", {
-          theme: "dark",
-          styles: { branding: { brandColor: "#4F46E5" } },
-          hideEventTypeDetails: true,
-          layout: "month_view",
-        });
-      })();
-    }
-  }, []);
-  
-
 
   const containerVariants = {
     hidden: { opacity: 0, y: 50 },
@@ -106,7 +89,7 @@ const ContactUs = () => {
             }}
           >
             <Link
-              href="/planejamento"
+              href="mailto:contato@example.com"
               className="py-3 px-6 inline-flex items-center justify-center w-full sm:w-auto gap-2 bg-indigo-600 text-white font-poppins font-normal text-sm rounded-xl"
             >
               <motion.div
@@ -135,11 +118,6 @@ const ContactUs = () => {
               }
             }}
           >
-            <button data-cal-namespace="30min"
-	  data-cal-link="spacefy-devteam/30min"
-    
-	  data-cal-config='{"layout":"month_view","theme":"dark"}'
-	  >Click me</button>
             <Link
               href="mailto:contato@example.com" 
               className="py-3 px-6 inline-flex items-center justify-center w-full sm:w-auto gap-2 bg-white text-black font-poppins font-normal text-sm rounded-xl"

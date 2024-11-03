@@ -1,17 +1,3 @@
-
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-body {
-  
-  background: black;
-  margin: 0; 
-  overflow-x: hidden; 
-}
-
-
 @layer utilities {
   .no-scrollbar::-webkit-scrollbar {
     display: none;
@@ -53,4 +39,4 @@ body {
 .react-calendar__tile--now {
   background-color: rgba(99, 102, 241, 0.1) !important;
   color: #6366f1 !important;
-}
+} 
