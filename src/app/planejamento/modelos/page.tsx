@@ -170,6 +170,8 @@ const Modelos = () => {
         setTimeout(() => {
           setShowSuccess(false);
           setShowThanks(true);
+          // Adicionar scroll para o topo
+          window.scrollTo({ top: 0, behavior: 'smooth' });
         }, 3500);
       }, 2000);
       return;
@@ -287,7 +289,7 @@ const Modelos = () => {
 
   if (showThanks) {
     return (
-      <div className="flex flex-col items-center min-h-screen bg-[#0A0A0B] px-4">
+      <div className="flex flex-col items-center min-h-screen px-4">
         <div className="relative w-full text-center pt-20">
           <motion.p 
             initial={{ opacity: 0 }}
