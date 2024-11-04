@@ -11,6 +11,24 @@ body {
   overflow-x: hidden; 
 }
 
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #0D0D0E;
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #4F46E8;
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #3F38B8;
+} 
+
 
 @layer utilities {
   .no-scrollbar::-webkit-scrollbar {
