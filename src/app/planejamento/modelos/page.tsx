@@ -11,6 +11,7 @@ import { MdOutlineSwitchAccessShortcutAdd } from "react-icons/md";
 import { HiOutlineViewGrid, HiOutlineSparkles, HiOutlineArrowLeft } from "react-icons/hi";
 import { CgWebsite } from "react-icons/cg";
 import { createPortal } from 'react-dom';
+import Image from 'next/image';
 
 interface Field {
   type: string;
@@ -28,6 +29,16 @@ interface Step {
   fields: Field[];
   title: string;
   subtitle: string;
+}
+
+interface RadioOption {
+  label: string;
+  value: string;
+}
+
+interface SelectOption {
+  label?: string;
+  value: string;
 }
 
 const Modelos = () => {
@@ -117,7 +128,7 @@ const Modelos = () => {
           options: [
             { label: "Sim, tenho referências", value: "sim" },
             { label: "Não, preciso de sugestões", value: "nao" }
-          ]
+          ] as RadioOption[]
         },
         { 
           Icon: RiFileTextLine,
@@ -518,11 +529,16 @@ const Modelos = () => {
                     }}
                     layout="position"
                   >
-                    <img 
-                      src={image} 
-                      alt={`Projeto ${index + 1}`}
-                      className="w-full h-full object-cover transition-transform duration-200 ease-out"
-                    />
+                    <div className="relative w-full h-full">
+                      <Image 
+                        src={image} 
+                        alt={`Projeto ${index + 1}`}
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        className="object-cover"
+                        priority={index === 0}
+                      />
+                    </div>
                   </motion.div>
                 ))}
               </motion.div>
@@ -783,7 +799,7 @@ const Modelos = () => {
                                 >
                                   <div className="bg-[#0D0D0E] border-2 border-[#151516] rounded-xl overflow-hidden
                                     shadow-[0_8px_32px_rgba(0,0,0,0.4)] backdrop-blur-lg">
-                                    {field.options?.map((option, i) => {
+                                    {field.options?.map((option: RadioOption | string, i: number) => {
                                       const value = typeof option === 'string' ? option : option.value;
                                       const label = typeof option === 'string' ? option : option.label;
                                       const isSelected = formData[field.name as keyof typeof formData] === value;

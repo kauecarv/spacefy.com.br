@@ -10,13 +10,14 @@ import { MdOutlineSwitchAccessShortcutAdd } from "react-icons/md";
 import { HiOutlineViewGrid, HiOutlineSparkles, HiOutlineArrowLeft } from "react-icons/hi";
 import { CgWebsite } from "react-icons/cg";
 import { createPortal } from 'react-dom';
+import Image from 'next/image';
 
 interface Field {
   type: string;
   placeholder: string;
   Icon?: IconType;
   description?: string;
-  options?: string[] | { label: string; value: string }[];
+  options?: string[] | OptionType[];
   name: string;
   conditional?: string;
   title?: string;
@@ -27,6 +28,11 @@ interface Step {
   fields: Field[];
   title: string;
   subtitle: string;
+}
+
+interface OptionType {
+  label: string;
+  value: string;
 }
 
 const Prototipos = () => {
@@ -356,25 +362,24 @@ const Prototipos = () => {
     }
   };
 
-
   const projects = {
     todos: [
-      "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671b25477be2a508e0342e75_10c8b478-b389-48df-93cb-299dae72141d.jpeg",
-      "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/67105ab6140b33f063f0aa7b_9ac3e592-c478-4029-a2d2-e6323699f465.jpeg", 
-      "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671182a4d5a2b01aafedd422_db783e89-af38-441c-a36c-7db2806f79f4.png",
-      "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671b29f6647cdaef47831669_e4402a7b-439b-410e-97ea-e03c575cf351.png"
+      "https://exemplo.com/prototipo1.gif",
+      "https://exemplo.com/prototipo2.gif",
+      "https://exemplo.com/prototipo3.gif",
+      "https://exemplo.com/prototipo4.gif"
     ],
-    sites: [
-      "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671182a4d5a2b01aafedd422_db783e89-af38-441c-a36c-7db2806f79f4.png",
-      "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/67105ab6140b33f063f0aa7b_9ac3e592-c478-4029-a2d2-e6323699f465.jpeg",
-      "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671b25477be2a508e0342e75_10c8b478-b389-48df-93cb-299dae72141d.jpeg",
-      "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671b29f6647cdaef47831669_e4402a7b-439b-410e-97ea-e03c575cf351.png"
+    mobile: [
+      "https://exemplo.com/mobile1.gif",
+      "https://exemplo.com/mobile2.gif",
+      "https://exemplo.com/mobile3.gif",
+      "https://exemplo.com/mobile4.gif"
     ],
-    modelos: [
-      "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671b29f6647cdaef47831669_e4402a7b-439b-410e-97ea-e03c575cf351.png", 
-      "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/67105ab6140b33f063f0aa7b_9ac3e592-c478-4029-a2d2-e6323699f465.jpeg",
-      "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671182a4d5a2b01aafedd422_db783e89-af38-441c-a36c-7db2806f79f4.png",
-      "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671b25477be2a508e0342e75_10c8b478-b389-48df-93cb-299dae72141d.jpeg"
+    web: [
+      "https://exemplo.com/web1.gif",
+      "https://exemplo.com/web2.gif",
+      "https://exemplo.com/web3.gif",
+      "https://exemplo.com/web4.gif"
     ]
   };
 
@@ -443,7 +448,7 @@ const Prototipos = () => {
               transition={{ duration: 0.5 }}
               className="flex flex-col mx-auto md:flex-row  justify-center text-center items-center gap-2"
             >
-      <Link 
+           <Link 
         href="/"
         className="inline-flex items-center gap-3 px-6 py-3 text-gray-400 hover:text-[#4F46E8] font-poppins transition-all duration-300 mb-20"
       >
@@ -533,10 +538,12 @@ const Prototipos = () => {
                     }}
                     layout="position"
                   >
-                    <img 
+                    <Image 
                       src={image} 
                       alt={`Projeto ${index + 1}`}
-                      className="w-full h-full object-cover transition-transform duration-200 ease-out"
+                      fill
+                      className="object-cover transition-transform duration-200 ease-out"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
                   </motion.div>
                 ))}
@@ -658,35 +665,41 @@ const Prototipos = () => {
                       )}
                       
                       <div className="grid grid-cols-2 gap-4">
-                        {Array.isArray(field.options) && field.options.map((option: any, i) => (
-                          <motion.button
-                            key={i}
-                            type="button"
-                            whileHover={{ scale: 1.02 }}
-                            whileTap={{ scale: 0.98 }}
-                            onClick={() => setFormData({...formData, [field.name]: option.value})}
-                            className={`relative flex flex-col items-center justify-center p-6 rounded-xl border-2 
-                              ${formData[field.name as keyof typeof formData] === option.value 
-                                ? 'border-spacefy bg-spacefy/5' 
-                                : 'border-[#151516] bg-[#0A0A0B]/80'} 
-                              transition-all duration-300 group hover:border-spacefy/50`}
-                          >
-                            <div className={`w-6 h-6 rounded-full border-2 mb-3 flex items-center justify-center
-                              ${formData[field.name as keyof typeof formData] === option.value 
-                                ? 'border-spacefy' 
-                                : 'border-[#151516]'}`}
+                        {Array.isArray(field.options) && field.options.map((option: OptionType | string, i) => {
+                          const value = typeof option === 'string' ? option : option.value;
+                          const label = typeof option === 'string' ? option : option.label;
+                          const isSelected = formData[field.name as keyof typeof formData] === value;
+
+                          return (
+                            <motion.button
+                              key={i}
+                              type="button"
+                              whileHover={{ scale: 1.02 }}
+                              whileTap={{ scale: 0.98 }}
+                              onClick={() => setFormData({...formData, [field.name]: value})}
+                              className={`relative flex flex-col items-center justify-center p-6 rounded-xl border-2 
+                                ${formData[field.name as keyof typeof formData] === value 
+                                  ? 'border-spacefy bg-spacefy/5' 
+                                  : 'border-[#151516] bg-[#0A0A0B]/80'} 
+                                transition-all duration-300 group hover:border-spacefy/50`}
                             >
-                              {formData[field.name as keyof typeof formData] === option.value && (
-                                <motion.div
-                                  initial={{ scale: 0 }}
-                                  animate={{ scale: 1 }}
-                                  className="w-3 h-3 rounded-full bg-spacefy"
-                                />
-                              )}
-                            </div>
-                            <span className="font-poppins text-sm text-white">{option.label}</span>
-                          </motion.button>
-                        ))}
+                              <div className={`w-6 h-6 rounded-full border-2 mb-3 flex items-center justify-center
+                                ${formData[field.name as keyof typeof formData] === value 
+                                  ? 'border-spacefy' 
+                                  : 'border-[#151516]'}`}
+                              >
+                                {formData[field.name as keyof typeof formData] === value && (
+                                  <motion.div
+                                    initial={{ scale: 0 }}
+                                    animate={{ scale: 1 }}
+                                    className="w-3 h-3 rounded-full bg-spacefy"
+                                  />
+                                )}
+                              </div>
+                              <span className="font-poppins text-sm text-white">{label}</span>
+                            </motion.button>
+                          );
+                        })}
                       </div>
                     </div>
                   ) : field.conditional === "sim" ? (
@@ -865,7 +878,7 @@ const Prototipos = () => {
               className={`flex-1 px-8 py-4 rounded-xl text-white font-poppins flex items-center justify-center gap-2 text-sm transition-all duration-300 
                 ${isCurrentStepValid() 
                   ? showSuccess 
-                    ? 'bg-green-500/50 cursor-not-allowed'
+                    ? 'bg-green-500 opacity-90 cursor-not-allowed'
                     : 'bg-spacefy hover:bg-white hover:text-black hover:shadow-[0_0_25px_rgba(79,70,232,0.25)] hover:-translate-y-1'
                   : 'bg-[#0A0A0B]/90 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0'}`}
             >

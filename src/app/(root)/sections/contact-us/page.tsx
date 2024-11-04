@@ -119,7 +119,7 @@ const ContactUs = () => {
             }}
           >
             <Link
-              href="mailto:contato@example.com" 
+              href="/planejamento" 
               className="py-3 px-6 inline-flex items-center justify-center w-full sm:w-auto gap-2 bg-white text-black font-poppins font-normal text-sm rounded-xl"
             >
               <motion.div

@@ -8,12 +8,13 @@ const nextConfig = {
         hostname: 'randomuser.me',
       },
       {
-        protocol: 'https',
+        protocol: 'https', 
         hostname: 'placehold.co',
       },
       {
         protocol: 'https',
-        hostname: 'framerusercontent.com',
+        
+        hostname: 'framerusercontent.com', 
       },
       {
         protocol: 'https',
