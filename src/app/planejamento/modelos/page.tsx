@@ -36,8 +36,8 @@ interface RadioOption {
   value: string;
 }
 
-interface SelectOption {
-  label?: string;
+interface Option {
+  label: string;
   value: string;
 }
 
@@ -659,25 +659,25 @@ const Modelos = () => {
                       )}
                       
                       <div className="grid grid-cols-2 gap-4">
-                        {Array.isArray(field.options) && field.options.map((option: any, i) => (
+                        {Array.isArray(field.options) && field.options.map((option: Option | string, i) => (
                           <motion.button
                             key={i}
                             type="button"
                             whileHover={{ scale: 1.02 }}
                             whileTap={{ scale: 0.98 }}
-                            onClick={() => setFormData({...formData, [field.name]: option.value})}
+                            onClick={() => setFormData({...formData, [field.name]: typeof option === 'string' ? option : option.value})}
                             className={`relative flex flex-col items-center justify-center p-6 rounded-xl border-2 
-                              ${formData[field.name as keyof typeof formData] === option.value 
+                              ${formData[field.name as keyof typeof formData] === (typeof option === 'string' ? option : option.value)
                                 ? 'border-spacefy bg-spacefy/5' 
                                 : 'border-[#151516] bg-[#0A0A0B]/80'} 
                               transition-all duration-300 group hover:border-spacefy/50`}
                           >
                             <div className={`w-6 h-6 rounded-full border-2 mb-3 flex items-center justify-center
-                              ${formData[field.name as keyof typeof formData] === option.value 
+                              ${formData[field.name as keyof typeof formData] === (typeof option === 'string' ? option : option.value)
                                 ? 'border-spacefy' 
                                 : 'border-[#151516]'}`}
                             >
-                              {formData[field.name as keyof typeof formData] === option.value && (
+                              {formData[field.name as keyof typeof formData] === (typeof option === 'string' ? option : option.value) && (
                                 <motion.div
                                   initial={{ scale: 0 }}
                                   animate={{ scale: 1 }}
@@ -685,7 +685,9 @@ const Modelos = () => {
                                 />
                               )}
                             </div>
-                            <span className="font-poppins text-sm text-white">{option.label}</span>
+                            <span className="font-poppins text-sm text-white">
+                              {typeof option === 'string' ? option : option.label}
+                            </span>
                           </motion.button>
                         ))}
                       </div>
@@ -799,7 +801,7 @@ const Modelos = () => {
                                 >
                                   <div className="bg-[#0D0D0E] border-2 border-[#151516] rounded-xl overflow-hidden
                                     shadow-[0_8px_32px_rgba(0,0,0,0.4)] backdrop-blur-lg">
-                                    {field.options?.map((option: RadioOption | string, i: number) => {
+                                    {field.options?.map((option: Option | string, i: number) => {
                                       const value = typeof option === 'string' ? option : option.value;
                                       const label = typeof option === 'string' ? option : option.label;
                                       const isSelected = formData[field.name as keyof typeof formData] === value;

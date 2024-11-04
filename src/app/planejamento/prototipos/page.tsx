@@ -668,7 +668,6 @@ const Prototipos = () => {
                         {Array.isArray(field.options) && field.options.map((option: OptionType | string, i) => {
                           const value = typeof option === 'string' ? option : option.value;
                           const label = typeof option === 'string' ? option : option.label;
-                          const isSelected = formData[field.name as keyof typeof formData] === value;
 
                           return (
                             <motion.button
