@@ -1,138 +1,19 @@
 "use client"
 
 import { motion, AnimatePresence } from "framer-motion";
-import { IoMdHelp, IoMdClose } from "react-icons/io";
+import { IoMdHelp } from "react-icons/io";
 import Link from "next/link";
 import Image from "next/image";
 
 import { LuLayoutDashboard } from "react-icons/lu";
-import { TbHandClick, TbMessage2Star, TbPencilPlus, TbUserCircle, TbDeviceMobile, TbClick, TbTestPipe, TbArrowsExchange, TbFileExport, TbDeviceAnalytics, TbBrandSpeedtest, TbLock, TbEdit, TbUsers, TbCloud, TbDeviceDesktop } from "react-icons/tb";
+import { TbHandClick, TbMessage2Star} from "react-icons/tb";
 import {  CgWebsite } from "react-icons/cg";
-import { MdOutlineSwitchAccessShortcutAdd, MdOutlineDesignServices } from "react-icons/md";
+import { MdOutlineSwitchAccessShortcutAdd } from "react-icons/md";
 import { HiOutlineViewGrid } from "react-icons/hi";
 import { LiaNetworkWiredSolid } from "react-icons/lia";
-import { BsMouseFill, BsStarFill } from "react-icons/bs";
+import { BsMouseFill } from "react-icons/bs";
 import { useEffect, useState } from "react";
 
-const categoryDetails = {
-  "UI/UX": {
-    image: "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671182a4d5a2b01aafedd422_db783e89-af38-441c-a36c-7db2806f79f4.png",
-    title: "Design de Interface e Experiência",
-    rating: 4.9,
-    reviews: 127,
-    description: "Criamos interfaces intuitivas e experiências memoráveis que encantam seus usuários. Nossa abordagem combina estética moderna com funcionalidade excepcional.",
-    features: [
-      {
-        icon: <TbPencilPlus className="w-5 h-5" />,
-        title: "Wireframes & Mockups",
-        description: "Criação de layouts e estruturas visuais detalhadas"
-      },
-      {
-        icon: <TbUserCircle className="w-5 h-5" />,
-        title: "Pesquisa de Usuário",
-        description: "Análise do comportamento e necessidades do público"
-      },
-      {
-        icon: <MdOutlineDesignServices className="w-5 h-5" />,
-        title: "Design System",
-        description: "Biblioteca de componentes e guia de estilos"
-      },
-      {
-        icon: <TbDeviceMobile className="w-5 h-5" />,
-        title: "Design Responsivo",
-        description: "Interface adaptável a todos dispositivos"
-      }
-    ]
-  },
-  "Protótipos": {
-    image: "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/67105ab6140b33f063f0aa7b_9ac3e592-c478-4029-a2d2-e6323699f465.jpeg",
-    title: "Protótipos Interativos",
-    rating: 4.8,
-    reviews: 98,
-    description: "Transformamos conceitos em protótipos funcionais que permitem visualizar e testar seu produto antes do desenvolvimento final.",
-    features: [
-      {
-        icon: <TbClick className="w-5 h-5" />,
-        title: "Protótipo Interativo",
-        description: "Simulação real da experiência do usuário"
-      },
-      {
-        icon: <TbTestPipe className="w-5 h-5" />,
-        title: "Testes A/B",
-        description: "Validação de diferentes versões do projeto"
-      },
-      {
-        icon: <TbArrowsExchange className="w-5 h-5" />,
-        title: "Fluxos de Navegação",
-        description: "Mapeamento completo da jornada do usuário"
-      },
-      {
-        icon: <TbFileExport className="w-5 h-5" />,
-        title: "Exportação para Dev",
-        description: "Arquivos prontos para desenvolvimento"
-      }
-    ]
-  },
-  "Sites": {
-    image: "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671b25477be2a508e0342e75_10c8b478-b389-48df-93cb-299dae72141d.jpeg",
-    title: "Desenvolvimento Web Profissional",
-    rating: 4.9,
-    reviews: 156,
-    description: "Desenvolvemos sites modernos, responsivos e otimizados para performance que destacam sua marca na internet.",
-    features: [
-      {
-        icon: <TbDeviceAnalytics className="w-5 h-5" />,
-        title: "SEO Otimizado",
-        description: "Estruturação para melhor ranqueamento"
-      },
-      {
-        icon: <TbBrandSpeedtest className="w-5 h-5" />,
-        title: "Alta Performance",
-        description: "Carregamento rápido e otimizado"
-      },
-      {
-        icon: <TbLock className="w-5 h-5" />,
-        
-        title: "Certificado SSL",
-        description: "Segurança e criptografia dos dados"
-      },
-      {
-        icon: <TbEdit className="w-5 h-5" />,
-        title: "Painel Admin",
-        description: "Gestão simplificada do conteúdo"
-      }
-    ]
-  },
-  "Sistemas": {
-    image: "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671b29f6647cdaef47831669_e4402a7b-439b-410e-97ea-e03c575cf351.png",
-    title: "Sistemas Personalizados",
-    rating: 4.7,
-    reviews: 89,
-    description: "Criamos soluções sob medida que automatizam e otimizam seus processos de negócio.",
-    features: [
-      {
-        icon: <LuLayoutDashboard className="w-5 h-5" />,
-        title: "Automação Inteligente",
-        description: "Processos otimizados e automatizados"
-      },
-      {
-        icon: <TbDeviceDesktop className="w-5 h-5" />,
-        title: "Multi-plataforma",
-        description: "Acesso via web, iOS e Android"
-      },
-      {
-        icon: <TbUsers className="w-5 h-5" />,
-        title: "Multi-usuários",
-        description: "Controle de acessos e permissões"
-      },
-      {
-        icon: <TbCloud className="w-5 h-5" />,
-        title: "Cloud Native",
-        description: "Sistema hospedado em nuvem segura"
-      }
-    ]
-  }
-};
 
 
 
