@@ -279,24 +279,12 @@ const Planejamento = () => {
   const [selectedCategory, setSelectedCategory] = useState("todos");
   const [hiddenTooltips, setHiddenTooltips] = useState<{[key: number]: boolean}>({});
   const [tooltipHoveredIndex, setTooltipHoveredIndex] = useState<number | null>(null);
-  const [modalOpen, setModalOpen] = useState(false);
-  const [selectedModalContent, setSelectedModalContent] = useState<string | null>(null);
 
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
-  useEffect(() => {
-    if (modalOpen) {
-      document.body.classList.add('modal-open');
-    } else {
-      document.body.classList.remove('modal-open');
-    }
 
-    return () => {
-      document.body.classList.remove('modal-open');
-    };
-  }, [modalOpen]);
 
   if (!isMounted) {
     return null;
@@ -397,15 +385,7 @@ const Planejamento = () => {
       animate="visible"
       variants={containerVariants}
     >
-      <AnimatePresence mode="wait">
-        {modalOpen && (
-          <Modal
-            isOpen={modalOpen}
-            onClose={() => setModalOpen(false)}
-            category={selectedModalContent}
-          />
-        )}
-      </AnimatePresence>
+     
 
       <motion.div
         className="flex items-center justify-center"
