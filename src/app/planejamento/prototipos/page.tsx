@@ -6,7 +6,7 @@ import { RiUserSmileLine, RiPhoneLine, RiMailSendLine, RiFileTextLine } from "re
 import { useState, useEffect } from "react";
 import { IconType } from "react-icons";
 import Link from "next/link";
-import { MdOutlineSwitchAccessShortcutAdd } from "react-icons/md";
+import { MdOutlineDesignServices, MdOutlineSwitchAccessShortcutAdd } from "react-icons/md";
 import { HiOutlineViewGrid, HiOutlineSparkles, HiOutlineArrowLeft } from "react-icons/hi";
 import { CgWebsite } from "react-icons/cg";
 import { createPortal } from 'react-dom';
@@ -45,16 +45,12 @@ const Prototipos = () => {
     nome: '',
     telefone: '',
     email: '',
-    descricao: '',
+    objetivo: '',
     referencia: '',
     referenciaLink: '',
-    tecnologias: '',
-    paginas: '',
-    secoes: '',
-    objetivo: '',
+    dispositivos: '',
     prazo: '',
-    investimento: '',
-    infraestrutura: ''
+    investimento: ''
   });
   const [selectedCategory, setSelectedCategory] = useState("todos");
   const [activeSelect, setActiveSelect] = useState<string | null>(null);
@@ -85,86 +81,71 @@ const Prototipos = () => {
           description: "Manteremos você informado sobre cada etapa."
         }
       ],
-      title: "Comece sua Jornada Digital Conosco",
-      subtitle: "O primeiro passo para transformar sua visão em realidade começa aqui. Vamos construir algo incrível juntos."
+      title: "Comece sua Jornada de Design Conosco",
+      subtitle: "O primeiro passo para transformar sua visão em um protótipo incrível começa aqui."
+    },
+    {
+      fields: [
+        {
+          Icon: HiOutlineSparkles,
+          type: "text",
+          placeholder: "Qual o objetivo principal do seu protótipo?",
+          name: "objetivo",
+          description: "Ex: Validar uma ideia, apresentar para investidores, testar com usuários"
+        },
+        {
+          type: "radio",
+          title: "Você já tem algum esboço ou rascunho?",
+          name: "referencia",
+          placeholder: "Selecione uma opção",
+          description: "Nos ajuda a entender melhor seu ponto de partida",
+          options: [
+            { label: "Sim, tenho rascunhos", value: "sim" },
+            { label: "Não, preciso começar do zero", value: "nao" }
+          ]
+        },
+        { 
+          Icon: RiFileTextLine,
+          placeholder: "Cole aqui os links dos seus rascunhos",
+          type: "text",
+          name: "referenciaLink",
+          conditional: "sim",
+          description: "Links dos esboços ou referências que você gostaria de usar como base."
+        }
+      ],
+      title: "Como Você Imagina seu Protótipo?",
+      subtitle: "Compartilhe sua visão e objetivos para criarmos algo extraordinário juntos."
     },
     {
       fields: [
         {
           type: "radio",
-          title: "Você tem algum design ou protótipo?",
-          name: "referencia",
+          title: "O protótipo deve suportar outros dispositivos?",
+          name: "dispositivos",
+          description: "Defina se seu protótipo precisa ser responsivo para diferentes tamanhos de tela",
           placeholder: "Selecione uma opção",
           options: [
-            { label: "Sim", value: "sim" },
-            { label: "Não", value: "nao" }
+            { label: "Sim, preciso de versões para diferentes dispositivos", value: "sim" },
+            { label: "Não, apenas uma versão é suficiente", value: "nao" }
           ]
-        },
-        { 
-          Icon: RiFileTextLine,
-          placeholder: "Cole aqui os links das suas referências",
-          type: "text",
-          name: "referenciaLink",
-          conditional: "sim",
-          description: "Links dos protótipos ou esboços que você gostaria de usar como inspiração."
         }
       ],
-      title: "Como Você Realmente Imagina seu Projeto?",
-      subtitle: "Compartilhe suas ideias e referências visuais, ou confie em nossa expertise para criar um design exclusivo."
-    },
-    {
-      fields: [
-        {
-          Icon: HiOutlineSparkles,
-          type: "text",
-          placeholder: "Se sim, qual ferramenta prefere?",
-          name: "tecnologias",
-          description: "Ex: Framer, Figma, Adobe XD ou deixe em branco para nossa sugestão"
-        }
-      ],
-      title: "Vamos Escolher as Melhores Ferramentas",
-      subtitle: "Conte-nos se você tem alguma preferência de ferramentas ou deixe com nossa equipe."
-    },
-    {
-      fields: [
-        {
-          Icon: HiOutlineViewGrid,
-          type: "text",
-          placeholder: "Quais páginas e seções serão necessárias?",
-          name: "paginas",
-          description: "Ex: Home, Sobre, Serviços, Contato, Blog, etc."
-        },
-        {
-          Icon: CgWebsite,
-          type: "text",
-          placeholder: "Quais seções cada página terá?",
-          name: "secoes",
-          description: "Ex: Banner, Galeria, Formulário, Lista de Produtos"
-        },
-        {
-          Icon: HiOutlineSparkles,
-          type: "text",
-          placeholder: "Qual o objetivo principal do site?",
-          name: "objetivo",
-          description: "Ex: Vender produtos, compartilhar informações, promover serviços"
-        }
-      ],
-      title: "Qual a Estrutura e Objetivos do Projeto",
-      subtitle: "Defina as páginas necessárias e o propósito principal do seu site."
+      title: "Dispositivos e Responsividade",
+      subtitle: "Um protótipo responsivo ajuda a validar a experiência em diferentes contextos de uso"
     },
     {
       fields: [
         {
           type: "select",
           Icon: BsCalculator,
-          placeholder: "Qual o prazo desejado para o projeto?",
+          placeholder: "Qual o prazo desejado para o protótipo?",
           name: "prazo",
           description: "Prazo estimado para entrega do projeto",
           options: [
-            { label: "Até 15 dias", value: "15 dias" },
+            { label: "Até 7 dias", value: "7 dias" },
+            { label: "7-15 dias", value: "15 dias" },
             { label: "15-30 dias", value: "30 dias" },
-            { label: "30-60 dias", value: "60 dias" },
-            { label: "Mais de 60 dias", value: "mais 60 dias" }
+            { label: "Mais de 30 dias", value: "mais 30 dias" }
           ]
         },
         {
@@ -172,31 +153,100 @@ const Prototipos = () => {
           Icon: MdOutlineSwitchAccessShortcutAdd,
           placeholder: "Qual o investimento disponível?",
           name: "investimento",
-          
           description: "Faixa de investimento para o projeto",
           options: [
-            { label: "Até R$ 1.000", value: "1000" },
-            { label: "R$ 1.000 - R$ 3.000", value: "3000" },
-            { label: "R$ 3.000 - R$ 5.000", value: "5000" },
-            { label: "Mais de R$ 5.000", value: "mais 5000" }
-          ]
-        },
-        {
-          type: "radio",
-          title: "Você já possui domínio e hospedagem?",
-          name: "infraestrutura",
-          description: "Se não possuir, podemos incluir no orçamento",
-          placeholder: "Selecione uma opção",
-          options: [
-            { label: "Sim, já tenho", value: "sim" },
-            { label: "Não tenho ainda", value: "nao" }
+            { label: "Até R$ 500", value: "500" },
+            { label: "R$ 500 - R$ 1.500", value: "1500" },
+            { label: "R$ 1.500 - R$ 3.000", value: "3000" },
+            { label: "Mais de R$ 3.000", value: "mais 3000" }
           ]
         }
       ],
       title: "Qual Prazo e Investimento Disponíveis?",
-      subtitle: "Informe qual o tempo estimado e o valor disponível que você pretende investir no projeto"
+      subtitle: "Informe o tempo estimado e o valor que você pretende investir no protótipo"
     }
   ];
+
+  // ... código existente ...
+
+// Adicione estes variants junto com os outros
+const iconVariants = {
+  hover: {
+    rotate: [0, -10, 10, -10, 0],
+    transition: {
+      duration: 0.5
+    }
+  }
+};
+
+
+const overlayVariants = {
+  hidden: {
+    opacity: 0,
+    y: 10
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.2
+    }
+  }
+};
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+      ease: "easeOut",
+      duration: 0.4
+    }
+  }
+};
+
+const projectVariants = {
+  hidden: { 
+    opacity: 0,
+    y: 20
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.4,
+      ease: "easeOut"
+    }
+  }
+};
+
+const sectionVariants = {
+  hidden: { 
+    opacity: 0, 
+    y: 20 
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: "easeOut",
+      when: "beforeChildren",
+      staggerChildren: 0.2
+    }
+  },
+  exit: {
+    opacity: 0,
+    y: -20,
+    transition: {
+      duration: 0.3,
+      ease: "easeIn"
+    }
+  }
+};
+
+// ... resto do código ...
 
   const inputVariants = {
     initial: { 
@@ -237,16 +287,13 @@ const Prototipos = () => {
       case 0:
         return formData.nome && formData.telefone && formData.email;
       case 1:
-        return formData.referencia === 'nao' || 
-               (formData.referencia === 'sim' && formData.referenciaLink);
+        return formData.objetivo && formData.referencia && 
+               (formData.referencia === 'nao' || 
+               (formData.referencia === 'sim' && formData.referenciaLink));
       case 2:
-        return formData.tecnologias && formData.tecnologias.trim().length > 0;
+        return formData.dispositivos;
       case 3:
-        return formData.paginas && formData.objetivo;
-      case 4:
-        return formData.prazo && 
-               formData.investimento && 
-               formData.infraestrutura;
+        return formData.prazo && formData.investimento;
       default:
         return false;
     }
@@ -364,22 +411,22 @@ const Prototipos = () => {
 
   const projects = {
     todos: [
-      "https://exemplo.com/prototipo1.gif",
-      "https://exemplo.com/prototipo2.gif",
-      "https://exemplo.com/prototipo3.gif",
-      "https://exemplo.com/prototipo4.gif"
+      "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671b25477be2a508e0342e75_10c8b478-b389-48df-93cb-299dae72141d.jpeg",
+      "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/67105ab6140b33f063f0aa7b_9ac3e592-c478-4029-a2d2-e6323699f465.jpeg", 
+      "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671182a4d5a2b01aafedd422_db783e89-af38-441c-a36c-7db2806f79f4.png",
+      "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671b29f6647cdaef47831669_e4402a7b-439b-410e-97ea-e03c575cf351.png"
     ],
-    mobile: [
-      "https://exemplo.com/mobile1.gif",
-      "https://exemplo.com/mobile2.gif",
-      "https://exemplo.com/mobile3.gif",
-      "https://exemplo.com/mobile4.gif"
+    sites: [
+      "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671182a4d5a2b01aafedd422_db783e89-af38-441c-a36c-7db2806f79f4.png",
+      "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/67105ab6140b33f063f0aa7b_9ac3e592-c478-4029-a2d2-e6323699f465.jpeg",
+      "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671b25477be2a508e0342e75_10c8b478-b389-48df-93cb-299dae72141d.jpeg",
+      "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671b29f6647cdaef47831669_e4402a7b-439b-410e-97ea-e03c575cf351.png"
     ],
-    web: [
-      "https://exemplo.com/web1.gif",
-      "https://exemplo.com/web2.gif",
-      "https://exemplo.com/web3.gif",
-      "https://exemplo.com/web4.gif"
+    modelos: [
+      "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671b29f6647cdaef47831669_e4402a7b-439b-410e-97ea-e03c575cf351.png",
+      "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/67105ab6140b33f063f0aa7b_9ac3e592-c478-4029-a2d2-e6323699f465.jpeg",
+      "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671182a4d5a2b01aafedd422_db783e89-af38-441c-a36c-7db2806f79f4.png",
+      "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671b25477be2a508e0342e75_10c8b478-b389-48df-93cb-299dae72141d.jpeg"
     ]
   };
 
@@ -481,33 +528,54 @@ const Prototipos = () => {
               Descubra o Poder da <span className="text-[#4F46E8]">Inovação Digital</span>
             </h2>
 
-            <div className="flex flex-col sm:flex-row items-center sm:items-start justify-center sm:justify-start w-full max-w-sm bg-[#0A0A0A] rounded-xl overflow-hidden mb-8">
+            <div className="flex flex-wrap md:flex-nowrap items-center justify-center w-full md:w-auto bg-[#0A0A0A] rounded-xl overflow-hidden">
               <motion.button 
-                whileHover={{ backgroundColor: selectedCategory === "todos" ? "#4F46E8" : "rgba(79, 70, 232, 0.1)" }}
-                whileTap={{ scale: 0.98 }}
+                variants={buttonVariants}
+                whileHover="hover"
+                whileTap="tap"
                 onClick={() => setSelectedCategory("todos")}
-                className={`w-full text-[#ccc] ${selectedCategory === "todos" ? "bg-[#4F46E8] text-white" : ""} duration-300 transition-all font-poppins px-6 py-3 flex items-center justify-center sm:justify-start gap-2`}
+                className={`text-[#ccc] w-full md:w-auto ${
+                  selectedCategory === "todos" 
+                    ? "bg-[#4F46E8] text-white" 
+                    : "hover:bg-[#4F46E8] hover:text-white"
+                } duration-300 transition-all font-poppins px-6 py-3 flex items-center justify-center md:justify-start gap-2`}
               >
-                <HiOutlineViewGrid className="text-xl" />
+                <motion.span variants={iconVariants}>
+                  <HiOutlineViewGrid className="text-xl" />
+                </motion.span>
                 Todos
               </motion.button>
               <motion.button 
-                whileHover={{ backgroundColor: selectedCategory === "mobile" ? "#4F46E8" : "rgba(79, 70, 232, 0.1)" }}
-                whileTap={{ scale: 0.98 }}
-                onClick={() => setSelectedCategory("mobile")}
-                className={`w-full text-[#ccc] ${selectedCategory === "mobile" ? "bg-[#4F46E8] text-white" : ""} duration-300 transition-all font-poppins px-6 py-3 flex items-center justify-center sm:justify-start gap-2`}
+                variants={buttonVariants}
+                whileHover="hover"
+                whileTap="tap"
+                onClick={() => setSelectedCategory("sites")}
+                className={`text-[#ccc] w-full md:w-auto ${
+                  selectedCategory === "sites" 
+                    ? "bg-[#4F46E8] text-white" 
+                    : "hover:bg-[#4F46E8] hover:text-white"
+                } duration-300 transition-all font-poppins px-6 py-3 flex items-center justify-center md:justify-start gap-2`}
               >
-                <CgWebsite className="text-xl" />
-                Mobile
+                <motion.span variants={iconVariants}>
+                  <CgWebsite className="text-xl" />
+                </motion.span>
+                Sites
               </motion.button>
               <motion.button 
-                whileHover={{ backgroundColor: selectedCategory === "web" ? "#4F46E8" : "rgba(79, 70, 232, 0.1)" }}
-                whileTap={{ scale: 0.98 }}
-                onClick={() => setSelectedCategory("web")}
-                className={`w-full text-[#ccc] ${selectedCategory === "web" ? "bg-[#4F46E8] text-white" : ""} duration-300 transition-all font-poppins px-6 py-3 flex items-center justify-center sm:justify-start gap-2`}
+                variants={buttonVariants}
+                whileHover="hover"
+                whileTap="tap"
+                onClick={() => setSelectedCategory("modelos")}
+                className={`text-[#ccc] w-full md:w-auto ${
+                  selectedCategory === "modelos" 
+                    ? "bg-[#4F46E8] text-white" 
+                    : "hover:bg-[#4F46E8] hover:text-white"
+                } duration-300 transition-all font-poppins px-6 py-3 flex items-center justify-center md:justify-start gap-2`}
               >
-                <CgWebsite className="text-xl" />
-                Web
+                <motion.span variants={iconVariants}>
+                  <MdOutlineDesignServices className="text-xl" />
+                </motion.span>
+                Modelos
               </motion.button>
             </div>
 
@@ -518,19 +586,19 @@ const Prototipos = () => {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.15 }}
-                className="grid grid-cols-1 md:grid-cols-12 gap-6 z-50"
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 w-full"
               >
                 {projects[selectedCategory as keyof typeof projects].map((image: string, index: number) => (
                   <motion.div
                     key={index}
-                    className={`relative rounded-lg overflow-hidden cursor-pointer z-50 ${
+                    className={`relative rounded-xl overflow-hidden cursor-pointer group ${
                       index <= 1 ? (
-                        index === 0 ? 'md:col-span-7 h-[300px]' : 'md:col-span-5 h-[300px]'
+                        index === 0 ? 'lg:col-span-7 h-[400px]' : 'lg:col-span-5 h-[400px]'
                       ) : 
-                      index === 2 ? 'md:col-span-4 h-[300px]' : 'md:col-span-8 h-[300px]'
+                      index === 2 ? 'lg:col-span-4 h-[400px]' : 'lg:col-span-8 h-[400px]'
                     }`}
                     whileHover={{ 
-                      scale: 1.01,
+                      scale: 1.02,
                       transition: {
                         duration: 0.2,
                         ease: "easeOut"
@@ -542,9 +610,10 @@ const Prototipos = () => {
                       src={image} 
                       alt={`Projeto ${index + 1}`}
                       fill
-                      className="object-cover transition-transform duration-200 ease-out"
+                      className="object-cover transition-transform duration-200 ease-out group-hover:scale-105"
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
+                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
                   </motion.div>
                 ))}
               </motion.div>

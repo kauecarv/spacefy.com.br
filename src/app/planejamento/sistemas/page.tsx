@@ -1,12 +1,11 @@
 "use client"
 
 import { motion, AnimatePresence } from "framer-motion";
-import { BsArrowLeftShort, BsArrowRightShort } from "react-icons/bs";
-import { RiUserSmileLine, RiPhoneLine, RiMailSendLine, RiFileTextLine } from "react-icons/ri";
+import { BsArrowLeftShort, BsArrowRightShort, BsCalculator } from "react-icons/bs";
+import { RiUserSmileLine, RiPhoneLine, RiMailSendLine } from "react-icons/ri";
 import { useState, useEffect } from "react";
 import { IconType } from "react-icons";
 import Link from "next/link";
-
 import { MdOutlineDesignServices, MdOutlineSwitchAccessShortcutAdd } from "react-icons/md";
 import { HiOutlineViewGrid, HiOutlineSparkles, HiOutlineArrowLeft } from "react-icons/hi";
 import { CgWebsite } from "react-icons/cg";
@@ -18,7 +17,7 @@ interface Field {
   placeholder: string;
   Icon?: IconType;
   description?: string;
-  options?: string[] | { label: string; value: string }[];
+  options?: string[] | OptionType[];
   name: string;
   conditional?: string;
   title?: string;
@@ -31,26 +30,12 @@ interface Step {
   subtitle: string;
 }
 
-interface RadioOption {
+interface OptionType {
   label: string;
   value: string;
 }
 
-interface Option {
-  label: string;
-  value: string;
-}
-
-const iconVariants = {
-  hover: {
-    rotate: [0, -10, 10, -10, 0],
-    transition: {
-      duration: 0.5
-    }
-  }
-};
-
-const Modelos = () => {
+const Prototipos = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [direction, setDirection] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
@@ -60,14 +45,14 @@ const Modelos = () => {
     nome: '',
     telefone: '',
     email: '',
-    descricao: '',
-    paginas: '',
-    secoes: '',
-    referencia: '',
-    referenciaLink: '',
+    necessidades: '',
+    objetivo: '',
+    tecnologia: '',
+    bancoDados: '',
+    integracao: '',
+    usuarios: '',
     prazo: '',
-    investimento: '',
-    conteudo: ''
+    investimento: ''
   });
   const [selectedCategory, setSelectedCategory] = useState("todos");
   const [activeSelect, setActiveSelect] = useState<string | null>(null);
@@ -81,123 +66,158 @@ const Modelos = () => {
           placeholder: "Nome da sua empresa ou projeto", 
           type: "text",
           name: "nome",
-          description: "Este será o nome principal que identificará seu projeto durante todo o processo."
+          description: "Identifique seu projeto para acompanhar todo o processo."
         },
         { 
           Icon: RiPhoneLine, 
           placeholder: "Seu melhor número para contato", 
           type: "tel",
           name: "telefone",
-          description: "Utilizaremos este número para atualizações importantes sobre seu projeto."
+          description: "Para atualizações importantes sobre o desenvolvimento."
         },
         { 
           Icon: RiMailSendLine, 
           placeholder: "E-mail profissional para comunicação", 
           type: "email",
           name: "email",
-          description: "Manteremos você informado sobre cada etapa do desenvolvimento."
+          description: "Manteremos você informado sobre cada etapa."
         }
       ],
-      title: "Pronto para Revolucionar sua Presença Digital?",
-      subtitle: "Dê o primeiro passo para transformar sua visão em realidade. Sua presença digital única começa aqui."
+      title: "Comece sua Jornada Digital Conosco",
+      subtitle: "O primeiro passo para transformar sua visão em um sistema incrível começa aqui."
     },
     {
       fields: [
-        { 
+        {
+          Icon: HiOutlineSparkles,
           type: "textarea",
-          placeholder: "Qual é a sua ideia para se tornar único?",
-          description: "Descreva seu projeto, objetivos e ideias principais. Quanto mais detalhes você fornecer, melhor poderemos entender e realizar sua visão.",
-          name: "descricao"
+          placeholder: "Quais são suas necessidades para o sistema?",
+          name: "necessidades",
+          description: "Descreva em detalhes as funcionalidades e recursos que seu sistema precisa ter"
         }
       ],
-      title: "Conte-nos Sobre Seu Projeto dos Sonhos",
-      subtitle: "Cada grande projeto começa com uma ideia. Compartilhe sua visão e deixe-nos ajudar a torná-la realidade."
+      title: "Quais são as necessidades para o sistema?",
+      subtitle: "Descreva como é o seu sistema ou o que você precisa que ele faça"
     },
     {
       fields: [
-        { 
-          Icon: HiOutlineViewGrid, 
-          placeholder: "Ex: Home, Sobre, Serviços, Blog...", 
+        {
+          Icon: HiOutlineSparkles,
           type: "text",
-          name: "paginas",
-          description: "Liste as principais páginas que você deseja em seu site, separando-as por vírgula. Pense em todas as seções necessárias para apresentar seu negócio de forma completa."
+          placeholder: "Qual o objetivo principal do sistema?",
+          name: "objetivo",
+          description: "Ex: Automatizar processos, gerenciar vendas, controlar estoque"
         },
-        { 
-          Icon: CgWebsite, 
-          placeholder: "Ex: Hero, Galeria, Depoimentos, FAQ...", 
-          type: "text",
-          name: "secoes",
-          description: "Indique os elementos e seções que você gostaria de incluir em suas páginas, separando-os por vírgula. Considere componentes que tornarão seu site mais atraente e funcional."
+        {
+          type: "select",
+          Icon: MdOutlineDesignServices,
+          placeholder: "Tem preferência por alguma tecnologia?",
+          name: "tecnologia",
+          description: "Selecione a tecnologia de sua preferência",
+          options: [
+            { label: "Não tenho preferência", value: "nenhuma" },
+            { label: "React/Next.js", value: "react" },
+            { label: "Node.js", value: "node" },
+            { label: "Python", value: "python" },
+            { label: "PHP/Laravel", value: "php" },
+            { label: "Outro", value: "outro" }
+          ]
+        }
+      ],
+      title: "Quais Objetivos e Tecnologia",
+      subtitle: "Defina o propósito principal do seu sistema e tecnologias preferidas"
+    },
+    {
+      fields: [
+        {
+          type: "radio",
+          title: "O sistema precisa de banco de dados?",
+          name: "bancoDados",
+          description: "Para armazenar e gerenciar informações de forma persistente",
+          placeholder: "Selecione uma opção",
+          options: [
+            { label: "Sim, preciso armazenar dados", value: "sim" },
+            { label: "Não, será um sistema mais simples", value: "nao" }
+          ]
         },
         {
           type: "radio",
-          title: "Você tem algum design ou protótipo?",
-          name: "referencia",
+          title: "Precisa integrar com outras ferramentas?",
+          name: "integracao",
+          description: "Ex: APIs externas, sistemas de pagamento, ERPs",
           placeholder: "Selecione uma opção",
           options: [
-            { label: "Sim, tenho referências", value: "sim" },
-            { label: "Não, preciso de sugestões", value: "nao" }
-          ] as RadioOption[]
-        },
-        { 
-          Icon: RiFileTextLine,
-          type: "text",
-          name: "referenciaLink",
-          placeholder: "Cole aqui os links de referência",
-          description: "Links dos sites que você gostaria de usar como inspiração",
-          conditional: "referencia"
+            { label: "Sim, preciso de integrações", value: "sim" },
+            { label: "Não necessário no momento", value: "nao" }
+          ]
         }
       ],
-      title: "Como Você Imagina seu Projeto?",
-      subtitle: "Compartilhe suas referências visuais ou confie em nossa expertise para criar um design exclusivo."
+      title: "Quais Requisitos Técnicos?  ",
+      subtitle: "Defina as necessidades técnicas do seu sistema"
     },
     {
       fields: [
-        { 
-          Icon: HiOutlineViewGrid, 
-          placeholder: "Selecione o prazo desejado", 
+        {
           type: "select",
+          Icon: RiUserSmileLine,
+          placeholder: "Quem são os usuários do sistema?",
+          name: "usuarios",
+          description: "Selecione o perfil dos usuários que utilizarão o sistema",
+          options: [
+            { label: "Equipe interna", value: "interno" },
+            { label: "Clientes/Usuários externos", value: "externo" },
+            { label: "Ambos (interno e externo)", value: "ambos" },
+            { label: "Outro", value: "outro" }
+          ]
+        }
+      ],
+      title: "Usuários do Sistema",
+      subtitle: "Identifique quem serão os principais usuários do seu sistema"
+    },
+    {
+      fields: [
+        {
+          type: "select",
+          Icon: BsCalculator,
+          placeholder: "Qual o prazo desejado para o sistema?",
           name: "prazo",
-          description: "Escolha o prazo ideal para a conclusão do seu projeto. Isso nos ajudará a organizar as entregas de forma eficiente.",
+          description: "Prazo estimado para entrega do projeto",
           options: [
-            "15 dias",
-            "30 dias",
-            "45 dias",
-            "60 dias",
-            "90 dias",
-            "Flexível"
-          ]
-        },
-        { 
-          Icon: CgWebsite, 
-          placeholder: "Selecione o investimento previsto", 
-          type: "select",
-          name: "investimento",
-          description: "Indique a faixa de investimento que você planeja para seu projeto. Isso nos permitirá sugerir as melhores soluções dentro do seu orçamento.",
-          options: [
-            "Até R$ 5.000",
-            "R$ 5.000 - R$ 10.000",
-            "R$ 10.000 - R$ 20.000",
-            "Acima de R$ 20.000",
-            "A definir"
+            { label: "Até 30 dias", value: "30 dias" },
+            { label: "1-2 meses", value: "2 meses" },
+            { label: "2-3 meses", value: "3 meses" },
+            { label: "Mais de 3 meses", value: "mais 3 meses" }
           ]
         },
         {
-          type: "radio",
-          title: "Sobre o conteúdo do seu site",
-          name: "conteudo",
-          description: "Nos informe se você já possui os textos, imagens e materiais que serão utilizados no site ou se precisará de ajuda para criá-los.",
-          placeholder: "Selecione uma opção",
+          type: "select",
+          Icon: MdOutlineSwitchAccessShortcutAdd,
+          placeholder: "Qual o investimento disponível?",
+          name: "investimento",
+          description: "Faixa de investimento para o projeto",
           options: [
-            { label: "Tenho todo o conteúdo pronto", value: "pronto" },
-            { label: "Preciso de ajuda para criar", value: "criar" }
+            { label: "Até R$ 5.000", value: "5000" },
+            { label: "R$ 5.000 - R$ 10.000", value: "10000" },
+            { label: "R$ 10.000 - R$ 20.000", value: "20000" },
+            { label: "Mais de R$ 20.000", value: "mais 20000" }
           ]
         }
       ],
-      title: "Planejamento e Recursos",
-      subtitle: "Vamos alinhar as expectativas de prazo e investimento para entregar um projeto excepcional que atenda suas necessidades."
+      title: "Prazo e Investimento",
+      subtitle: "Defina o cronograma e orçamento para o desenvolvimento"
     }
   ];
+
+
+const iconVariants = {
+  hover: {
+    rotate: [0, -10, 10, -10, 0],
+    transition: {
+      duration: 0.5
+    }
+  }
+};
+
 
   const inputVariants = {
     initial: { 
@@ -238,12 +258,15 @@ const Modelos = () => {
       case 0:
         return formData.nome && formData.telefone && formData.email;
       case 1:
-        return formData.descricao && formData.descricao.trim().length > 0;
+        return formData.necessidades;
       case 2:
-        return formData.paginas.trim() && formData.secoes.trim() && formData.referencia && 
-          (formData.referencia === 'nao' || (formData.referencia === 'sim' && formData.referenciaLink.trim()));
+        return formData.objetivo && formData.tecnologia;
       case 3:
-        return formData.prazo && formData.investimento && formData.conteudo;
+        return formData.bancoDados && formData.integracao;
+      case 4:
+        return formData.usuarios;
+      case 5:
+        return formData.prazo && formData.investimento;
       default:
         return false;
     }
@@ -280,11 +303,7 @@ const Modelos = () => {
     }
   };
 
-  const pageVariants: {
-    initial: (direction: number) => { x: number; opacity: number };
-    animate: any;
-    exit: (direction: number) => any;
-  } = {
+  const pageVariants = {
     initial: (direction: number) => ({
       x: direction > 0 ? 100 : -100,
       opacity: 0
@@ -374,7 +393,7 @@ const Modelos = () => {
       "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671b29f6647cdaef47831669_e4402a7b-439b-410e-97ea-e03c575cf351.png"
     ],
     modelos: [
-      "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671b29f6647cdaef47831669_e4402a7b-439b-410e-97ea-e03c575cf351.png", 
+      "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671b29f6647cdaef47831669_e4402a7b-439b-410e-97ea-e03c575cf351.png",
       "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/67105ab6140b33f063f0aa7b_9ac3e592-c478-4029-a2d2-e6323699f465.jpeg",
       "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671182a4d5a2b01aafedd422_db783e89-af38-441c-a36c-7db2806f79f4.png",
       "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671b25477be2a508e0342e75_10c8b478-b389-48df-93cb-299dae72141d.jpeg"
@@ -403,7 +422,7 @@ const Modelos = () => {
     const rect = button.getBoundingClientRect();
     
     setDropdownPosition({
-      top: rect.bottom + window.scrollY + 8, 
+      top: rect.bottom + window.scrollY + 8, // 8px de espaçamento
       left: rect.left + window.scrollX,
       width: rect.width
     });
@@ -483,7 +502,7 @@ const Modelos = () => {
               <motion.button 
                 variants={buttonVariants}
                 whileHover="hover"
-                whileTap="tap"  
+                whileTap="tap"
                 onClick={() => setSelectedCategory("todos")}
                 className={`text-[#ccc] w-full md:w-auto ${
                   selectedCategory === "todos" 
@@ -496,7 +515,6 @@ const Modelos = () => {
                 </motion.span>
                 Todos
               </motion.button>
-
               <motion.button 
                 variants={buttonVariants}
                 whileHover="hover"
@@ -513,7 +531,6 @@ const Modelos = () => {
                 </motion.span>
                 Sites
               </motion.button>
-
               <motion.button 
                 variants={buttonVariants}
                 whileHover="hover"
@@ -578,7 +595,7 @@ const Modelos = () => {
   }
 
   return (
-    <div className="flex flex-col items-center w-full min-h-screen pt-10">
+    <div className="flex flex-col items-center w-full min-h-screen pt-10 pb-20 overflow-x-hidden">
       <div className="flex items-center justify-center">
         <p className="font-poppins uppercase font-semibold text-transparent bg-clip-text bg-gradient-to-b from-transparent via-[#4F46E8]/70 to-[#4F46E8] text-[90px] sm:text-[110px] md:text-[300px] lg:text-[316px] leading-[0.9] whitespace-nowrap">
           SPACEFY
@@ -639,7 +656,7 @@ const Modelos = () => {
                   className="relative group"
                 >
                   {field.type === "radio" ? (
-                    <div className="space-y-2">
+                    <div className="space-y-2 mb-4">
                       <div className="flex items-center">
                         <h3 className="text-xl text-white font-poppins font-medium">{field.title}</h3>
                         
@@ -687,95 +704,68 @@ const Modelos = () => {
                       )}
                       
                       <div className="grid grid-cols-2 gap-4">
-                        {Array.isArray(field.options) && field.options.map((option: Option | string, i) => (
-                          <motion.button
-                            key={i}
-                            type="button"
-                            whileHover={{ scale: 1.02 }}
-                            whileTap={{ scale: 0.98 }}
-                            onClick={() => setFormData({...formData, [field.name]: typeof option === 'string' ? option : option.value})}
-                            className={`relative flex flex-col items-center justify-center p-6 rounded-xl border-2 
-                              ${formData[field.name as keyof typeof formData] === (typeof option === 'string' ? option : option.value)
-                                ? 'border-spacefy bg-spacefy/5' 
-                                : 'border-[#151516] bg-[#0A0A0B]/80'} 
-                              transition-all duration-300 group hover:border-spacefy/50`}
-                          >
-                            <div className={`w-6 h-6 rounded-full border-2 mb-3 flex items-center justify-center
-                              ${formData[field.name as keyof typeof formData] === (typeof option === 'string' ? option : option.value)
-                                ? 'border-spacefy' 
-                                : 'border-[#151516]'}`}
+                        {Array.isArray(field.options) && field.options.map((option: OptionType | string, i) => {
+                          const value = typeof option === 'string' ? option : option.value;
+                          const label = typeof option === 'string' ? option : option.label;
+
+                          return (
+                            <motion.button
+                              key={i}
+                              type="button"
+                              whileHover={{ scale: 1.02 }}
+                              whileTap={{ scale: 0.98 }}
+                              onClick={() => setFormData({...formData, [field.name]: value})}
+                              className={`relative flex flex-col items-center justify-center p-6 rounded-xl border-2 
+                                ${formData[field.name as keyof typeof formData] === value 
+                                  ? 'border-spacefy bg-spacefy/5' 
+                                  : 'border-[#151516] bg-[#0A0A0B]/80'} 
+                                transition-all duration-300 group hover:border-spacefy/50`}
                             >
-                              {formData[field.name as keyof typeof formData] === (typeof option === 'string' ? option : option.value) && (
-                                <motion.div
-                                  initial={{ scale: 0 }}
-                                  animate={{ scale: 1 }}
-                                  className="w-3 h-3 rounded-full bg-spacefy"
-                                />
-                              )}
-                            </div>
-                            <span className="font-poppins text-sm text-white">
-                              {typeof option === 'string' ? option : option.label}
-                            </span>
-                          </motion.button>
-                        ))}
+                              <div className={`w-6 h-6 rounded-full border-2 mb-3 flex items-center justify-center
+                                ${formData[field.name as keyof typeof formData] === value 
+                                  ? 'border-spacefy' 
+                                  : 'border-[#151516]'}`}
+                              >
+                                {formData[field.name as keyof typeof formData] === value && (
+                                  <motion.div
+                                    initial={{ scale: 0 }}
+                                    animate={{ scale: 1 }}
+                                    className="w-3 h-3 rounded-full bg-spacefy"
+                                  />
+                                )}
+                              </div>
+                              <span className="font-poppins text-sm text-white">{label}</span>
+                            </motion.button>
+                          );
+                        })}
                       </div>
                     </div>
-                  ) : field.conditional ? (
-                    formData[field.conditional as keyof typeof formData] === 'sim' && (
-                      <motion.div
-                        initial={{ opacity: 0, y: -10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
-                        className="relative group mb-4 mt-4"
-                      >
-                        {field.description && (
-                          <p className="text-sm text-gray-400 font-dmsans mb-2 ml-1">{field.description}</p>
-                        )}
-                        <div className="relative">
-                        {field.Icon && (
-                          <field.Icon className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 text-xl transition-colors duration-300 group-hover:text-spacefy group-focus-within:text-spacefy z-10" />
-                        )}
-                        <input
-                          type={field.type}
-                          placeholder={field.placeholder}
-                          value={formData[field.name as keyof typeof formData]}
-                          onChange={(e) => setFormData({...formData, [field.name]: e.target.value})}
-                          className="w-full pl-12 pr-4 py-4 rounded-xl bg-[#0A0A0B]/80 backdrop-blur-sm
-                            border-2 border-[#151516] text-white placeholder-gray-500
-                            transition-all duration-300 ease-out
-                            font-dmsans text-sm
-                            focus:outline-none focus:ring-0 focus:ring-offset-0
-                            focus:border-spacefy focus:bg-[#0D0D0E]
-                            focus:shadow-[0_0_20px_rgba(79,70,232,0.15)]
-                            hover:border-spacefy/50 hover:bg-[#0C0C0D]
-                            disabled:opacity-50 disabled:cursor-not-allowed"
-                        />
-                        </div>
-                      </motion.div>
-                    )
-                  ) : field.type === "textarea" ? (
-                    <div className="space-y-2">
-                      <p className="text-sm text-gray-400 font-dmsans font-normal ml-2">{field.description}</p>
-                      <div className="relative group">
-                        <RiFileTextLine className="absolute left-4 top-6 text-gray-500 text-xl transition-colors duration-300 group-hover:text-spacefy group-focus-within:text-spacefy z-10" />
-                        <textarea
-                          placeholder={field.placeholder}
-                          value={formData[field.name as keyof typeof formData]}
-                          onChange={(e) => setFormData({...formData, [field.name]: e.target.value})}
-                          rows={8}
-                          className="w-full pl-12 pr-4 py-4 rounded-xl bg-[#0A0A0B]/80 backdrop-blur-sm
-                            border-2 border-[#151516] text-white placeholder-gray-500
-                            transition-all duration-300 ease-out
-                            font-dmsans text-sm
-                            focus:outline-none focus:ring-0 focus:ring-offset-0
-                            focus:border-spacefy focus:bg-[#0D0D0E]
-                            focus:shadow-[0_0_20px_rgba(79,70,232,0.15)]
-                            hover:border-spacefy/50 hover:bg-[#0C0C0D]
-                            disabled:opacity-50 disabled:cursor-not-allowed
-                            resize-none"
-                        />
-                      </div>
-                    </div>
+                  ) : field.conditional === "sim" ? (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      className="relative group mt-4"
+                    >
+                      {field.Icon && (
+                        <field.Icon className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 text-xl transition-colors duration-300 group-hover:text-spacefy group-focus-within:text-spacefy z-10" />
+                      )}
+                      <input
+                        type={field.type}
+                        placeholder={field.placeholder}
+                        value={formData[field.name as keyof typeof formData]}
+                        onChange={(e) => setFormData({...formData, [field.name]: e.target.value})}
+                        className="w-full pl-12 pr-4 py-4 rounded-xl bg-[#0A0A0B]/80 backdrop-blur-sm
+                          border-2 border-[#151516] text-white placeholder-gray-500
+                          transition-all duration-300 ease-out
+                          font-dmsans text-sm
+                          focus:outline-none focus:ring-0 focus:ring-offset-0
+                          focus:border-spacefy focus:bg-[#0D0D0E]
+                          focus:shadow-[0_0_20px_rgba(79,70,232,0.15)]
+                          hover:border-spacefy/50 hover:bg-[#0C0C0D]
+                          disabled:opacity-50 disabled:cursor-not-allowed"
+                      />
+                    </motion.div>
                   ) : (
                     <motion.div
                       variants={inputVariants}
@@ -828,43 +818,45 @@ const Modelos = () => {
                                   className="fixed"
                                 >
                                   <div className="bg-[#0D0D0E] border-2 border-[#151516] rounded-xl overflow-hidden
-                                    shadow-[0_8px_32px_rgba(0,0,0,0.4)] backdrop-blur-lg">
-                                    {field.options?.map((option: Option | string, i: number) => {
-                                      const value = typeof option === 'string' ? option : option.value;
-                                      const label = typeof option === 'string' ? option : option.label;
-                                      const isSelected = formData[field.name as keyof typeof formData] === value;
+                                    shadow-[0_8px_32px_rgba(0,0,0,0.4)] backdrop-blur-lg w-full">
+                                    <div className="max-h-[240px] overflow-y-auto overflow-x-hidden custom-scrollbar">
+                                      {field.options?.map((option, i) => {
+                                        const value = typeof option === 'string' ? option : option.value;
+                                        const label = typeof option === 'string' ? option : option.label;
+                                        const isSelected = formData[field.name as keyof typeof formData] === value;
 
-                                      return (
-                                        <motion.button
-                                          key={i}
-                                          onClick={() => {
-                                            setFormData({ ...formData, [field.name]: value });
-                                            setActiveSelect(null);
-                                            setDropdownPosition(null);
-                                          }}
-                                          className={`w-full px-6 py-4 text-left transition-all duration-200
-                                            flex items-center gap-3 group
-                                            ${isSelected ? 'bg-spacefy/10' : 'hover:bg-[#151516]'}`}
-                                          whileHover={{ x: 4 }}
-                                          whileTap={{ scale: 0.98 }}
-                                        >
-                                          <div className={`w-2 h-2 rounded-full transition-all duration-200
-                                            ${isSelected 
-                                              ? 'bg-spacefy scale-100' 
-                                              : 'bg-gray-500 scale-0 group-hover:scale-100 group-hover:bg-spacefy/50'
-                                            }`}
-                                          />
-                                          <span className={`font-dmsans text-sm
-                                            ${isSelected 
-                                              ? 'text-spacefy' 
-                                              : 'text-gray-400 group-hover:text-white'
-                                            }`}
+                                        return (
+                                          <motion.button
+                                            key={i}
+                                            onClick={() => {
+                                              setFormData({ ...formData, [field.name]: value });
+                                              setActiveSelect(null);
+                                              setDropdownPosition(null);
+                                            }}
+                                            className={`w-full px-6 py-4 text-left transition-all duration-200
+                                              flex items-center gap-3 group
+                                              ${isSelected ? 'bg-spacefy/10' : 'hover:bg-[#151516]'}`}
+                                            whileHover={{ x: 4 }}
+                                            whileTap={{ scale: 0.98 }}
                                           >
-                                            {label}
-                                          </span>
-                                        </motion.button>
-                                      );
-                                    })}
+                                            <div className={`w-2 h-2 rounded-full transition-all duration-200
+                                              ${isSelected 
+                                                ? 'bg-spacefy scale-100' 
+                                                : 'bg-gray-500 scale-0 group-hover:scale-100 group-hover:bg-spacefy/50'
+                                              }`}
+                                            />
+                                            <span className={`font-dmsans text-sm
+                                              ${isSelected 
+                                                ? 'text-spacefy' 
+                                                : 'text-gray-400 group-hover:text-white'
+                                              }`}
+                                            >
+                                              {label}
+                                            </span>
+                                          </motion.button>
+                                        );
+                                      })}
+                                    </div>
                                   </div>
                                 </motion.div>
                               )}
@@ -924,7 +916,7 @@ const Modelos = () => {
               className={`flex-1 px-8 py-4 rounded-xl text-white font-poppins flex items-center justify-center gap-2 text-sm transition-all duration-300 
                 ${isCurrentStepValid() 
                   ? showSuccess 
-                    ? 'bg-green-500/50 cursor-not-allowed'
+                    ? 'bg-green-500 opacity-90 cursor-not-allowed'
                     : 'bg-spacefy hover:bg-white hover:text-black hover:shadow-[0_0_25px_rgba(79,70,232,0.25)] hover:-translate-y-1'
                   : 'bg-[#0A0A0B]/90 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0'}`}
             >
@@ -964,7 +956,7 @@ const Modelos = () => {
             initial="initial"
             animate="animate"
             exit="exit"
-            className="fixed top-4 right-4 bg-green-500/5 backdrop-blur-sm border border-green-500/10 text-green-500/80 px-6 py-4 rounded-2xl shadow-lg z-50 flex items-center gap-3"
+            className="fixed top-4 right-4 bg-green-500/10 backdrop-blur-sm border border-green-500/20 text-green-500 px-6 py-4 rounded-2xl shadow-lg z-50 flex items-center gap-3"
           >
             <svg 
               className="w-5 h-5" 
@@ -987,4 +979,4 @@ const Modelos = () => {
   );
 };
 
-export default Modelos;
+export default Prototipos;

@@ -14,20 +14,20 @@ import Projects from "./sections/projects/page";
 import ContactUs from "./sections/contact-us/page";
 import Footer from "../components/Footer";
 
-const words = ["Inovador", "Exclusivo", "Moderno", "Eficiente"];
+// const words = ["Digital.", "Exclusivo.", "Moderno.", "Eficiente."];
 
 export default function Home() {
-  const [currentWordIndex, setCurrentWordIndex] = useState(0);
+  // const [currentWordIndex, setCurrentWordIndex] = useState(0);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentWordIndex((prevIndex) =>
-        prevIndex === words.length - 1 ? 0 : prevIndex + 1
-      );
-    }, 4500); 
+  // // useEffect(() => {
+  // //   const interval = setInterval(() => {
+  // //     setCurrentWordIndex((prevIndex) =>
+  // //       prevIndex === words.length - 1 ? 0 : prevIndex + 1
+  // //     );
+  // //   }, 4500); 
 
-    return () => clearInterval(interval);
-  }, []);
+  // //   return () => clearInterval(interval);
+  // // }, []);
 
   const fadeInUp = {
     hidden: { opacity: 0, y: 20 },
@@ -175,7 +175,7 @@ export default function Home() {
             <span className="text-white">Explore</span> o{" "}
             <AnimatePresence mode="wait">
               <motion.span
-                key={currentWordIndex}
+                // key={currentWordIndex}
                 className="text-[#4F46E5] inline-block"
                 variants={wordAnimation}
                 initial="initial"
@@ -183,7 +183,8 @@ export default function Home() {
                 exit="exit"
                 transition={{ duration: 0.5, ease: "easeInOut" }}
               >
-                {words[currentWordIndex]}
+                {/* {words[currentWordIndex]} */}
+                Digital.
               </motion.span>
             </AnimatePresence>
           </motion.h1>
@@ -280,8 +281,7 @@ export default function Home() {
           </div>
 
           <p className="font-poppins font-normal text-center sm:text-start text-sm leading-tight w-full max-w-lg text-[#A3A3A3]">
-            Explorando novos horizontes digitais. Inove com tecnologia de ponta
-            e leve sua visão além do esperado com a Spacefy.
+            Somos especialistas em design e desenvolvimento web, criando soluções personalizadas que impulsionam seu negócio e encantam seus clientes.
           </p>
         </motion.div>
       </section>

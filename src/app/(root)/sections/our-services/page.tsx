@@ -77,7 +77,7 @@ const OurServices = () => {
   ];
 
   return (
-    <section ref={ref} className="w-full h-full bg-black flex flex-col py-24 px-4 sm:px-0">
+    <section ref={ref} className="w-full h-full bg-black flex flex-col py-24 px-4 sm:px-0" id="services">
       <motion.div 
         className="flex flex-col justify-center mx-auto text-center"
         variants={containerVariants}

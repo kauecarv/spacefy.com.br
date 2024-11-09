@@ -36,7 +36,7 @@ const ContactUs = () => {
 
 
   return (
-    <section ref={ref} className="bg-black w-full h-full max-w-5xl py-8 px-4 sm:px-6 mx-auto justify-center z-50">
+    <section ref={ref} className="bg-black w-full h-full max-w-5xl py-8 px-4 sm:px-6 mx-auto justify-center z-50" id="contact-us">
       <motion.div 
         className="flex flex-col mx-auto text-center"
         variants={containerVariants}
@@ -89,7 +89,7 @@ const ContactUs = () => {
             }}
           >
             <Link
-              href="mailto:contato@example.com"
+              href="/planejamento"
               className="py-3 px-6 inline-flex items-center justify-center w-full sm:w-auto gap-2 bg-indigo-600 text-white font-poppins font-normal text-sm rounded-xl"
             >
               <motion.div
@@ -119,7 +119,8 @@ const ContactUs = () => {
             }}
           >
             <Link
-              href="/planejamento" 
+              href="https://wa.me/5511999999999"
+              target="_blank"
               className="py-3 px-6 inline-flex items-center justify-center w-full sm:w-auto gap-2 bg-white text-black font-poppins font-normal text-sm rounded-xl"
             >
               <motion.div

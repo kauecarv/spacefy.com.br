@@ -1,12 +1,11 @@
 "use client"
 
 import { motion, AnimatePresence } from "framer-motion";
-import { BsArrowLeftShort, BsArrowRightShort } from "react-icons/bs";
+import { BsArrowLeftShort, BsArrowRightShort, BsCalculator } from "react-icons/bs";
 import { RiUserSmileLine, RiPhoneLine, RiMailSendLine, RiFileTextLine } from "react-icons/ri";
 import { useState, useEffect } from "react";
 import { IconType } from "react-icons";
 import Link from "next/link";
-
 import { MdOutlineDesignServices, MdOutlineSwitchAccessShortcutAdd } from "react-icons/md";
 import { HiOutlineViewGrid, HiOutlineSparkles, HiOutlineArrowLeft } from "react-icons/hi";
 import { CgWebsite } from "react-icons/cg";
@@ -18,7 +17,7 @@ interface Field {
   placeholder: string;
   Icon?: IconType;
   description?: string;
-  options?: string[] | { label: string; value: string }[];
+  options?: string[] | OptionType[];
   name: string;
   conditional?: string;
   title?: string;
@@ -31,26 +30,12 @@ interface Step {
   subtitle: string;
 }
 
-interface RadioOption {
+interface OptionType {
   label: string;
   value: string;
 }
 
-interface Option {
-  label: string;
-  value: string;
-}
-
-const iconVariants = {
-  hover: {
-    rotate: [0, -10, 10, -10, 0],
-    transition: {
-      duration: 0.5
-    }
-  }
-};
-
-const Modelos = () => {
+const Sites = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [direction, setDirection] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
@@ -61,13 +46,15 @@ const Modelos = () => {
     telefone: '',
     email: '',
     descricao: '',
-    paginas: '',
-    secoes: '',
     referencia: '',
     referenciaLink: '',
+    tecnologias: '',
+    paginas: '',
+    secoes: '',
+    objetivo: '',
     prazo: '',
     investimento: '',
-    conteudo: ''
+    infraestrutura: ''
   });
   const [selectedCategory, setSelectedCategory] = useState("todos");
   const [activeSelect, setActiveSelect] = useState<string | null>(null);
@@ -81,123 +68,212 @@ const Modelos = () => {
           placeholder: "Nome da sua empresa ou projeto", 
           type: "text",
           name: "nome",
-          description: "Este será o nome principal que identificará seu projeto durante todo o processo."
+          description: "Identifique seu projeto para acompanhar todo o processo."
         },
         { 
           Icon: RiPhoneLine, 
           placeholder: "Seu melhor número para contato", 
           type: "tel",
           name: "telefone",
-          description: "Utilizaremos este número para atualizações importantes sobre seu projeto."
+          description: "Para atualizações importantes sobre o desenvolvimento."
         },
         { 
           Icon: RiMailSendLine, 
           placeholder: "E-mail profissional para comunicação", 
           type: "email",
           name: "email",
-          description: "Manteremos você informado sobre cada etapa do desenvolvimento."
+          description: "Manteremos você informado sobre cada etapa."
         }
       ],
-      title: "Pronto para Revolucionar sua Presença Digital?",
-      subtitle: "Dê o primeiro passo para transformar sua visão em realidade. Sua presença digital única começa aqui."
+      title: "Comece sua Jornada Digital Conosco",
+      subtitle: "O primeiro passo para transformar sua visão em realidade começa aqui. Vamos construir algo incrível juntos."
     },
     {
       fields: [
-        { 
-          type: "textarea",
-          placeholder: "Qual é a sua ideia para se tornar único?",
-          description: "Descreva seu projeto, objetivos e ideias principais. Quanto mais detalhes você fornecer, melhor poderemos entender e realizar sua visão.",
-          name: "descricao"
-        }
-      ],
-      title: "Conte-nos Sobre Seu Projeto dos Sonhos",
-      subtitle: "Cada grande projeto começa com uma ideia. Compartilhe sua visão e deixe-nos ajudar a torná-la realidade."
-    },
-    {
-      fields: [
-        { 
-          Icon: HiOutlineViewGrid, 
-          placeholder: "Ex: Home, Sobre, Serviços, Blog...", 
-          type: "text",
-          name: "paginas",
-          description: "Liste as principais páginas que você deseja em seu site, separando-as por vírgula. Pense em todas as seções necessárias para apresentar seu negócio de forma completa."
-        },
-        { 
-          Icon: CgWebsite, 
-          placeholder: "Ex: Hero, Galeria, Depoimentos, FAQ...", 
-          type: "text",
-          name: "secoes",
-          description: "Indique os elementos e seções que você gostaria de incluir em suas páginas, separando-os por vírgula. Considere componentes que tornarão seu site mais atraente e funcional."
-        },
         {
           type: "radio",
           title: "Você tem algum design ou protótipo?",
           name: "referencia",
           placeholder: "Selecione uma opção",
           options: [
-            { label: "Sim, tenho referências", value: "sim" },
-            { label: "Não, preciso de sugestões", value: "nao" }
-          ] as RadioOption[]
-        },
-        { 
-          Icon: RiFileTextLine,
-          type: "text",
-          name: "referenciaLink",
-          placeholder: "Cole aqui os links de referência",
-          description: "Links dos sites que você gostaria de usar como inspiração",
-          conditional: "referencia"
-        }
-      ],
-      title: "Como Você Imagina seu Projeto?",
-      subtitle: "Compartilhe suas referências visuais ou confie em nossa expertise para criar um design exclusivo."
-    },
-    {
-      fields: [
-        { 
-          Icon: HiOutlineViewGrid, 
-          placeholder: "Selecione o prazo desejado", 
-          type: "select",
-          name: "prazo",
-          description: "Escolha o prazo ideal para a conclusão do seu projeto. Isso nos ajudará a organizar as entregas de forma eficiente.",
-          options: [
-            "15 dias",
-            "30 dias",
-            "45 dias",
-            "60 dias",
-            "90 dias",
-            "Flexível"
+            { label: "Sim", value: "sim" },
+            { label: "Não", value: "nao" }
           ]
         },
         { 
-          Icon: CgWebsite, 
-          placeholder: "Selecione o investimento previsto", 
+          Icon: RiFileTextLine,
+          placeholder: "Cole aqui os links das suas referências",
+          type: "text",
+          name: "referenciaLink",
+          conditional: "sim",
+          description: "Links dos protótipos ou esboços que você gostaria de usar como inspiração."
+        }
+      ],
+      title: "Como Você Realmente Imagina seu Projeto?",
+      subtitle: "Compartilhe suas ideias e referências visuais, ou confie em nossa expertise para criar um design exclusivo."
+    },
+    {
+      fields: [
+        {
+          Icon: HiOutlineSparkles,
+          type: "text",
+          placeholder: "Se sim, qual ferramenta prefere?",
+          name: "tecnologias",
+          description: "Ex: Framer, Figma, Adobe XD ou deixe em branco para nossa sugestão"
+        }
+      ],
+      title: "Vamos Escolher as Melhores Ferramentas",
+      subtitle: "Conte-nos se você tem alguma preferência de ferramentas ou deixe com nossa equipe."
+    },
+    {
+      fields: [
+        {
+          Icon: HiOutlineViewGrid,
+          type: "text",
+          placeholder: "Quais páginas serão necessárias?",
+          name: "paginas",
+          description: "Ex: Home, Sobre, Serviços, Contato, Blog, etc."
+        },
+        {
+          Icon: CgWebsite,
+          type: "text",
+          placeholder: "Quais seções cada página terá?",
+          name: "secoes",
+          description: "Ex: Banner, Galeria, Formulário, Lista de Produtos"
+        },
+        {
+          Icon: HiOutlineSparkles,
+          type: "text",
+          placeholder: "Qual o objetivo principal do site?",
+          name: "objetivo",
+          description: "Ex: Vender produtos, compartilhar informações, promover serviços"
+        }
+      ],
+      title: "Qual a Estrutura e Objetivos do Projeto",
+      subtitle: "Defina as páginas necessárias e o propósito principal do seu site."
+    },
+    {
+      fields: [
+        {
           type: "select",
-          name: "investimento",
-          description: "Indique a faixa de investimento que você planeja para seu projeto. Isso nos permitirá sugerir as melhores soluções dentro do seu orçamento.",
+          Icon: BsCalculator,
+          placeholder: "Qual o prazo desejado para o projeto?",
+          name: "prazo",
+          description: "Prazo estimado para entrega do projeto",
           options: [
-            "Até R$ 5.000",
-            "R$ 5.000 - R$ 10.000",
-            "R$ 10.000 - R$ 20.000",
-            "Acima de R$ 20.000",
-            "A definir"
+            { label: "Até 15 dias", value: "15 dias" },
+            { label: "15-30 dias", value: "30 dias" },
+            { label: "30-60 dias", value: "60 dias" },
+            { label: "Mais de 60 dias", value: "mais 60 dias" }
+          ]
+        },
+        {
+          type: "select",
+          Icon: MdOutlineSwitchAccessShortcutAdd,
+          placeholder: "Qual o investimento disponível?",
+          name: "investimento",
+          
+          description: "Faixa de investimento para o projeto",
+          options: [
+            { label: "Até R$ 1.000", value: "1000" },
+            { label: "R$ 1.000 - R$ 3.000", value: "3000" },
+            { label: "R$ 3.000 - R$ 5.000", value: "5000" },
+            { label: "Mais de R$ 5.000", value: "mais 5000" }
           ]
         },
         {
           type: "radio",
-          title: "Sobre o conteúdo do seu site",
-          name: "conteudo",
-          description: "Nos informe se você já possui os textos, imagens e materiais que serão utilizados no site ou se precisará de ajuda para criá-los.",
+          title: "Você já possui domínio e hospedagem?",
+          name: "infraestrutura",
+          description: "Se não possuir, podemos incluir no orçamento",
           placeholder: "Selecione uma opção",
           options: [
-            { label: "Tenho todo o conteúdo pronto", value: "pronto" },
-            { label: "Preciso de ajuda para criar", value: "criar" }
+            { label: "Sim, já tenho", value: "sim" },
+            { label: "Não tenho ainda", value: "nao" }
           ]
         }
       ],
-      title: "Planejamento e Recursos",
-      subtitle: "Vamos alinhar as expectativas de prazo e investimento para entregar um projeto excepcional que atenda suas necessidades."
+      title: "Qual Prazo e Investimento Disponíveis?",
+      subtitle: "Informe qual o tempo estimado e o valor disponível que você pretende investir no projeto"
     }
   ];
+
+const iconVariants = {
+  hover: {
+    rotate: [0, -10, 10, -10, 0],
+    transition: {
+      duration: 0.5
+    }
+  }
+};
+
+
+const overlayVariants = {
+  hidden: {
+    opacity: 0,
+    y: 10
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.2
+    }
+  }
+};
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+      ease: "easeOut",
+      duration: 0.4
+    }
+  }
+};
+
+const projectVariants = {
+  hidden: { 
+    opacity: 0,
+    y: 20
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.4,
+      ease: "easeOut"
+    }
+  }
+};
+
+const sectionVariants = {
+  hidden: { 
+    opacity: 0, 
+    y: 20 
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: "easeOut",
+      when: "beforeChildren",
+      staggerChildren: 0.2
+    }
+  },
+  exit: {
+    opacity: 0,
+    y: -20,
+    transition: {
+      duration: 0.3,
+      ease: "easeIn"
+    }
+  }
+};
+
 
   const inputVariants = {
     initial: { 
@@ -238,12 +314,16 @@ const Modelos = () => {
       case 0:
         return formData.nome && formData.telefone && formData.email;
       case 1:
-        return formData.descricao && formData.descricao.trim().length > 0;
+        return formData.referencia === 'nao' || 
+               (formData.referencia === 'sim' && formData.referenciaLink);
       case 2:
-        return formData.paginas.trim() && formData.secoes.trim() && formData.referencia && 
-          (formData.referencia === 'nao' || (formData.referencia === 'sim' && formData.referenciaLink.trim()));
+        return formData.tecnologias && formData.tecnologias.trim().length > 0;
       case 3:
-        return formData.prazo && formData.investimento && formData.conteudo;
+        return formData.paginas && formData.objetivo;
+      case 4:
+        return formData.prazo && 
+               formData.investimento && 
+               formData.infraestrutura;
       default:
         return false;
     }
@@ -280,11 +360,7 @@ const Modelos = () => {
     }
   };
 
-  const pageVariants: {
-    initial: (direction: number) => { x: number; opacity: number };
-    animate: any;
-    exit: (direction: number) => any;
-  } = {
+  const pageVariants = {
     initial: (direction: number) => ({
       x: direction > 0 ? 100 : -100,
       opacity: 0
@@ -374,7 +450,7 @@ const Modelos = () => {
       "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671b29f6647cdaef47831669_e4402a7b-439b-410e-97ea-e03c575cf351.png"
     ],
     modelos: [
-      "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671b29f6647cdaef47831669_e4402a7b-439b-410e-97ea-e03c575cf351.png", 
+      "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671b29f6647cdaef47831669_e4402a7b-439b-410e-97ea-e03c575cf351.png",
       "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/67105ab6140b33f063f0aa7b_9ac3e592-c478-4029-a2d2-e6323699f465.jpeg",
       "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671182a4d5a2b01aafedd422_db783e89-af38-441c-a36c-7db2806f79f4.png",
       "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671b25477be2a508e0342e75_10c8b478-b389-48df-93cb-299dae72141d.jpeg"
@@ -483,7 +559,7 @@ const Modelos = () => {
               <motion.button 
                 variants={buttonVariants}
                 whileHover="hover"
-                whileTap="tap"  
+                whileTap="tap"
                 onClick={() => setSelectedCategory("todos")}
                 className={`text-[#ccc] w-full md:w-auto ${
                   selectedCategory === "todos" 
@@ -496,7 +572,6 @@ const Modelos = () => {
                 </motion.span>
                 Todos
               </motion.button>
-
               <motion.button 
                 variants={buttonVariants}
                 whileHover="hover"
@@ -513,7 +588,6 @@ const Modelos = () => {
                 </motion.span>
                 Sites
               </motion.button>
-
               <motion.button 
                 variants={buttonVariants}
                 whileHover="hover"
@@ -639,7 +713,7 @@ const Modelos = () => {
                   className="relative group"
                 >
                   {field.type === "radio" ? (
-                    <div className="space-y-2">
+                    <div className="space-y-2 mb-4">
                       <div className="flex items-center">
                         <h3 className="text-xl text-white font-poppins font-medium">{field.title}</h3>
                         
@@ -687,51 +761,50 @@ const Modelos = () => {
                       )}
                       
                       <div className="grid grid-cols-2 gap-4">
-                        {Array.isArray(field.options) && field.options.map((option: Option | string, i) => (
-                          <motion.button
-                            key={i}
-                            type="button"
-                            whileHover={{ scale: 1.02 }}
-                            whileTap={{ scale: 0.98 }}
-                            onClick={() => setFormData({...formData, [field.name]: typeof option === 'string' ? option : option.value})}
-                            className={`relative flex flex-col items-center justify-center p-6 rounded-xl border-2 
-                              ${formData[field.name as keyof typeof formData] === (typeof option === 'string' ? option : option.value)
-                                ? 'border-spacefy bg-spacefy/5' 
-                                : 'border-[#151516] bg-[#0A0A0B]/80'} 
-                              transition-all duration-300 group hover:border-spacefy/50`}
-                          >
-                            <div className={`w-6 h-6 rounded-full border-2 mb-3 flex items-center justify-center
-                              ${formData[field.name as keyof typeof formData] === (typeof option === 'string' ? option : option.value)
-                                ? 'border-spacefy' 
-                                : 'border-[#151516]'}`}
+                        {Array.isArray(field.options) && field.options.map((option: OptionType | string, i) => {
+                          const value = typeof option === 'string' ? option : option.value;
+                          const label = typeof option === 'string' ? option : option.label;
+
+                          return (
+                            <motion.button
+                              key={i}
+                              type="button"
+                              whileHover={{ scale: 1.02 }}
+                              whileTap={{ scale: 0.98 }}
+                              onClick={() => setFormData({...formData, [field.name]: value})}
+                              className={`relative flex flex-col items-center justify-center p-6 rounded-xl border-2 
+                                ${formData[field.name as keyof typeof formData] === value 
+                                  ? 'border-spacefy bg-spacefy/5' 
+                                  : 'border-[#151516] bg-[#0A0A0B]/80'} 
+                                transition-all duration-300 group hover:border-spacefy/50`}
                             >
-                              {formData[field.name as keyof typeof formData] === (typeof option === 'string' ? option : option.value) && (
-                                <motion.div
-                                  initial={{ scale: 0 }}
-                                  animate={{ scale: 1 }}
-                                  className="w-3 h-3 rounded-full bg-spacefy"
-                                />
-                              )}
-                            </div>
-                            <span className="font-poppins text-sm text-white">
-                              {typeof option === 'string' ? option : option.label}
-                            </span>
-                          </motion.button>
-                        ))}
+                              <div className={`w-6 h-6 rounded-full border-2 mb-3 flex items-center justify-center
+                                ${formData[field.name as keyof typeof formData] === value 
+                                  ? 'border-spacefy' 
+                                  : 'border-[#151516]'}`}
+                              >
+                                {formData[field.name as keyof typeof formData] === value && (
+                                  <motion.div
+                                    initial={{ scale: 0 }}
+                                    animate={{ scale: 1 }}
+                                    className="w-3 h-3 rounded-full bg-spacefy"
+                                  />
+                                )}
+                              </div>
+                              <span className="font-poppins text-sm text-white">{label}</span>
+                            </motion.button>
+                          );
+                        })}
                       </div>
                     </div>
-                  ) : field.conditional ? (
-                    formData[field.conditional as keyof typeof formData] === 'sim' && (
+                  ) : field.conditional === "sim" ? (
+                    formData.referencia === "sim" && (
                       <motion.div
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -10 }}
-                        className="relative group mb-4 mt-4"
+                        className="relative group mt-4"
                       >
-                        {field.description && (
-                          <p className="text-sm text-gray-400 font-dmsans mb-2 ml-1">{field.description}</p>
-                        )}
-                        <div className="relative">
                         {field.Icon && (
                           <field.Icon className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 text-xl transition-colors duration-300 group-hover:text-spacefy group-focus-within:text-spacefy z-10" />
                         )}
@@ -750,32 +823,8 @@ const Modelos = () => {
                             hover:border-spacefy/50 hover:bg-[#0C0C0D]
                             disabled:opacity-50 disabled:cursor-not-allowed"
                         />
-                        </div>
                       </motion.div>
                     )
-                  ) : field.type === "textarea" ? (
-                    <div className="space-y-2">
-                      <p className="text-sm text-gray-400 font-dmsans font-normal ml-2">{field.description}</p>
-                      <div className="relative group">
-                        <RiFileTextLine className="absolute left-4 top-6 text-gray-500 text-xl transition-colors duration-300 group-hover:text-spacefy group-focus-within:text-spacefy z-10" />
-                        <textarea
-                          placeholder={field.placeholder}
-                          value={formData[field.name as keyof typeof formData]}
-                          onChange={(e) => setFormData({...formData, [field.name]: e.target.value})}
-                          rows={8}
-                          className="w-full pl-12 pr-4 py-4 rounded-xl bg-[#0A0A0B]/80 backdrop-blur-sm
-                            border-2 border-[#151516] text-white placeholder-gray-500
-                            transition-all duration-300 ease-out
-                            font-dmsans text-sm
-                            focus:outline-none focus:ring-0 focus:ring-offset-0
-                            focus:border-spacefy focus:bg-[#0D0D0E]
-                            focus:shadow-[0_0_20px_rgba(79,70,232,0.15)]
-                            hover:border-spacefy/50 hover:bg-[#0C0C0D]
-                            disabled:opacity-50 disabled:cursor-not-allowed
-                            resize-none"
-                        />
-                      </div>
-                    </div>
                   ) : (
                     <motion.div
                       variants={inputVariants}
@@ -829,7 +878,7 @@ const Modelos = () => {
                                 >
                                   <div className="bg-[#0D0D0E] border-2 border-[#151516] rounded-xl overflow-hidden
                                     shadow-[0_8px_32px_rgba(0,0,0,0.4)] backdrop-blur-lg">
-                                    {field.options?.map((option: Option | string, i: number) => {
+                                    {field.options?.map((option, i) => {
                                       const value = typeof option === 'string' ? option : option.value;
                                       const label = typeof option === 'string' ? option : option.label;
                                       const isSelected = formData[field.name as keyof typeof formData] === value;
@@ -924,7 +973,7 @@ const Modelos = () => {
               className={`flex-1 px-8 py-4 rounded-xl text-white font-poppins flex items-center justify-center gap-2 text-sm transition-all duration-300 
                 ${isCurrentStepValid() 
                   ? showSuccess 
-                    ? 'bg-green-500/50 cursor-not-allowed'
+                    ? 'bg-green-500 opacity-90 cursor-not-allowed'
                     : 'bg-spacefy hover:bg-white hover:text-black hover:shadow-[0_0_25px_rgba(79,70,232,0.25)] hover:-translate-y-1'
                   : 'bg-[#0A0A0B]/90 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0'}`}
             >
@@ -964,7 +1013,7 @@ const Modelos = () => {
             initial="initial"
             animate="animate"
             exit="exit"
-            className="fixed top-4 right-4 bg-green-500/5 backdrop-blur-sm border border-green-500/10 text-green-500/80 px-6 py-4 rounded-2xl shadow-lg z-50 flex items-center gap-3"
+            className="fixed top-4 right-4 bg-green-500/10 backdrop-blur-sm border border-green-500/20 text-green-500 px-6 py-4 rounded-2xl shadow-lg z-50 flex items-center gap-3"
           >
             <svg 
               className="w-5 h-5" 
@@ -987,4 +1036,4 @@ const Modelos = () => {
   );
 };
 
-export default Modelos;
+export default Sites;

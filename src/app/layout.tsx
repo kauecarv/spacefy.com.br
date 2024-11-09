@@ -3,14 +3,15 @@ import "./globals.css";
 import NavbarComponent from "./components/navbar/NavbarComponent";
 import WhatsAppButton from "./components/Whatsapp";
 import { DM_Sans, Poppins } from "next/font/google";
-
+import Script from "next/script";
+import ScrollToTop from "./components/ScrollToTop";
+import CookieConsent from "./components/CookieConsent";
 
 const dmsans = DM_Sans({
   subsets: ['latin'],
   weight: ['200', '300', '400', '500', '600', '700'],
   variable: '--font-dmsans', 
 });
-
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -55,8 +56,6 @@ export const metadata: Metadata = {
   },
 };
 
-
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -64,10 +63,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-br" className={`${poppins.variable} ${dmsans.variable}`}>
-
-      <body  className={`${poppins.variable} ${dmsans.variable}`}>
+      <body className={`${poppins.variable} ${dmsans.variable}`}>
         <NavbarComponent />
         {children}
+        <CookieConsent />
+        <ScrollToTop />
         <WhatsAppButton />
       </body>
     </html>

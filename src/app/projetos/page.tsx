@@ -1,18 +1,17 @@
 "use client"
 
-import { PiHandSwipeRightBold } from "react-icons/pi";
 import { HiOutlineViewGrid } from "react-icons/hi";
 import { CgWebsite } from "react-icons/cg";
-import { MdOutlineDesignServices, MdOutlineSwitchAccessShortcutAdd } from "react-icons/md";
+import { MdOutlineDesignServices } from "react-icons/md";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { CgArrowsExpandUpRight } from "react-icons/cg";
 import { useInView } from "react-intersection-observer";
-import { TbMessage2Star } from "react-icons/tb";
 import Image from "next/image";
-import Link from "next/link";
+import { GoProject } from "react-icons/go";
+import { AiOutlineCheckCircle } from "react-icons/ai";
 
-const Projects = () => {
+const Projetos = () => {
   const [selectedCategory, setSelectedCategory] = useState("sites");
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
@@ -134,6 +133,12 @@ const Projects = () => {
       "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671b25477be2a508e0342e75_10c8b478-b389-48df-93cb-299dae72141d.jpeg",
       "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671b29f6647cdaef47831669_e4402a7b-439b-410e-97ea-e03c575cf351.png"
     ],
+    sistemas: [
+      "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671b25477be2a508e0342e75_10c8b478-b389-48df-93cb-299dae72141d.jpeg",
+      "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/67105ab6140b33f063f0aa7b_9ac3e592-c478-4029-a2d2-e6323699f465.jpeg", 
+      "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671182a4d5a2b01aafedd422_db783e89-af38-441c-a36c-7db2806f79f4.png",
+      "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671b29f6647cdaef47831669_e4402a7b-439b-410e-97ea-e03c575cf351.png"
+    ],
     modelos: [
       "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671b29f6647cdaef47831669_e4402a7b-439b-410e-97ea-e03c575cf351.png",
       "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/67105ab6140b33f063f0aa7b_9ac3e592-c478-4029-a2d2-e6323699f465.jpeg",
@@ -149,38 +154,37 @@ const Projects = () => {
       animate={inView ? "visible" : "hidden"}
       exit="exit"
       variants={sectionVariants}
-      id="projects"
       className="bg-black w-full h-full flex flex-col py-16"
     >
-      <div className="flex flex-col text-start mx-auto w-full max-w-6xl gap-8">
+      <div className="flex flex-col text-start mx-auto w-full max-w-7xl gap-8">
         <div className="flex flex-col gap-3 px-6">
         <motion.div 
-          className="flex flex-col sm:flex-row justify-center sm:justify-start sm:space-x-4 space-y-4 sm:space-y-0 mb-6"
+          className="flex flex-col sm:flex-row justify-center sm:justify-center sm:space-x-4 space-y-4 sm:space-y-0 mb-6"
           variants={itemVariants}
         >
-          <span className="inline-flex items-center justify-center sm:justify-start bg-transparent bg-opacity-20 text-[#ccc] px-3 py-2 sm:py-1 rounded-full text-xs sm:text-sm font-medium font-dmsans w-full sm:w-auto">
-            <TbMessage2Star className="mr-2 w-4 h-4 sm:w-5 sm:h-5 text-indigo-600" />
+          <span className="inline-flex items-center justify-center bg-transparent bg-opacity-20 text-[#ccc] px-3 py-2 sm:py-1 rounded-full text-xs sm:text-sm font-medium font-dmsans w-full sm:w-auto">
+            <GoProject className="mr-2 w-4 h-4 sm:w-5 sm:h-5 text-indigo-600" />
             <span className="text-sm sm:text-md text-[#ccc] mr-1">127+</span> projetos entregues
           </span>
-          <span className="inline-flex items-center justify-center sm:justify-start bg-transparent bg-opacity-20 text-[#ccc] px-3 py-2 sm:py-1 rounded-full text-xs sm:text-sm font-medium font-dmsans w-full sm:w-auto">
-            <MdOutlineSwitchAccessShortcutAdd className="mr-2 w-4 h-4 sm:w-5 sm:h-5 text-indigo-600" />
-            <span className="text-sm sm:text-md text-[#ccc] mr-1">119.4k</span> views geradas
+          <span className="inline-flex items-center justify-center bg-transparent bg-opacity-20 text-[#ccc] px-3 py-2 sm:py-1 rounded-full text-xs sm:text-sm font-medium font-dmsans w-full sm:w-auto">
+            <AiOutlineCheckCircle className="mr-2 w-4 h-4 sm:w-5 sm:h-5 text-indigo-600" />
+            <span className="text-sm sm:text-md text-[#ccc] mr-1">98%</span> taxa de aprovação
           </span>
         </motion.div>
           
-          <h2 className="text-white text-3xl md:text-5xl font-bold font-poppins text-center md:text-left">
-            Impacto <span className="text-indigo-600">Real</span> com Resultados <span className="text-indigo-600">Visíveis.</span>
+          <h2 className="text-white text-3xl md:text-7xl max-w-5xl mx-auto text-center font-bold font-poppins text-center">
+            Excelência em <span className="text-indigo-600">Projetos</span> e Qualidade em{" "}<span className="text-indigo-600">Soluções.</span>
           </h2>
         </div>
         
-        <div className="flex flex-col md:flex-row items-center justify-between px-6 gap-6 md:gap-0">
-          <div className="flex flex-wrap md:flex-nowrap items-center justify-center w-full md:w-auto bg-[#0A0A0A] rounded-xl overflow-hidden">
+        <div className="flex justify-center px-6">
+          <div className="flex flex-wrap md:flex-nowrap items-center justify-center bg-[#0A0A0A] rounded-xl overflow-hidden">
             <motion.button 
               variants={buttonVariants}
               whileHover="hover"
               whileTap="tap"
               onClick={() => setSelectedCategory("todos")}
-              className={`text-[#ccc] w-full md:w-auto ${selectedCategory === "todos" ? "bg-indigo-600 text-white" : "hover:bg-indigo-600 hover:text-white"} duration-300 transition-all font-poppins px-6 py-3 flex items-center justify-center md:justify-start gap-2`}
+              className={`text-[#ccc] w-full md:w-auto ${selectedCategory === "todos" ? "bg-indigo-600 text-white" : "hover:bg-indigo-600 hover:text-white"} duration-300 transition-all font-poppins px-6 py-3 flex items-center justify-center gap-2`}
             >
               <motion.span variants={iconVariants}>
                 <HiOutlineViewGrid className="text-xl" />
@@ -192,7 +196,7 @@ const Projects = () => {
               whileHover="hover"
               whileTap="tap"
               onClick={() => setSelectedCategory("sites")}
-              className={`text-[#ccc] w-full md:w-auto ${selectedCategory === "sites" ? "bg-indigo-600 text-white" : "hover:bg-indigo-600 hover:text-white"} duration-300 transition-all font-poppins px-6 py-3 flex items-center justify-center md:justify-start gap-2`}
+              className={`text-[#ccc] w-full md:w-auto ${selectedCategory === "sites" ? "bg-indigo-600 text-white" : "hover:bg-indigo-600 hover:text-white"} duration-300 transition-all font-poppins px-6 py-3 flex items-center justify-center gap-2`}
             >
               <motion.span variants={iconVariants}>
                 <CgWebsite className="text-xl" />
@@ -203,8 +207,20 @@ const Projects = () => {
               variants={buttonVariants}
               whileHover="hover"
               whileTap="tap"
+              onClick={() => setSelectedCategory("sistemas")}
+              className={`text-[#ccc] w-full md:w-auto ${selectedCategory === "sistemas" ? "bg-indigo-600 text-white" : "hover:bg-indigo-600 hover:text-white"} duration-300 transition-all font-poppins px-6 py-3 flex items-center justify-center gap-2`}
+            >
+              <motion.span variants={iconVariants}>
+                <MdOutlineDesignServices className="text-xl" />
+              </motion.span>
+              Sistemas
+            </motion.button>
+            <motion.button 
+              variants={buttonVariants}
+              whileHover="hover"
+              whileTap="tap"
               onClick={() => setSelectedCategory("modelos")}
-              className={`text-[#ccc] w-full md:w-auto ${selectedCategory === "modelos" ? "bg-indigo-600 text-white" : "hover:bg-indigo-600 hover:text-white"} duration-300 transition-all font-poppins px-6 py-3 flex items-center justify-center md:justify-start gap-2`}
+              className={`text-[#ccc] w-full md:w-auto ${selectedCategory === "modelos" ? "bg-indigo-600 text-white" : "hover:bg-indigo-600 hover:text-white"} duration-300 transition-all font-poppins px-6 py-3 flex items-center justify-center gap-2`}
             >
               <motion.span variants={iconVariants}>
                 <MdOutlineDesignServices className="text-xl" />
@@ -212,24 +228,6 @@ const Projects = () => {
               Modelos
             </motion.button>
           </div>
-
-          <Link 
-            href="/projetos"
-            className="text-indigo-600 font-medium hover:text-white group transition-colors font-poppins flex items-center gap-2"
-          >
-            Ver todos
-            <motion.span 
-              className="text-lg"
-              animate={{ x: [0, 5, 0] }}
-              transition={{ 
-                duration: 1.5,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-            >
-              <PiHandSwipeRightBold/>
-            </motion.span>
-          </Link>
         </div>
 
         <AnimatePresence mode="wait">
@@ -263,26 +261,6 @@ const Projects = () => {
                   priority={index === 0}
                   quality={90}
                 />
-                <AnimatePresence>
-                  {hoveredIndex === index && (
-                    <motion.div 
-                      className="absolute inset-0 bg-black/60 flex items-center justify-center"
-                      initial="hidden"
-                      animate="visible"
-                      exit="hidden"
-                      variants={overlayVariants}
-                    >
-                      <motion.button
-                        className="bg-indigo-700 px-6 py-2.5 rounded-xl flex items-center gap-2 hover:bg-indigo-500 transition-colors text-white"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                      >
-                        <CgArrowsExpandUpRight className="w-5 h-5" />
-                        <span className="text-sm font-medium text-white font-dmsans">Ver projetos</span>
-                      </motion.button>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
               </motion.div>
             ))}
           </motion.div>
@@ -292,4 +270,4 @@ const Projects = () => {
   );
 };
 
-export default Projects;
+export default Projetos;

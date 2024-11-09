@@ -2,6 +2,8 @@
 
 import { motion } from "framer-motion";
 import { BsStars } from "react-icons/bs";
+import { HiRocketLaunch } from "react-icons/hi2";
+
 import { useInView } from "react-intersection-observer";
 
 export default function AboutUs() {
@@ -35,7 +37,7 @@ export default function AboutUs() {
   };
 
   return (
-    <section ref={ref} className="bg-black py-4 px-6 lg:py-10 z-10">
+    <section ref={ref} className="bg-black py-4 px-6 lg:py-10 z-10"   id="about-us">
       <motion.div
         variants={containerVariants}
         initial="hidden"
@@ -47,11 +49,40 @@ export default function AboutUs() {
             className="font-poppins text-3xl lg:text-5xl font-semibold leading-tight lg:leading-snug text-center lg:text-left"
             variants={itemVariants}
           >
-            Inovação e
-            <br />
-            Impacto =
-            <br />
-            <span className="text-indigo-600">Excelência.</span>
+            <div className="flex items-center gap-3" >
+              <motion.div
+                className="text-3xl text-indigo-600"
+              
+                animate={{
+                  y: [-2, -8, -2],
+                  scale: [1, 1.1, 1],
+                  rotate: [0, 15, 0],
+                }}
+                transition={{
+                  duration: 2,
+                  ease: "easeInOut",
+                  repeat: Infinity,
+                }}
+              >
+                <motion.div
+                  animate={{
+                    opacity: [0.4, 1, 0.4],
+                    scale: [0.8, 1.2, 0.8], 
+                  }}
+                  transition={{
+                    duration: 1.5,
+                    repeat: Infinity,
+                  }}
+                  className="absolute -bottom-1 -z-10 text-purple-500/50"
+                >
+                  <HiRocketLaunch />
+                </motion.div>
+                <HiRocketLaunch />
+              </motion.div>
+              <span>Experiência</span>
+            </div>
+            <span>Digital com<br/></span>
+            <span className="text-indigo-600">Resultados.</span>
           </motion.h1>
           <div className="flex flex-col w-full space-y-6">
             <motion.p 
