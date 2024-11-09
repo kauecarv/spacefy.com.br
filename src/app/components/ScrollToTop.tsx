@@ -30,17 +30,7 @@ export default function ScrollToTop() {
     visible: { opacity: 1, x: 0 },
   };
 
-  const arrowVariants = {
-    initial: { y: 0 },
-    animate: {
-      y: [-2, -6, -2],
-      transition: {
-        duration: 1.5,
-        repeat: Infinity,
-        ease: "easeInOut",
-      },
-    },
-  };
+
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });

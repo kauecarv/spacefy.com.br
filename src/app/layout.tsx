@@ -3,7 +3,6 @@ import "./globals.css";
 import NavbarComponent from "./components/navbar/NavbarComponent";
 import WhatsAppButton from "./components/Whatsapp";
 import { DM_Sans, Poppins } from "next/font/google";
-import Script from "next/script";
 import ScrollToTop from "./components/ScrollToTop";
 import CookieConsent from "./components/CookieConsent";
 

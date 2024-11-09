@@ -5,7 +5,6 @@ import { CgWebsite } from "react-icons/cg";
 import { MdOutlineDesignServices } from "react-icons/md";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import { CgArrowsExpandUpRight } from "react-icons/cg";
 import { useInView } from "react-intersection-observer";
 import Image from "next/image";
 import { GoProject } from "react-icons/go";
@@ -13,7 +12,6 @@ import { AiOutlineCheckCircle } from "react-icons/ai";
 
 const Projetos = () => {
   const [selectedCategory, setSelectedCategory] = useState("sites");
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   const [ref, inView] = useInView({
     threshold: 0.1,
@@ -81,19 +79,6 @@ const Projetos = () => {
     }
   };
 
-  const overlayVariants = {
-    hidden: {
-      opacity: 0,
-      y: 10
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.2
-      }
-    }
-  };
 
   const sectionVariants = {
     hidden: { 
@@ -248,8 +233,7 @@ const Projetos = () => {
                   ) : 
                   index === 2 ? 'md:col-span-4 h-[300px]' : 'md:col-span-8 h-[300px]'
                 }`}
-                onHoverStart={() => setHoveredIndex(index)}
-                onHoverEnd={() => setHoveredIndex(null)}
+     
                 whileHover={{ scale: 1.02 }}
               >
                 <Image 

@@ -3,6 +3,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { IoMdHelp, IoMdClose } from "react-icons/io";
 import Link from "next/link";
+import Image from "next/image";
 
 import { LuLayoutDashboard } from "react-icons/lu";
 import { TbHandClick, TbMessage2Star, TbPencilPlus, TbUserCircle, TbDeviceMobile, TbClick, TbTestPipe, TbArrowsExchange, TbFileExport, TbDeviceAnalytics, TbBrandSpeedtest, TbLock, TbEdit, TbUsers, TbCloud, TbDeviceDesktop } from "react-icons/tb";
@@ -183,10 +184,12 @@ const Modal = ({
               {/* Header Image Section */}
               <div className="relative h-[280px] rounded-t-2xl overflow-hidden">
                 <div className="absolute inset-0">
-                  <img 
+                  <Image 
                     src={categoryData.image}
                     alt={category}
-                    className="w-full h-full object-cover"
+                    fill
+                    className="object-cover"
+                    priority
                   />
                   <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/50 to-[#0A0A0A]" />
                 </div>
@@ -310,11 +313,6 @@ const Planejamento = () => {
         [index]: false
       }));
     }, 300000);
-  };
-
-  const handleModalOpen = (category: string) => {
-    setSelectedModalContent(category);
-    setModalOpen(true);
   };
 
   const buttonVariants = {
@@ -659,10 +657,13 @@ const Planejamento = () => {
                     layout="position"
                     layoutDependency={selectedCategory}
                   >
-                    <img 
+                    <Image 
                       src={image} 
                       alt={`Projeto ${index + 1}`}
-                      className="w-full h-full object-cover transition-transform duration-200 ease-out"
+                      fill
+                      className="object-cover transition-transform duration-200 ease-out"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      priority={index === 0}
                     />
                   </motion.div>
                 ))}
