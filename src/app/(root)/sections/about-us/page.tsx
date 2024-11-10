@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { BsStars } from "react-icons/bs";
-import { HiRocketLaunch } from "react-icons/hi2";
 
 import { useInView } from "react-intersection-observer";
 
@@ -50,35 +49,7 @@ export default function AboutUs() {
             variants={itemVariants}
           >
             <div className="flex items-center gap-3" >
-              <motion.div
-                className="text-3xl text-indigo-600"
-              
-                animate={{
-                  y: [-2, -8, -2],
-                  scale: [1, 1.1, 1],
-                  rotate: [0, 15, 0],
-                }}
-                transition={{
-                  duration: 2,
-                  ease: "easeInOut",
-                  repeat: Infinity,
-                }}
-              >
-                <motion.div
-                  animate={{
-                    opacity: [0.4, 1, 0.4],
-                    scale: [0.8, 1.2, 0.8], 
-                  }}
-                  transition={{
-                    duration: 1.5,
-                    repeat: Infinity,
-                  }}
-                  className="absolute -bottom-1 -z-10 text-purple-500/50"
-                >
-                  <HiRocketLaunch />
-                </motion.div>
-                <HiRocketLaunch />
-              </motion.div>
+        
               <span>Experiência</span>
             </div>
             <span>Digital com<br/></span>

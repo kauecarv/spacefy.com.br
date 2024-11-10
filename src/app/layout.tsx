@@ -4,7 +4,6 @@ import NavbarComponent from "./components/navbar/NavbarComponent";
 import WhatsAppButton from "./components/Whatsapp";
 import { DM_Sans, Poppins } from "next/font/google";
 import ScrollToTop from "./components/ScrollToTop";
-import CookieConsent from "./components/CookieConsent";
 
 const dmsans = DM_Sans({
   subsets: ['latin'],
@@ -65,7 +64,6 @@ export default function RootLayout({
       <body className={`${poppins.variable} ${dmsans.variable}`}>
         <NavbarComponent />
         {children}
-        <CookieConsent />
         <ScrollToTop />
         <WhatsAppButton />
       </body>
