@@ -1,16 +1,33 @@
-"use client"
+"use client";
 
-import { motion, AnimatePresence } from "framer-motion";
-import { BsArrowLeftShort, BsArrowRightShort, BsCalculator } from "react-icons/bs";
-import { RiUserSmileLine, RiPhoneLine, RiMailSendLine, RiFileTextLine } from "react-icons/ri";
-import { useState, useEffect } from "react";
-import { IconType } from "react-icons";
+import axios from "axios";
+import { AnimatePresence, motion } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
-import { MdOutlineDesignServices, MdOutlineSwitchAccessShortcutAdd } from "react-icons/md";
-import { HiOutlineViewGrid, HiOutlineSparkles, HiOutlineArrowLeft } from "react-icons/hi";
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
+import { IconType } from "react-icons";
+import {
+  BsArrowLeftShort,
+  BsArrowRightShort,
+  BsCalculator,
+} from "react-icons/bs";
 import { CgWebsite } from "react-icons/cg";
-import { createPortal } from 'react-dom';
-import Image from 'next/image';
+import {
+  HiOutlineArrowLeft,
+  HiOutlineSparkles,
+  HiOutlineViewGrid,
+} from "react-icons/hi";
+import {
+  MdOutlineDesignServices,
+  MdOutlineSwitchAccessShortcutAdd,
+} from "react-icons/md";
+import {
+  RiFileTextLine,
+  RiMailSendLine,
+  RiPhoneLine,
+  RiUserSmileLine,
+} from "react-icons/ri";
 
 interface Field {
   type: string;
@@ -42,47 +59,62 @@ const Prototipos = () => {
   const [showSuccess, setShowSuccess] = useState(false);
   const [showThanks, setShowThanks] = useState(false);
   const [formData, setFormData] = useState({
-    nome: '',
-    telefone: '',
-    email: '',
-    objetivo: '',
-    referencia: '',
-    referenciaLink: '',
-    dispositivos: '',
-    prazo: '',
-    investimento: ''
+    nome: "",
+    telefone: "",
+    email: "",
+    objetivo: "",
+    referencia: "",
+    referenciaLink: "",
+    dispositivos: "",
+    prazo: "",
+    investimento: "",
   });
+
   const [selectedCategory, setSelectedCategory] = useState("todos");
   const [activeSelect, setActiveSelect] = useState<string | null>(null);
-  const [dropdownPosition, setDropdownPosition] = useState<{ top: number; left: number; width: number } | null>(null);
+  const [dropdownPosition, setDropdownPosition] = useState<{
+    top: number;
+    left: number;
+    width: number;
+  } | null>(null);
+
+  const handleSendRequest = async () => {
+    const response = await axios.post(
+      "https://backend-spacefy.vercel.app/briefing/emit",
+      { ...formData, from: "prototipos" }
+    );
+    return response;
+  };
 
   const steps: Step[] = [
     {
       fields: [
-        { 
-          Icon: RiUserSmileLine, 
-          placeholder: "Nome da sua empresa ou projeto", 
+        {
+          Icon: RiUserSmileLine,
+          placeholder: "Nome da sua empresa ou projeto",
           type: "text",
           name: "nome",
-          description: "Identifique seu projeto para acompanhar todo o processo."
+          description:
+            "Identifique seu projeto para acompanhar todo o processo.",
         },
-        { 
-          Icon: RiPhoneLine, 
-          placeholder: "Seu melhor número para contato", 
+        {
+          Icon: RiPhoneLine,
+          placeholder: "Seu melhor número para contato",
           type: "tel",
           name: "telefone",
-          description: "Para atualizações importantes sobre o desenvolvimento."
+          description: "Para atualizações importantes sobre o desenvolvimento.",
         },
-        { 
-          Icon: RiMailSendLine, 
-          placeholder: "E-mail profissional para comunicação", 
+        {
+          Icon: RiMailSendLine,
+          placeholder: "E-mail profissional para comunicação",
           type: "email",
           name: "email",
-          description: "Manteremos você informado sobre cada etapa."
-        }
+          description: "Manteremos você informado sobre cada etapa.",
+        },
       ],
       title: "Comece sua Jornada de Design Conosco",
-      subtitle: "O primeiro passo para transformar sua visão em um protótipo incrível começa aqui."
+      subtitle:
+        "O primeiro passo para transformar sua visão em um protótipo incrível começa aqui.",
     },
     {
       fields: [
@@ -91,7 +123,8 @@ const Prototipos = () => {
           type: "text",
           placeholder: "Qual o objetivo principal do seu protótipo?",
           name: "objetivo",
-          description: "Ex: Validar uma ideia, apresentar para investidores, testar com usuários"
+          description:
+            "Ex: Validar uma ideia, apresentar para investidores, testar com usuários",
         },
         {
           type: "radio",
@@ -101,20 +134,22 @@ const Prototipos = () => {
           description: "Nos ajuda a entender melhor seu ponto de partida",
           options: [
             { label: "Sim, tenho rascunhos", value: "sim" },
-            { label: "Não, preciso começar do zero", value: "nao" }
-          ]
+            { label: "Não, preciso começar do zero", value: "nao" },
+          ],
         },
-        { 
+        {
           Icon: RiFileTextLine,
           placeholder: "Cole aqui os links dos seus rascunhos",
           type: "text",
           name: "referenciaLink",
           conditional: "sim",
-          description: "Links dos esboços ou referências que você gostaria de usar como base."
-        }
+          description:
+            "Links dos esboços ou referências que você gostaria de usar como base.",
+        },
       ],
       title: "Como Você Imagina seu Protótipo?",
-      subtitle: "Compartilhe sua visão e objetivos para criarmos algo extraordinário juntos."
+      subtitle:
+        "Compartilhe sua visão e objetivos para criarmos algo extraordinário juntos.",
     },
     {
       fields: [
@@ -122,16 +157,21 @@ const Prototipos = () => {
           type: "radio",
           title: "O protótipo deve suportar outros dispositivos?",
           name: "dispositivos",
-          description: "Defina se seu protótipo precisa ser responsivo para diferentes tamanhos de tela",
+          description:
+            "Defina se seu protótipo precisa ser responsivo para diferentes tamanhos de tela",
           placeholder: "Selecione uma opção",
           options: [
-            { label: "Sim, preciso de versões para diferentes dispositivos", value: "sim" },
-            { label: "Não, apenas uma versão é suficiente", value: "nao" }
-          ]
-        }
+            {
+              label: "Sim, preciso de versões para diferentes dispositivos",
+              value: "sim",
+            },
+            { label: "Não, apenas uma versão é suficiente", value: "nao" },
+          ],
+        },
       ],
       title: "Dispositivos e Responsividade",
-      subtitle: "Um protótipo responsivo ajuda a validar a experiência em diferentes contextos de uso"
+      subtitle:
+        "Um protótipo responsivo ajuda a validar a experiência em diferentes contextos de uso",
     },
     {
       fields: [
@@ -145,8 +185,8 @@ const Prototipos = () => {
             { label: "Até 7 dias", value: "7 dias" },
             { label: "7-15 dias", value: "15 dias" },
             { label: "15-30 dias", value: "30 dias" },
-            { label: "Mais de 30 dias", value: "mais 30 dias" }
-          ]
+            { label: "Mais de 30 dias", value: "mais 30 dias" },
+          ],
         },
         {
           type: "select",
@@ -158,48 +198,47 @@ const Prototipos = () => {
             { label: "Até R$ 500", value: "500" },
             { label: "R$ 500 - R$ 1.500", value: "1500" },
             { label: "R$ 1.500 - R$ 3.000", value: "3000" },
-            { label: "Mais de R$ 3.000", value: "mais 3000" }
-          ]
-        }
+            { label: "Mais de R$ 3.000", value: "mais 3000" },
+          ],
+        },
       ],
       title: "Qual Prazo e Investimento Disponíveis?",
-      subtitle: "Informe o tempo estimado e o valor que você pretende investir no protótipo"
-    }
+      subtitle:
+        "Informe o tempo estimado e o valor que você pretende investir no protótipo",
+    },
   ];
 
   // ... código existente ...
 
-// Adicione estes variants junto com os outros
-const iconVariants = {
-  hover: {
-    rotate: [0, -10, 10, -10, 0],
-    transition: {
-      duration: 0.5
-    }
-  }
-};
-
-
+  // Adicione estes variants junto com os outros
+  const iconVariants = {
+    hover: {
+      rotate: [0, -10, 10, -10, 0],
+      transition: {
+        duration: 0.5,
+      },
+    },
+  };
 
   const inputVariants = {
-    initial: { 
+    initial: {
       opacity: 0,
-      y: 10
+      y: 10,
     },
     animate: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.15
-      }
+        duration: 0.15,
+      },
     },
     exit: {
       opacity: 0,
       y: -10,
       transition: {
-        duration: 0.1
-      }
-    }
+        duration: 0.1,
+      },
+    },
   };
 
   const buttonVariants = {
@@ -207,12 +246,12 @@ const iconVariants = {
     hover: {
       scale: 1.02,
       transition: {
-        duration: 0.1
-      }
+        duration: 0.1,
+      },
     },
     tap: {
-      scale: 0.98
-    }
+      scale: 0.98,
+    },
   };
 
   const isCurrentStepValid = () => {
@@ -220,9 +259,12 @@ const iconVariants = {
       case 0:
         return formData.nome && formData.telefone && formData.email;
       case 1:
-        return formData.objetivo && formData.referencia && 
-               (formData.referencia === 'nao' || 
-               (formData.referencia === 'sim' && formData.referenciaLink));
+        return (
+          formData.objetivo &&
+          formData.referencia &&
+          (formData.referencia === "nao" ||
+            (formData.referencia === "sim" && formData.referenciaLink))
+        );
       case 2:
         return formData.dispositivos;
       case 3:
@@ -236,79 +278,80 @@ const iconVariants = {
     if (!isCurrentStepValid()) {
       return;
     }
-    
+
     if (currentStep === steps.length - 1) {
       setIsLoading(true);
       // Simular uma requisição bem-sucedida
-      setTimeout(() => {
+      handleSendRequest().then(() => {
         setIsLoading(false);
         setShowSuccess(true);
-        
+        handleSendRequest();
+
         // Após 3.5 segundos, esconde o tooltip e mostra a tela de agradecimento
         setTimeout(() => {
           setShowSuccess(false);
           setShowThanks(true);
           // Adicionar scroll para o topo
-          window.scrollTo({ top: 0, behavior: 'smooth' });
+          window.scrollTo({ top: 0, behavior: "smooth" });
         }, 3500);
-      }, 2000);
+      });
       return;
     }
-    
+
     setDirection(1);
-    setCurrentStep(prev => prev + 1);
+    setCurrentStep((prev) => prev + 1);
   };
 
   const handleBack = () => {
     if (currentStep > 0) {
       setDirection(-1);
-      setCurrentStep(prev => prev - 1);
+      setCurrentStep((prev) => prev - 1);
     }
   };
 
   const pageVariants = {
     initial: (direction: number) => ({
       x: direction > 0 ? 100 : -100,
-      opacity: 0
+      opacity: 0,
     }),
     animate: {
       x: 0,
       opacity: 1,
       transition: {
         x: { type: "spring", stiffness: 300, damping: 30 },
-        opacity: { duration: 0.2 }
-      }
+        opacity: { duration: 0.2 },
+      },
     },
     exit: (direction: number) => ({
       x: direction > 0 ? -100 : 100,
       opacity: 0,
       transition: {
         x: { type: "spring", stiffness: 300, damping: 30 },
-        opacity: { duration: 0.2 }
-      }
-    })
+        opacity: { duration: 0.2 },
+      },
+    }),
   };
 
   const titleVariants = {
     initial: (direction: number) => ({
       y: direction > 0 ? 20 : -20,
-      opacity: 0
+      opacity: 0,
     }),
     animate: {
       y: 0,
       opacity: 1,
       transition: {
         duration: 0.5,
-        ease: "easeOut"
-      }
+        ease: "easeOut",
+      },
     },
     exit: (direction: number) => ({
       y: direction > 0 ? -20 : 20,
       opacity: 0,
       transition: {
-        duration: 0.3
-      }
-    })
+        duration: 0.3,
+      },
+    }),
   };
 
   const loadingVariants = {
@@ -317,64 +360,67 @@ const iconVariants = {
       transition: {
         duration: 1,
         repeat: Infinity,
-        ease: "linear"
-      }
-    }
+        ease: "linear",
+      },
+    },
   };
 
   const successVariants = {
     initial: { x: 100, opacity: 0 },
-    animate: { 
-      x: 0, 
+    animate: {
+      x: 0,
       opacity: 1,
       transition: {
         type: "spring",
         stiffness: 300,
-        damping: 25
-      }
+        damping: 25,
+      },
     },
-    exit: { 
-      x: 100, 
+    exit: {
+      x: 100,
       opacity: 0,
       transition: {
-        duration: 0.2
-      }
-    }
+        duration: 0.2,
+      },
+    },
   };
 
   const projects = {
     todos: [
       "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671b25477be2a508e0342e75_10c8b478-b389-48df-93cb-299dae72141d.jpeg",
-      "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/67105ab6140b33f063f0aa7b_9ac3e592-c478-4029-a2d2-e6323699f465.jpeg", 
+      "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/67105ab6140b33f063f0aa7b_9ac3e592-c478-4029-a2d2-e6323699f465.jpeg",
       "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671182a4d5a2b01aafedd422_db783e89-af38-441c-a36c-7db2806f79f4.png",
-      "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671b29f6647cdaef47831669_e4402a7b-439b-410e-97ea-e03c575cf351.png"
+      "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671b29f6647cdaef47831669_e4402a7b-439b-410e-97ea-e03c575cf351.png",
     ],
     sites: [
       "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671182a4d5a2b01aafedd422_db783e89-af38-441c-a36c-7db2806f79f4.png",
       "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/67105ab6140b33f063f0aa7b_9ac3e592-c478-4029-a2d2-e6323699f465.jpeg",
       "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671b25477be2a508e0342e75_10c8b478-b389-48df-93cb-299dae72141d.jpeg",
-      "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671b29f6647cdaef47831669_e4402a7b-439b-410e-97ea-e03c575cf351.png"
+      "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671b29f6647cdaef47831669_e4402a7b-439b-410e-97ea-e03c575cf351.png",
     ],
     modelos: [
       "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671b29f6647cdaef47831669_e4402a7b-439b-410e-97ea-e03c575cf351.png",
       "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/67105ab6140b33f063f0aa7b_9ac3e592-c478-4029-a2d2-e6323699f465.jpeg",
       "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671182a4d5a2b01aafedd422_db783e89-af38-441c-a36c-7db2806f79f4.png",
-      "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671b25477be2a508e0342e75_10c8b478-b389-48df-93cb-299dae72141d.jpeg"
-    ]
+      "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671b25477be2a508e0342e75_10c8b478-b389-48df-93cb-299dae72141d.jpeg",
+    ],
   };
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (activeSelect && !(event.target as Element).closest('.relative')) {
+      if (activeSelect && !(event.target as Element).closest(".relative")) {
         setActiveSelect(null);
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [activeSelect]);
 
-  const handleSelectClick = (event: React.MouseEvent<HTMLButtonElement>, fieldName: string) => {
+  const handleSelectClick = (
+    event: React.MouseEvent<HTMLButtonElement>,
+    fieldName: string
+  ) => {
     if (activeSelect === fieldName) {
       setActiveSelect(null);
       setDropdownPosition(null);
@@ -383,13 +429,13 @@ const iconVariants = {
 
     const button = event.currentTarget;
     const rect = button.getBoundingClientRect();
-    
+
     setDropdownPosition({
       top: rect.bottom + window.scrollY + 8, // 8px de espaçamento
       left: rect.left + window.scrollX,
-      width: rect.width
+      width: rect.width,
     });
-    
+
     setActiveSelect(fieldName);
   };
 
@@ -397,7 +443,7 @@ const iconVariants = {
     return (
       <div className="flex flex-col items-center min-h-screen px-4">
         <div className="relative w-full text-center pt-20">
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 0.1 }}
             transition={{ duration: 1 }}
@@ -413,32 +459,31 @@ const iconVariants = {
             className="relative z-10"
           >
             <h1 className="font-poppins text-4xl sm:text-5xl md:text-7xl font-bold text-white mb-4">
-              Sua Jornada Digital<br/>
+              Sua Jornada Digital
+              <br />
               <span className="text-[#4F46E8]">Começa Agora</span>
               <HiOutlineSparkles className="inline-block ml-2 text-[#4F46E8] w-8 h-8 md:w-12 md:h-12" />
             </h1>
             <p className="font-dmsans text-lg text-[#A3A3A3] max-w-2xl mx-auto mb-8">
-              Agradecemos por confiar em nossa equipe! Em breve entraremos em contato para transformar suas ideias em uma experiência digital extraordinária.
+              Agradecemos por confiar em nossa equipe! Em breve entraremos em
+              contato para transformar suas ideias em uma experiência digital
+              extraordinária.
             </p>
-            
 
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
               className="flex flex-col mx-auto md:flex-row  justify-center text-center items-center gap-2"
             >
-           <Link 
-        href="/"
-        className="inline-flex items-center gap-3 px-6 py-3 text-gray-400 hover:text-[#4F46E8] font-poppins transition-all duration-300 mb-20"
-      >
+              <Link
+                href="/"
+                className="inline-flex items-center gap-3 px-6 py-3 text-gray-400 hover:text-[#4F46E8] font-poppins transition-all duration-300 mb-20"
+              >
                 <HiOutlineArrowLeft className="text-xl" />
                 Voltar ao Início
               </Link>
-
-         
-              </motion.div>
-        
+            </motion.div>
           </motion.div>
         </div>
 
@@ -446,8 +491,19 @@ const iconVariants = {
           <div className="flex flex-col items-center sm:items-start gap-3 mb-12">
             <div className="flex flex-col sm:flex-row items-center gap-4 mb-2">
               <span className="inline-flex items-center bg-[#0D0D0E] text-[#A3A3A3] px-4 py-2 rounded-full text-sm font-medium font-dmsans">
-                <svg className="mr-2 w-5 h-5 text-[#4F46E8]" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <svg
+                  className="mr-2 w-5 h-5 text-[#4F46E8]"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
                 </svg>
                 <span className="text-white mr-1">127+</span> projetos entregues
               </span>
@@ -456,20 +512,21 @@ const iconVariants = {
                 <span className="text-white mr-1">119.4k</span> views geradas
               </span>
             </div>
-            
+
             <h2 className="text-white text-3xl md:text-5xl font-bold font-poppins text-center sm:text-left mb-8">
-              Descubra o Poder da <span className="text-[#4F46E8]">Inovação Digital</span>
+              Descubra o Poder da{" "}
+              <span className="text-[#4F46E8]">Inovação Digital</span>
             </h2>
 
             <div className="flex flex-wrap md:flex-nowrap items-center justify-center w-full md:w-auto bg-[#0A0A0A] rounded-xl overflow-hidden">
-              <motion.button 
+              <motion.button
                 variants={buttonVariants}
                 whileHover="hover"
                 whileTap="tap"
                 onClick={() => setSelectedCategory("todos")}
                 className={`text-[#ccc] w-full md:w-auto ${
-                  selectedCategory === "todos" 
-                    ? "bg-[#4F46E8] text-white" 
+                  selectedCategory === "todos"
+                    ? "bg-[#4F46E8] text-white"
                     : "hover:bg-[#4F46E8] hover:text-white"
                 } duration-300 transition-all font-poppins px-6 py-3 flex items-center justify-center md:justify-start gap-2`}
               >
@@ -478,14 +535,14 @@ const iconVariants = {
                 </motion.span>
                 Todos
               </motion.button>
-              <motion.button 
+              <motion.button
                 variants={buttonVariants}
                 whileHover="hover"
                 whileTap="tap"
                 onClick={() => setSelectedCategory("sites")}
                 className={`text-[#ccc] w-full md:w-auto ${
-                  selectedCategory === "sites" 
-                    ? "bg-[#4F46E8] text-white" 
+                  selectedCategory === "sites"
+                    ? "bg-[#4F46E8] text-white"
                     : "hover:bg-[#4F46E8] hover:text-white"
                 } duration-300 transition-all font-poppins px-6 py-3 flex items-center justify-center md:justify-start gap-2`}
               >
@@ -494,14 +551,14 @@ const iconVariants = {
                 </motion.span>
                 Sites
               </motion.button>
-              <motion.button 
+              <motion.button
                 variants={buttonVariants}
                 whileHover="hover"
                 whileTap="tap"
                 onClick={() => setSelectedCategory("modelos")}
                 className={`text-[#ccc] w-full md:w-auto ${
-                  selectedCategory === "modelos" 
-                    ? "bg-[#4F46E8] text-white" 
+                  selectedCategory === "modelos"
+                    ? "bg-[#4F46E8] text-white"
                     : "hover:bg-[#4F46E8] hover:text-white"
                 } duration-300 transition-all font-poppins px-6 py-3 flex items-center justify-center md:justify-start gap-2`}
               >
@@ -513,7 +570,7 @@ const iconVariants = {
             </div>
 
             <AnimatePresence mode="wait" initial={false}>
-              <motion.div 
+              <motion.div
                 key={selectedCategory}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -521,34 +578,39 @@ const iconVariants = {
                 transition={{ duration: 0.15 }}
                 className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 w-full"
               >
-                {projects[selectedCategory as keyof typeof projects].map((image: string, index: number) => (
-                  <motion.div
-                    key={index}
-                    className={`relative rounded-xl overflow-hidden cursor-pointer group ${
-                      index <= 1 ? (
-                        index === 0 ? 'lg:col-span-7 h-[400px]' : 'lg:col-span-5 h-[400px]'
-                      ) : 
-                      index === 2 ? 'lg:col-span-4 h-[400px]' : 'lg:col-span-8 h-[400px]'
-                    }`}
-                    whileHover={{ 
-                      scale: 1.02,
-                      transition: {
-                        duration: 0.2,
-                        ease: "easeOut"
-                      }
-                    }}
-                    layout="position"
-                  >
-                    <Image 
-                      src={image} 
-                      alt={`Projeto ${index + 1}`}
-                      fill
-                      className="object-cover transition-transform duration-200 ease-out group-hover:scale-105"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    />
-                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
-                  </motion.div>
-                ))}
+                {projects[selectedCategory as keyof typeof projects].map(
+                  (image: string, index: number) => (
+                    <motion.div
+                      key={index}
+                      className={`relative rounded-xl overflow-hidden cursor-pointer group ${
+                        index <= 1
+                          ? index === 0
+                            ? "lg:col-span-7 h-[400px]"
+                            : "lg:col-span-5 h-[400px]"
+                          : index === 2
+                          ? "lg:col-span-4 h-[400px]"
+                          : "lg:col-span-8 h-[400px]"
+                      }`}
+                      whileHover={{
+                        scale: 1.02,
+                        transition: {
+                          duration: 0.2,
+                          ease: "easeOut",
+                        },
+                      }}
+                      layout="position"
+                    >
+                      <Image
+                        src={image}
+                        alt={`Projeto ${index + 1}`}
+                        fill
+                        className="object-cover transition-transform duration-200 ease-out group-hover:scale-105"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      />
+                      <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+                    </motion.div>
+                  )
+                )}
               </motion.div>
             </AnimatePresence>
           </div>
@@ -570,7 +632,7 @@ const iconVariants = {
           <h2 className="font-poppins uppercase font-bold text-[#1A1A1C]/10 text-[100px] sm:text-[130px] md:text-[160px] lg:text-[200px] leading-[0.9] mb-8 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 whitespace-nowrap">
             SPACEFY
           </h2>
-          
+
           <div className="relative z-10 pt-16 sm:pt-0">
             <AnimatePresence mode="wait" custom={direction}>
               <motion.h1
@@ -614,15 +676,14 @@ const iconVariants = {
               className="w-full z-50"
             >
               {steps[currentStep].fields.map((field, index) => (
-                <motion.div
-                  key={index}
-                  className="relative group"
-                >
+                <motion.div key={index} className="relative group">
                   {field.type === "radio" ? (
                     <div className="space-y-2 mb-4">
                       <div className="flex items-center">
-                        <h3 className="text-xl text-white font-poppins font-medium">{field.title}</h3>
-                        
+                        <h3 className="text-xl text-white font-poppins font-medium">
+                          {field.title}
+                        </h3>
+
                         {field.tooltip && (
                           <div className="relative ml-1.5">
                             <button
@@ -643,19 +704,24 @@ const iconVariants = {
                                 />
                               </svg>
                             </button>
-                            
+
                             {/* Tooltip */}
-                            <div className="absolute invisible group-hover/tooltip:visible opacity-0 group-hover/tooltip:opacity-100 
+                            <div
+                              className="absolute invisible group-hover/tooltip:visible opacity-0 group-hover/tooltip:opacity-100 
                               bottom-full left-1/2 -translate-x-1/2 mb-2 w-64 z-[9999]
-                              transition-all duration-200">
-                              <div className="bg-[#0D0D0E] border border-[#151516] p-2.5 rounded-lg 
-                                shadow-lg backdrop-blur-sm">
+                              transition-all duration-200"
+                            >
+                              <div
+                                className="bg-[#0D0D0E] border border-[#151516] p-2.5 rounded-lg 
+                                shadow-lg backdrop-blur-sm"
+                              >
                                 <p className="font-dmsans text-xs text-gray-300 leading-relaxed whitespace-normal">
                                   {field.tooltip}
                                 </p>
-                                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 
-                                  rotate-45 w-2 h-2 bg-[#0D0D0E] border-r border-b border-[#151516]">
-                                </div>
+                                <div
+                                  className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 
+                                  rotate-45 w-2 h-2 bg-[#0D0D0E] border-r border-b border-[#151516]"
+                                ></div>
                               </div>
                             </div>
                           </div>
@@ -663,44 +729,73 @@ const iconVariants = {
                       </div>
 
                       {field.description && (
-                        <p className="text-sm text-gray-400 font-dmsans mb-4">{field.description}</p>
+                        <p className="text-sm text-gray-400 font-dmsans mb-4">
+                          {field.description}
+                        </p>
                       )}
-                      
-                      <div className="grid grid-cols-2 gap-4">
-                        {Array.isArray(field.options) && field.options.map((option: OptionType | string, i) => {
-                          const value = typeof option === 'string' ? option : option.value;
-                          const label = typeof option === 'string' ? option : option.label;
 
-                          return (
-                            <motion.button
-                              key={i}
-                              type="button"
-                              whileHover={{ scale: 1.02 }}
-                              whileTap={{ scale: 0.98 }}
-                              onClick={() => setFormData({...formData, [field.name]: value})}
-                              className={`relative flex flex-col items-center justify-center p-6 rounded-xl border-2 
-                                ${formData[field.name as keyof typeof formData] === value 
-                                  ? 'border-spacefy bg-spacefy/5' 
-                                  : 'border-[#151516] bg-[#0A0A0B]/80'} 
+                      <div className="grid grid-cols-2 gap-4">
+                        {Array.isArray(field.options) &&
+                          field.options.map(
+                            (option: OptionType | string, i) => {
+                              const value =
+                                typeof option === "string"
+                                  ? option
+                                  : option.value;
+                              const label =
+                                typeof option === "string"
+                                  ? option
+                                  : option.label;
+
+                              return (
+                                <motion.button
+                                  key={i}
+                                  type="button"
+                                  whileHover={{ scale: 1.02 }}
+                                  whileTap={{ scale: 0.98 }}
+                                  onClick={() =>
+                                    setFormData({
+                                      ...formData,
+                                      [field.name]: value,
+                                    })
+                                  }
+                                  className={`relative flex flex-col items-center justify-center p-6 rounded-xl border-2 
+                                ${
+                                  formData[
+                                    field.name as keyof typeof formData
+                                  ] === value
+                                    ? "border-spacefy bg-spacefy/5"
+                                    : "border-[#151516] bg-[#0A0A0B]/80"
+                                } 
                                 transition-all duration-300 group hover:border-spacefy/50`}
-                            >
-                              <div className={`w-6 h-6 rounded-full border-2 mb-3 flex items-center justify-center
-                                ${formData[field.name as keyof typeof formData] === value 
-                                  ? 'border-spacefy' 
-                                  : 'border-[#151516]'}`}
-                              >
-                                {formData[field.name as keyof typeof formData] === value && (
-                                  <motion.div
-                                    initial={{ scale: 0 }}
-                                    animate={{ scale: 1 }}
-                                    className="w-3 h-3 rounded-full bg-spacefy"
-                                  />
-                                )}
-                              </div>
-                              <span className="font-poppins text-sm text-white">{label}</span>
-                            </motion.button>
-                          );
-                        })}
+                                >
+                                  <div
+                                    className={`w-6 h-6 rounded-full border-2 mb-3 flex items-center justify-center
+                                ${
+                                  formData[
+                                    field.name as keyof typeof formData
+                                  ] === value
+                                    ? "border-spacefy"
+                                    : "border-[#151516]"
+                                }`}
+                                  >
+                                    {formData[
+                                      field.name as keyof typeof formData
+                                    ] === value && (
+                                      <motion.div
+                                        initial={{ scale: 0 }}
+                                        animate={{ scale: 1 }}
+                                        className="w-3 h-3 rounded-full bg-spacefy"
+                                      />
+                                    )}
+                                  </div>
+                                  <span className="font-poppins text-sm text-white">
+                                    {label}
+                                  </span>
+                                </motion.button>
+                              );
+                            }
+                          )}
                       </div>
                     </div>
                   ) : field.conditional === "sim" ? (
@@ -718,7 +813,12 @@ const iconVariants = {
                           type={field.type}
                           placeholder={field.placeholder}
                           value={formData[field.name as keyof typeof formData]}
-                          onChange={(e) => setFormData({...formData, [field.name]: e.target.value})}
+                          onChange={(e) =>
+                            setFormData({
+                              ...formData,
+                              [field.name]: e.target.value,
+                            })
+                          }
                           className="w-full pl-12 pr-4 py-4 rounded-xl bg-[#0A0A0B]/80 backdrop-blur-sm
                             border-2 border-[#151516] text-white placeholder-gray-500
                             transition-all duration-300 ease-out
@@ -755,74 +855,106 @@ const iconVariants = {
                               hover:border-spacefy/50 hover:bg-[#0C0C0D]
                               flex items-center justify-between"
                           >
-                            <span className={`${formData[field.name as keyof typeof formData] ? 'text-white' : 'text-gray-500'}`}>
-                              {formData[field.name as keyof typeof formData] || field.placeholder}
+                            <span
+                              className={`${
+                                formData[field.name as keyof typeof formData]
+                                  ? "text-white"
+                                  : "text-gray-500"
+                              }`}
+                            >
+                              {formData[field.name as keyof typeof formData] ||
+                                field.placeholder}
                             </span>
-                            
-                            <BsArrowRightShort className={`w-5 h-5 -rotate-90 text-gray-500 transition-transform duration-200 ${
-                              activeSelect === field.name ? 'rotate-90' : ''
-                            }`} />
+
+                            <BsArrowRightShort
+                              className={`w-5 h-5 -rotate-90 text-gray-500 transition-transform duration-200 ${
+                                activeSelect === field.name ? "rotate-90" : ""
+                              }`}
+                            />
                           </button>
 
                           {/* Portal para o Dropdown */}
                           {createPortal(
                             <AnimatePresence>
-                              {activeSelect === field.name && dropdownPosition && (
-                                <motion.div
-                                  initial={{ opacity: 0, y: -4 }}
-                                  animate={{ opacity: 1, y: 0 }}
-                                  exit={{ opacity: 0, y: -4 }}
-                                  transition={{ duration: 0.2 }}
-                                  style={{
-                                    position: 'absolute',
-                                    top: dropdownPosition.top,
-                                    left: dropdownPosition.left,
-                                    width: dropdownPosition.width,
-                                    zIndex: 99999
-                                  }}
-                                  className="fixed"
-                                >
-                                  <div className="bg-[#0D0D0E] border-2 border-[#151516] rounded-xl overflow-hidden
-                                    shadow-[0_8px_32px_rgba(0,0,0,0.4)] backdrop-blur-lg">
-                                    {field.options?.map((option, i) => {
-                                      const value = typeof option === 'string' ? option : option.value;
-                                      const label = typeof option === 'string' ? option : option.label;
-                                      const isSelected = formData[field.name as keyof typeof formData] === value;
+                              {activeSelect === field.name &&
+                                dropdownPosition && (
+                                  <motion.div
+                                    initial={{ opacity: 0, y: -4 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: -4 }}
+                                    transition={{ duration: 0.2 }}
+                                    style={{
+                                      position: "absolute",
+                                      top: dropdownPosition.top,
+                                      left: dropdownPosition.left,
+                                      width: dropdownPosition.width,
+                                      zIndex: 99999,
+                                    }}
+                                    className="fixed"
+                                  >
+                                    <div
+                                      className="bg-[#0D0D0E] border-2 border-[#151516] rounded-xl overflow-hidden
+                                    shadow-[0_8px_32px_rgba(0,0,0,0.4)] backdrop-blur-lg"
+                                    >
+                                      {field.options?.map((option, i) => {
+                                        const value =
+                                          typeof option === "string"
+                                            ? option
+                                            : option.value;
+                                        const label =
+                                          typeof option === "string"
+                                            ? option
+                                            : option.label;
+                                        const isSelected =
+                                          formData[
+                                            field.name as keyof typeof formData
+                                          ] === value;
 
-                                      return (
-                                        <motion.button
-                                          key={i}
-                                          onClick={() => {
-                                            setFormData({ ...formData, [field.name]: value });
-                                            setActiveSelect(null);
-                                            setDropdownPosition(null);
-                                          }}
-                                          className={`w-full px-6 py-4 text-left transition-all duration-200
+                                        return (
+                                          <motion.button
+                                            key={i}
+                                            onClick={() => {
+                                              setFormData({
+                                                ...formData,
+                                                [field.name]: value,
+                                              });
+                                              setActiveSelect(null);
+                                              setDropdownPosition(null);
+                                            }}
+                                            className={`w-full px-6 py-4 text-left transition-all duration-200
                                             flex items-center gap-3 group
-                                            ${isSelected ? 'bg-spacefy/10' : 'hover:bg-[#151516]'}`}
-                                          whileHover={{ x: 4 }}
-                                          whileTap={{ scale: 0.98 }}
-                                        >
-                                          <div className={`w-2 h-2 rounded-full transition-all duration-200
-                                            ${isSelected 
-                                              ? 'bg-spacefy scale-100' 
-                                              : 'bg-gray-500 scale-0 group-hover:scale-100 group-hover:bg-spacefy/50'
+                                            ${
+                                              isSelected
+                                                ? "bg-spacefy/10"
+                                                : "hover:bg-[#151516]"
                                             }`}
-                                          />
-                                          <span className={`font-dmsans text-sm
-                                            ${isSelected 
-                                              ? 'text-spacefy' 
-                                              : 'text-gray-400 group-hover:text-white'
-                                            }`}
+                                            whileHover={{ x: 4 }}
+                                            whileTap={{ scale: 0.98 }}
                                           >
-                                            {label}
-                                          </span>
-                                        </motion.button>
-                                      );
-                                    })}
-                                  </div>
-                                </motion.div>
-                              )}
+                                            <div
+                                              className={`w-2 h-2 rounded-full transition-all duration-200
+                                            ${
+                                              isSelected
+                                                ? "bg-spacefy scale-100"
+                                                : "bg-gray-500 scale-0 group-hover:scale-100 group-hover:bg-spacefy/50"
+                                            }`}
+                                            />
+                                            <span
+                                              className={`font-dmsans text-sm
+                                            ${
+                                              isSelected
+                                                ? "text-spacefy"
+                                                : "text-gray-400 group-hover:text-white"
+                                            }`}
+                                            >
+                                              {label}
+                                            </span>
+                                          </motion.button>
+                                        );
+                                      })}
+                                    </div>
+                                  </motion.div>
+                                )}
                             </AnimatePresence>,
                             document.body
                           )}
@@ -832,7 +964,12 @@ const iconVariants = {
                           type={field.type}
                           placeholder={field.placeholder}
                           value={formData[field.name as keyof typeof formData]}
-                          onChange={(e) => setFormData({...formData, [field.name]: e.target.value})}
+                          onChange={(e) =>
+                            setFormData({
+                              ...formData,
+                              [field.name]: e.target.value,
+                            })
+                          }
                           className="w-full pl-12 pr-4 py-4 rounded-xl bg-[#0A0A0B]/80 backdrop-blur-sm
                             border-2 border-[#151516] text-white placeholder-gray-500
                             transition-all duration-300 ease-out
@@ -877,11 +1014,13 @@ const iconVariants = {
               onClick={handleNext}
               disabled={!isCurrentStepValid() || showSuccess}
               className={`flex-1 px-8 py-4 rounded-xl text-white font-poppins flex items-center justify-center gap-2 text-sm transition-all duration-300 
-                ${isCurrentStepValid() 
-                  ? showSuccess 
-                    ? 'bg-green-500 opacity-90 cursor-not-allowed'
-                    : 'bg-spacefy hover:bg-white hover:text-black hover:shadow-[0_0_25px_rgba(79,70,232,0.25)] hover:-translate-y-1'
-                  : 'bg-[#0A0A0B]/90 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0'}`}
+                ${
+                  isCurrentStepValid()
+                    ? showSuccess
+                      ? "bg-green-500 opacity-90 cursor-not-allowed"
+                      : "bg-spacefy hover:bg-white hover:text-black hover:shadow-[0_0_25px_rgba(79,70,232,0.25)] hover:-translate-y-1"
+                    : "bg-[#0A0A0B]/90 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0"
+                }`}
             >
               <span className="font-medium tracking-wide">
                 {currentStep === steps.length - 1 ? (
@@ -906,7 +1045,9 @@ const iconVariants = {
                   "Avançar"
                 )}
               </span>
-              {!isLoading && currentStep !== steps.length - 1 && <BsArrowRightShort className="text-2xl" />}
+              {!isLoading && currentStep !== steps.length - 1 && (
+                <BsArrowRightShort className="text-2xl" />
+              )}
             </motion.button>
           </div>
         </div>
@@ -921,20 +1062,22 @@ const iconVariants = {
             exit="exit"
             className="fixed top-4 right-4 bg-green-500/10 backdrop-blur-sm border border-green-500/20 text-green-500 px-6 py-4 rounded-2xl shadow-lg z-50 flex items-center gap-3"
           >
-            <svg 
-              className="w-5 h-5" 
-              fill="none" 
-              stroke="currentColor" 
+            <svg
+              className="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
               viewBox="0 0 24 24"
             >
-              <path 
-                strokeLinecap="round" 
-                strokeLinejoin="round" 
-                strokeWidth={2} 
-                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" 
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
               />
             </svg>
-            <span className="font-poppins font-medium">Formulário enviado com sucesso!</span>
+            <span className="font-poppins font-medium">
+              Formulário enviado com sucesso!
+            </span>
           </motion.div>
         )}
       </AnimatePresence>
