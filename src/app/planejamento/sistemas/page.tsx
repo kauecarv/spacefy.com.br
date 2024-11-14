@@ -76,7 +76,7 @@ const Prototipos = () => {
 
   const handleSendRequest = async () => {
     const response = await axios.post(
-      "https://backend-spacefy.vercel.app/briefing/emit",
+      "https://backend-spacefy.onrender.com/briefing/emit",
       { ...formData, from: "sistemas" }
     );
     return response;
