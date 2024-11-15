@@ -1,6 +1,6 @@
 "use client"
 
-import { motion, useAnimation, animate } from "framer-motion";
+import { motion, animate } from "framer-motion";
 import { BsStars } from "react-icons/bs";
 import { useInView } from "react-intersection-observer";
 import { useEffect, useState } from "react";
