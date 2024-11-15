@@ -5,7 +5,12 @@ import { useInView } from "react-intersection-observer";
 import { useState, useEffect } from "react";
 import { TbSquareRoundedPercentage } from "react-icons/tb";
 import { FaHeadphonesSimple } from "react-icons/fa6";
-import Image from "next/image";
+import { RiSeoFill } from "react-icons/ri";
+import { HiMiniServerStack } from "react-icons/hi2";
+import { TbLayout2Filled } from "react-icons/tb";
+
+import { RiWindyLine } from "react-icons/ri";
+
 
 const Features = () => {
   const [ref, inView] = useInView({
@@ -132,6 +137,8 @@ const Features = () => {
           em <span className="text-indigo-600">Até 62%. </span>
         </motion.h2>
 
+
+        {/* Mobile */}
         {isMobile ? (
           <motion.div
             className="grid grid-cols-1 gap-4"
@@ -152,6 +159,9 @@ const Features = () => {
               title="Desempenho Rápido"
               description="Otimizamos seu site para carregar rapidamente, melhorando a experiência do usuário."
               position="top"
+              icon={
+                <RiWindyLine className="w-4 h-4 text-indigo-700"/>
+              }
               isShaking={activeShakeIndex === 1}
               isMobile={isMobile}
               isActive={activeTooltip === "Desempenho Rápido"}
@@ -179,13 +189,7 @@ const Features = () => {
               title="Hospedagem Gratuita"
               description="Economize com nossa hospedagem gratuita de alta qualidade."
               icon={
-                <Image
-                  src="https://framerusercontent.com/images/X9rSPrFBr6Qh4qsMnmARaX1VN3Q.png?scale-down-to=512"
-                  alt="Ícone"
-                  width={16}
-                  height={16}
-                  className="w-4 h-4"
-                />
+                <HiMiniServerStack className="w-4 h-4 text-indigo-700"/>
               }
               position="top"
               isShaking={activeShakeIndex === 4}
@@ -197,13 +201,7 @@ const Features = () => {
               title="Aparecer no Google"
               description="Otimizamos seu site para os mecanismos de busca, aumentando sua visibilidade online."
               icon={
-                <Image
-                  src="https://framerusercontent.com/images/X9rSPrFBr6Qh4qsMnmARaX1VN3Q.png?scale-down-to=512"
-                  alt="Ícone"
-                  width={16}
-                  height={16}
-                  className="w-4 h-4"
-                />
+               <RiSeoFill className="w-4 h-4"/>
               }
               position="top"
               isShaking={activeShakeIndex === 5}
@@ -215,13 +213,7 @@ const Features = () => {
               title="Interface Atraente"
               description="Criamos designs modernos e atraentes que cativam seus visitantes."
               icon={
-                <Image
-                  src="https://framerusercontent.com/images/X9rSPrFBr6Qh4qsMnmARaX1VN3Q.png?scale-down-to=512"
-                  alt="Ícone"
-                  width={16}
-                  height={16}
-                  className="w-4 h-4"
-                />
+             <TbLayout2Filled className="w-4 h-4 text-indigo-700"/>
               }
               position="top"
               isShaking={activeShakeIndex === 6}
@@ -246,6 +238,9 @@ const Features = () => {
             />
             <FeatureCard
               title="Desempenho Rápido"
+              icon={
+                <RiWindyLine className="w-4 h-4 text-indigo-700"/>
+              }
               className="absolute top-0 left-[35%] transform -translate-x-1/2"
               description="Otimizamos seu site para carregar rapidamente, melhorando a experiência do usuário."
               position="top"
@@ -270,13 +265,7 @@ const Features = () => {
               className="absolute top-1/3 left-[60%] transform -translate-y-1/2 translate-x-1/2"
               description="Economize com nossa hospedagem gratuita de alta qualidade."
               icon={
-                <Image
-                  src="https://framerusercontent.com/images/X9rSPrFBr6Qh4qsMnmARaX1VN3Q.png?scale-down-to=512"
-                  alt="Ícone"
-                  width={16}
-                  height={16}
-                  className="w-4 h-4"
-                />
+                <HiMiniServerStack className="w-4 h-4 text-indigo-700"/>
               }
               position="top"
               isShaking={activeShakeIndex === 4}
@@ -286,13 +275,7 @@ const Features = () => {
               className="absolute bottom-16 right-[10%] transform -translate-x-1/2"
               description="Otimizamos seu site para os mecanismos de busca, aumentando sua visibilidade online."
               icon={
-                <Image
-                  src="https://framerusercontent.com/images/X9rSPrFBr6Qh4qsMnmARaX1VN3Q.png?scale-down-to=512"
-                  alt="Ícone"
-                  width={16}
-                  height={16}
-                  className="w-4 h-4"
-                />
+                <RiSeoFill className="w-4 h-4 text-indigo-700"/>
               }
               position="top"
               isShaking={activeShakeIndex === 5}
@@ -302,13 +285,8 @@ const Features = () => {
               className="absolute bottom-16 right-[60%] transform translate-x-1/2"
               description="Criamos designs modernos e atraentes que cativam seus visitantes."
               icon={
-                <Image
-                  src="https://framerusercontent.com/images/X9rSPrFBr6Qh4qsMnmARaX1VN3Q.png?scale-down-to=512"
-                  alt="Ícone"
-                  width={16}
-                  height={16}
-                  className="w-4 h-4"
-                />
+                <TbLayout2Filled className="w-4 h-4 text-indigo-700"/>
+
               }
               position="top"
               isShaking={activeShakeIndex === 6}

@@ -17,8 +17,9 @@ const Projects = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   const [ref, inView] = useInView({
-    threshold: 0.1,
-    triggerOnce: false
+    threshold: 0.25,
+    triggerOnce: false,
+    rootMargin: '-50px 0px'
   });
 
   const itemVariants = {
@@ -105,7 +106,7 @@ const Projects = () => {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.6,
+        duration: 0.8,
         ease: "easeOut",
         when: "beforeChildren",
         staggerChildren: 0.2
@@ -123,22 +124,27 @@ const Projects = () => {
 
   const projects = {
     todos: [
-      "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671b25477be2a508e0342e75_10c8b478-b389-48df-93cb-299dae72141d.jpeg",
-      "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/67105ab6140b33f063f0aa7b_9ac3e592-c478-4029-a2d2-e6323699f465.jpeg", 
-      "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671182a4d5a2b01aafedd422_db783e89-af38-441c-a36c-7db2806f79f4.png",
-      "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671b29f6647cdaef47831669_e4402a7b-439b-410e-97ea-e03c575cf351.png"
+      "/assets/projects/legasse.jpg",
+      "/assets/projects/AmazingEmpresarial.avif",
+ 
+      "/assets/projects/Greenleaf.avif",
+      "/assets/projects/IncredibleMinecraft.avif",
+
+
     ],
     sites: [
-      "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671182a4d5a2b01aafedd422_db783e89-af38-441c-a36c-7db2806f79f4.png",
-      "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/67105ab6140b33f063f0aa7b_9ac3e592-c478-4029-a2d2-e6323699f465.jpeg",
-      "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671b25477be2a508e0342e75_10c8b478-b389-48df-93cb-299dae72141d.jpeg",
-      "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671b29f6647cdaef47831669_e4402a7b-439b-410e-97ea-e03c575cf351.png"
+      "/assets/projects/JWConstitucional.avif",
+      "/assets/projects/SpaceLabs.avif",
+ 
+      "/assets/projects/Greenleaf.avif",
+      "/assets/projects/AmazingEmpresarial.avif",
     ],
     modelos: [
-      "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671b29f6647cdaef47831669_e4402a7b-439b-410e-97ea-e03c575cf351.png",
-      "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/67105ab6140b33f063f0aa7b_9ac3e592-c478-4029-a2d2-e6323699f465.jpeg",
-      "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671182a4d5a2b01aafedd422_db783e89-af38-441c-a36c-7db2806f79f4.png",
-      "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671b25477be2a508e0342e75_10c8b478-b389-48df-93cb-299dae72141d.jpeg",
+      "/assets/projects/Greenleaf.avif",
+      "/assets/projects/IncredibleMinecraft.avif",
+ 
+      "/assets/projects/legasse.jpg",
+      "/assets/projects/SpaceLabs.avif",
     ]
   };
 
@@ -272,14 +278,15 @@ const Projects = () => {
                       exit="hidden"
                       variants={overlayVariants}
                     >
-                      <motion.button
+                      <motion.a
+                        href="/projetos"
                         className="bg-indigo-700 px-6 py-2.5 rounded-xl flex items-center gap-2 hover:bg-indigo-500 transition-colors text-white"
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                       >
                         <CgArrowsExpandUpRight className="w-5 h-5" />
                         <span className="text-sm font-medium text-white font-dmsans">Ver projetos</span>
-                      </motion.button>
+                      </motion.a>
                     </motion.div>
                   )}
                 </AnimatePresence>

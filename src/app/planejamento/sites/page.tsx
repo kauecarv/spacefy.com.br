@@ -83,7 +83,7 @@ const Sites = () => {
 
   const handleSendRequest = async () => {
     const response = await axios.post(
-      "https://backend-spacefy.onrender.com/briefing/emit",
+      "https://www.renato-amaral.com/briefing/emit",
       { ...formData, from: "sites" }
     );
     return response;
@@ -410,23 +410,23 @@ const Sites = () => {
 
   const projects = {
     todos: [
-      "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671b25477be2a508e0342e75_10c8b478-b389-48df-93cb-299dae72141d.jpeg",
-      "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/67105ab6140b33f063f0aa7b_9ac3e592-c478-4029-a2d2-e6323699f465.jpeg",
-      "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671182a4d5a2b01aafedd422_db783e89-af38-441c-a36c-7db2806f79f4.png",
-      "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671b29f6647cdaef47831669_e4402a7b-439b-410e-97ea-e03c575cf351.png",
+      "/assets/projects/AmazingEmpresarial.avif",
+      "/assets/projects/Greenleaf.avif",
+      "/assets/projects/JWConstitucional.avif",
+      "/assets/projects/SpaceLabs.avif"
     ],
     sites: [
-      "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671182a4d5a2b01aafedd422_db783e89-af38-441c-a36c-7db2806f79f4.png",
-      "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/67105ab6140b33f063f0aa7b_9ac3e592-c478-4029-a2d2-e6323699f465.jpeg",
-      "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671b25477be2a508e0342e75_10c8b478-b389-48df-93cb-299dae72141d.jpeg",
-      "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671b29f6647cdaef47831669_e4402a7b-439b-410e-97ea-e03c575cf351.png",
+      "/assets/projects/FineMetrics.avif",
+      "/assets/projects/IncredibleMinecraft.avif",
+      "/assets/projects/SpaceLabs.avif",
+      "/assets/projects/legasse.jpg"
     ],
     modelos: [
-      "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671b29f6647cdaef47831669_e4402a7b-439b-410e-97ea-e03c575cf351.png",
-      "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/67105ab6140b33f063f0aa7b_9ac3e592-c478-4029-a2d2-e6323699f465.jpeg",
-      "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671182a4d5a2b01aafedd422_db783e89-af38-441c-a36c-7db2806f79f4.png",
-      "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671b25477be2a508e0342e75_10c8b478-b389-48df-93cb-299dae72141d.jpeg",
-    ],
+      "/assets/projects/Greenleaf.avif",
+      "/assets/projects/IncredibleMinecraft.avif",
+      "/assets/projects/legasse.jpg",
+      "/assets/projects/SpaceLabs.avif"
+    ]
   };
 
   useEffect(() => {

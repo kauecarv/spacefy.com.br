@@ -42,8 +42,7 @@ const OurServices = () => {
       number: "01",
       title: "Sites",
       description: "Criamos sites personalizados e responsivos que refletem a identidade da sua marca e oferecem uma experiência excepcional ao usuário.",
-      image: "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671b25477be2a508e0342e75_10c8b478-b389-48df-93cb-299dae72141d.jpeg",
-      time: "34 dias",
+      image: "/assets/projects/legasse.jpg",      time: "34 dias",
       client: "Andrea Montini", 
       views: "27.2K+"
     },
@@ -51,8 +50,7 @@ const OurServices = () => {
       number: "02",
       title: "Sistemas",
       description: "Desenvolvemos sistemas robustos e escaláveis para otimizar seus processos de negócio e aumentar a eficiência operacional.",
-      image: "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671b25477be2a508e0342e75_10c8b478-b389-48df-93cb-299dae72141d.jpeg",
-      time: "60 dias",
+      image: "/assets/projects/SpaceLabs.avif",      time: "60 dias",
       client: "TechCorp Ltda.",
       views: "15.8K+"
     },
@@ -60,8 +58,7 @@ const OurServices = () => {
       number: "03", 
       title: "Modelos Estáticos",
       description: "Oferecemos modelos estáticos elegantes e de alto desempenho, perfeitos para apresentar informações de forma clara e eficaz.",
-      image: "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671b25477be2a508e0342e75_10c8b478-b389-48df-93cb-299dae72141d.jpeg",
-      time: "21 dias",
+      image: "/assets/projects/LabsPainelDeControle.avif",      time: "21 dias",
       client: "Design Studio",
       views: "42.5K+"
     },
@@ -69,7 +66,7 @@ const OurServices = () => {
       number: "04",
       title: "Modelos Interativos",
       description: "Nossos modelos interativos proporcionam uma experiência envolvente e dinâmica, permitindo que seus usuários interajam de forma intuitiva com seu conteúdo.",
-      image: "https://cdn.prod.website-files.com/5e593fb060cf877cf875dd1f/671b25477be2a508e0342e75_10c8b478-b389-48df-93cb-299dae72141d.jpeg",
+      image: "/assets/projects/Greenleaf.avif",
       time: "45 dias",
       client: "Interativa S.A.",
       views: "38.9K+"
@@ -156,7 +153,7 @@ const ServiceItem = ({ number, title, description, image, time, client, views, i
           >
             <span className={`text-sm sm:text-xl font-semibold font-poppins transition-all duration-500 text-indigo-600 ${isExpanded ? 'group-hover:text-indigo-600' : 'group-hover:text-white'}`}>{number}</span>
           </motion.span>
-          <h2 className={`text-white text-2xl sm:text-4xl font-semibold font-poppins ${isExpanded ? '' : ''}`}>{title}</h2>
+          <h2 className={`text-white text-xl sm:text-3xl md:text-4xl font-semibold font-poppins ${isExpanded ? '' : ''}`}>{title}</h2>
         </div>
         <motion.div 
           className={`rounded-xl p-2 sm:p-3 transition-all duration-500 ${isExpanded ? 'bg-indigo-600 text-white' : 'bg-[#181818] text-[#CCC] group-hover:bg-indigo-500 group-hover:text-white'}`}

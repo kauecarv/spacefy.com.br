@@ -13,6 +13,7 @@ import OurServices from "./sections/our-services/page";
 import Projects from "./sections/projects/page";
 import ContactUs from "./sections/contact-us/page";
 import Footer from "../components/Footer";
+import Reviews from "./sections/reviews/page";
 
 // const words = ["Digital.", "Exclusivo.", "Moderno.", "Eficiente."];
 
@@ -291,6 +292,7 @@ export default function Home() {
         <Features/>
         <OurServices />
         <Projects />
+        <Reviews />
         <ContactUs />
         <Footer />
          </main>

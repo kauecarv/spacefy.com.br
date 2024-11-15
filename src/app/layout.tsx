@@ -22,9 +22,9 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
-  title: "Spacefy - Soluções Digitais",
+  title: "Spacefy | Transformação Digital para seu Negócio",
   description:
-    "Explorando novos horizontes digitais. Inove com tecnologia de ponta e leve sua visão além do esperado com a Spacefy.",
+    "Desenvolvemos soluções digitais inovadoras que transformam negócios. Expertise em tecnologia de ponta para resultados extraordinários.",
   alternates: {
     canonical: "https://spacefy.com.br/",
   },
@@ -35,20 +35,20 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
-  keywords: ["spacefy", "soluções digitais"],
+  keywords: ["spacefy", "soluções digitais", "desenvolvimento web", "transformação digital", "tecnologia empresarial"],
   openGraph: {
-    title: "Spacefy - Soluções Digitais",
-    siteName: "Spacefy - Solução Rápida e Eficaz",
+    title: "Spacefy | Transformação Digital para seu Negócio",
+    siteName: "Spacefy - Excelência em Tecnologia",
     url: "https://spacefy.com.br",
     locale: "pt_BR",
     description:
-      "Explorando novos horizontes digitais. Inove com tecnologia de ponta e leve sua visão além do esperado com a Spacefy.",
+      "Desenvolvemos soluções digitais inovadoras que transformam negócios. Expertise em tecnologia de ponta para resultados extraordinários.",
     images: ["/logo/website-banner.png"],
   },
   twitter: {
-    title: "Spacefy - Soluções Digitais",
+    title: "Spacefy | Transformação Digital para seu Negócio",
     description:
-      "Explorando novos horizontes digitais. Inove com tecnologia de ponta e leve sua visão além do esperado com a Spacefy.",
+      "Desenvolvemos soluções digitais inovadoras que transformam negócios. Expertise em tecnologia de ponta para resultados extraordinários.",
     card: "summary_large_image",
     images: ["/logo/website-banner.png"],
   },
