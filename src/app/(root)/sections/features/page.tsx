@@ -14,8 +14,8 @@ import { RiWindyLine } from "react-icons/ri";
 
 const Features = () => {
   const [ref, inView] = useInView({
-    threshold: 0.2,
-    triggerOnce: false,
+    threshold: 0.1,
+    triggerOnce: true,
   });
 
   const [activeShakeIndex, setActiveShakeIndex] = useState(0);
@@ -85,19 +85,21 @@ const Features = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.3,
+        staggerChildren: 0.05,
+        delayChildren: 0.1,
+        duration: 0.3,
+        ease: "easeOut"
       },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 10 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.5,
+        duration: 0.3,
         ease: "easeOut",
       },
     },
@@ -201,7 +203,7 @@ const Features = () => {
               title="Aparecer no Google"
               description="Otimizamos seu site para os mecanismos de busca, aumentando sua visibilidade online."
               icon={
-               <RiSeoFill className="w-4 h-4"/>
+               <RiSeoFill className="w-4 h-4 text-indigo-700"/>
               }
               position="top"
               isShaking={activeShakeIndex === 5}
@@ -355,7 +357,7 @@ const FeatureCard = ({
           opacity: 1,
           scale: 1,
           transition: {
-            duration: 0.5,
+            duration: 0.3,
             ease: "easeOut",
           },
         },
@@ -365,8 +367,8 @@ const FeatureCard = ({
         backgroundColor: "#4F46E5",
         scale: 1.02,
         transition: {
-          duration: 0.3,
-          ease: "easeInOut",
+          duration: 0.2,
+          ease: "easeOut",
         },
       }}
       animate={isShaking ? shakeAnimation : { scale: 1 }}

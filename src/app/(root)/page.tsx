@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaDiscord, FaInstagram, FaLinkedin, FaThreads } from "react-icons/fa6";
+import { FaDiscord, FaInstagram, FaLinkedin, FaWhatsapp } from "react-icons/fa6";
 import { GiRoundStar } from "react-icons/gi";
 import Image from "next/image";
 import MoreSales from "./sections/more-sales/page";
@@ -14,6 +14,7 @@ import Projects from "./sections/projects/page";
 import ContactUs from "./sections/contact-us/page";
 import Footer from "../components/Footer";
 import Reviews from "./sections/reviews/page";
+
 
 // const words = ["Digital.", "Exclusivo.", "Moderno.", "Eficiente."];
 
@@ -93,7 +94,7 @@ export default function Home() {
           >
             <FaInstagram className="w-6 h-6 md:w-8 md:h-8 transition duration-300 hover:scale-110 cursor-pointer hover:text-[#717BFE]" />
             <FaDiscord className="w-6 h-6 md:w-8 md:h-8 transition duration-300 hover:scale-110 cursor-pointer hover:text-[#717BFE]" />
-            <FaThreads className="w-6 h-6 md:w-8 md:h-8 transition duration-300 hover:scale-110 cursor-pointer hover:text-[#717BFE]" />
+            <FaWhatsapp className="w-6 h-6 md:w-8 md:h-8 transition duration-300 hover:scale-110 cursor-pointer hover:text-[#717BFE]" />
             <FaLinkedin className="w-6 h-6 md:w-8 md:h-8 transition duration-300 hover:scale-110 cursor-pointer hover:text-[#717BFE]" />
           </motion.div>
           
@@ -101,8 +102,8 @@ export default function Home() {
             <div className="relative -mt-1 flex -space-x-3">
               <Link href="#avaliacoes">
                 <Image
-                  width={10}
-                  height={10}
+                  width={40}
+                  height={40}
                   src="https://randomuser.me/api/portraits/men/32.jpg"
                   alt="Avatar Cliente Nº 1"
                   className="w-10 h-10 transition duration-200 hover:border-spacefy rounded-full border-2 border-[#101010]"
@@ -111,8 +112,8 @@ export default function Home() {
 
               <Link href="#avaliacoes">
                 <Image
-                  width={10}
-                  height={10}
+                  width={40}
+                  height={40}
                   src="https://randomuser.me/api/portraits/women/44.jpg"
                   alt="Avatar Cliente Nº 2"
                   className="w-10 h-10  transition duration-200 hover:border-spacefy rounded-full border-2 border-[#101010]"
@@ -121,8 +122,8 @@ export default function Home() {
 
               <Link href="#avaliacoes">
                 <Image
-                  width={10}
-                  height={10}
+                  width={40}
+                  height={40}
                   src="https://randomuser.me/api/portraits/men/52.jpg"
                   alt="Avatar Cliente Nº 3"
 
@@ -132,8 +133,8 @@ export default function Home() {
 
               <Link href="#avaliacoes">
                 <Image
-                  width={10}
-                  height={10}
+                  width={40}
+                  height={40}
                   src="https://randomuser.me/api/portraits/men/64.jpg"
                   alt="Avatar Cliente Nº 4"
 
@@ -199,7 +200,7 @@ export default function Home() {
           >
             <FaInstagram className="w-6 h-6 md:w-8 md:h-8 transition duration-300 hover:scale-110 cursor-pointer hover:text-[#717BFE]" />
             <FaDiscord className="w-6 h-6 md:w-8 md:h-8 transition duration-300 hover:scale-110 cursor-pointer hover:text-[#717BFE]" />
-            <FaThreads className="w-6 h-6 md:w-8 md:h-8 transition duration-300 hover:scale-110 cursor-pointer hover:text-[#717BFE]" />
+            <FaWhatsapp className="w-6 h-6 md:w-8 md:h-8 transition duration-300 hover:scale-110 cursor-pointer hover:text-[#717BFE]" />
             <FaLinkedin className="w-6 h-6 md:w-8 md:h-8 transition duration-300 hover:scale-110 cursor-pointer hover:text-[#717BFE]" />
           </motion.div>
         </div>
@@ -215,8 +216,8 @@ export default function Home() {
             <div className="relative -mt-1 flex -space-x-3">
               <Link href="#avaliacoes">
                 <Image
-                  width={10}
-                  height={10}
+                  width={40}
+                  height={40}
                   src="https://randomuser.me/api/portraits/men/32.jpg"
                   alt="Avatar Cliente Nº 1"
 
@@ -226,8 +227,8 @@ export default function Home() {
 
               <Link href="#avaliacoes">
                 <Image
-                  width={10}
-                  height={10}
+                  width={40}
+                  height={40}
                   src="https://randomuser.me/api/portraits/women/44.jpg"
                   alt="Avatar Cliente Nº 2"
 
@@ -237,8 +238,8 @@ export default function Home() {
 
               <Link href="#avaliacoes">
                 <Image
-                  width={10}
-                  height={10}
+                  width={40}
+                  height={40}
                   src="https://randomuser.me/api/portraits/men/52.jpg"
                   alt="Avatar Cliente Nº 3"
 
@@ -248,8 +249,8 @@ export default function Home() {
 
               <Link href="#avaliacoes">
                 <Image
-                  width={10}
-                  height={10}
+                  width={40}
+                  height={40}
                   src="https://randomuser.me/api/portraits/men/64.jpg"
                   alt="Avatar Cliente Nº 4"
 
@@ -281,9 +282,11 @@ export default function Home() {
             </motion.div>
           </div>
 
-          <p className="font-poppins font-normal text-center sm:text-start text-sm leading-tight w-full max-w-lg text-[#A3A3A3]">
-            Somos especialistas em design e desenvolvimento web, criando soluções personalizadas que impulsionam seu negócio e encantam seus clientes.
+          <p className="font-poppins font-normal text-center sm:text-start text-sm leading-tight w-full max-w-lg text-[#A3A3A3] mb-4">
+            Somos especialistas em design e desenvolvimento web, criando soluções únicas que impulsionam seu negócio e encantam seus clientes.
           </p>
+
+         
         </motion.div>
       </section>
 

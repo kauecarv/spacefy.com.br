@@ -7,28 +7,31 @@ import { IoArrowForward, IoVideocam } from "react-icons/io5";
 
 const ContactUs = () => {
   const ref = useRef(null);
-  const inView = useInView(ref);
+  const inView = useInView(ref, {
+    amount: 0.3,
+    once: false
+  });
 
   const containerVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.8,
-        ease: "easeOut",
-        staggerChildren: 0.2
-      }
-    }
-  };
-
-  const itemVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.5,
+        duration: 0.4,
+        ease: "easeOut",
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 10 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.3,
         ease: "easeOut"
       }
     }
@@ -52,10 +55,10 @@ const ContactUs = () => {
           }}
         >
           <span className="bg-indigo-600 text-white px-3 py-1.5 sm:px-3 sm:py-1 rounded-md text-[10px] sm:text-xs font-bold whitespace-nowrap w-fit mx-auto sm:mx-0">
-            OFERTA ESPECIAL
+            Até 24/12
           </span>
           <span className="text-center sm:text-left text-sm mt-1 sm:mt-0 px-2">
-            Análise personalizada do seu negócio digital.
+            30% de desconto na primeira compra!
           </span>
         </motion.div>
 

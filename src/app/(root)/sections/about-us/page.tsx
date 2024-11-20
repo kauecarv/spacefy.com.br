@@ -8,28 +8,33 @@ import { useEffect, useState } from "react";
 export default function AboutUs() {
   const [ref, inView] = useInView({
     threshold: 0.2,
-    triggerOnce: true
   });
 
   const containerVariants = {
-    hidden: { opacity: 0, y: 50 },
+    hidden: { 
+      opacity: 0, 
+      y: 20
+    },
     visible: { 
       opacity: 1,
       y: 0,
       transition: { 
-        duration: 0.5, 
+        duration: 0.3,
         ease: "easeOut"
       }
     }
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { 
+      opacity: 0, 
+      y: 10
+    },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.3,
+        duration: 0.2,
         ease: "easeOut"
       }
     }
@@ -49,34 +54,29 @@ export default function AboutUs() {
   });
 
   useEffect(() => {
-    if (inView && !hasAnimated) {
-      setHasAnimated(true);
-      
-      // Animar leads
+    if (inView) {
       animate(0, targetNumbers.leads, {
-        duration: 2,
+        duration: 1.5,
         onUpdate: (value) => {
           setCurrentNumbers(prev => ({...prev, leads: Math.round(value)}));
         }
       });
 
-      // Animar feedback
       animate(0, targetNumbers.feedback, {
-        duration: 2,
+        duration: 1.5,
         onUpdate: (value) => {
           setCurrentNumbers(prev => ({...prev, feedback: Math.round(value)}));
         }
       });
 
-      // Animar visits
       animate(0, targetNumbers.visits, {
-        duration: 2,
+        duration: 1.5,
         onUpdate: (value) => {
           setCurrentNumbers(prev => ({...prev, visits: Number(value.toFixed(1))}));
         }
       });
     }
-  }, [inView, hasAnimated, targetNumbers]);
+  }, [inView, targetNumbers]);
 
   return (
     <section ref={ref} className="bg-black py-4 px-6 lg:py-10 z-10"   id="about-us">

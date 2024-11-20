@@ -8,7 +8,8 @@ const MoreSales = () => {
   const controls = useAnimation();
   const [ref, inView] = useInView({
     triggerOnce: false,
-    threshold: 0.2,
+    threshold: 0.1,
+    rootMargin: "50px",
   });
 
   useEffect(() => {
@@ -23,7 +24,7 @@ const MoreSales = () => {
     hidden: {},
     visible: {
       transition: {
-        staggerChildren: 0.1,
+        staggerChildren: 0.05,
       },
     },
   };
@@ -31,8 +32,8 @@ const MoreSales = () => {
   const textVariants = {
     hidden: { 
       opacity: 0, 
-      y: 50,
-      scale: 0.9,
+      y: 20,
+      scale: 0.95,
     },
     visible: {
       opacity: 1,
@@ -40,9 +41,9 @@ const MoreSales = () => {
       scale: 1,
       transition: {
         type: "spring",
-        damping: 12,
-        stiffness: 100,
-        duration: 0.6,
+        damping: 20,
+        stiffness: 200,
+        duration: 0.4,
       },
     },
   };
@@ -51,7 +52,7 @@ const MoreSales = () => {
     hidden: { opacity: 0 },
     visible: { 
       opacity: 1,
-      transition: { duration: 0.5 }
+      transition: { duration: 0.3 }
     },
   };
 

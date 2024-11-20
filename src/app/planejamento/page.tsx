@@ -13,6 +13,7 @@
   import { LiaNetworkWiredSolid } from "react-icons/lia";
   import { BsMouseFill } from "react-icons/bs";
   import { useEffect, useState } from "react";
+import { PiHandSwipeRightBold } from "react-icons/pi";
 
 
 
@@ -313,53 +314,73 @@
                 Explore Nosso <span className="text-indigo-600">Universo</span> de <span className="text-indigo-600">Criações</span>
               </motion.h2>
 
-              <div className="flex flex-col sm:flex-row items-center sm:items-start justify-center sm:justify-start w-full max-w-sm bg-[#0A0A0A] rounded-xl overflow-hidden mb-8">
-                <motion.button 
-                  variants={buttonVariants}
-                  whileHover="hover"
-                  whileTap="tap"
-                  onClick={() => setSelectedCategory("todos")}
-                  className={`w-full text-[#ccc] ${selectedCategory === "todos" ? "bg-indigo-600 text-white" : "hover:bg-indigo-600 hover:text-white"} duration-300 transition-all font-poppins px-6 py-3 flex items-center justify-center sm:justify-start gap-2`}
+              <div className="flex flex-col md:flex-row items-center justify-between w-full gap-6 md:gap-0">
+                <div className="flex flex-wrap md:flex-nowrap items-center justify-center w-full md:w-auto bg-[#0A0A0A] rounded-xl overflow-hidden">
+                  <motion.button 
+                    variants={buttonVariants}
+                    whileHover="hover"
+                    whileTap="tap"
+                    onClick={() => setSelectedCategory("todos")}
+                    className={`text-[#ccc] w-full md:w-auto ${selectedCategory === "todos" ? "bg-indigo-600 text-white" : "hover:bg-indigo-600 hover:text-white"} duration-300 transition-all font-poppins px-6 py-3 flex items-center justify-center md:justify-start gap-2`}
+                  >
+                    <motion.span variants={iconVariants}>
+                      <HiOutlineViewGrid className="text-xl" />
+                    </motion.span>
+                    Todos
+                  </motion.button>
+                  <motion.button 
+                    variants={buttonVariants}
+                    whileHover="hover"
+                    whileTap="tap"
+                    onClick={() => setSelectedCategory("sites")}
+                    className={`text-[#ccc] w-full md:w-auto ${selectedCategory === "sites" ? "bg-indigo-600 text-white" : "hover:bg-indigo-600 hover:text-white"} duration-300 transition-all font-poppins px-6 py-3 flex items-center justify-center md:justify-start gap-2`}
+                  >
+                    <motion.span variants={iconVariants}>
+                      <CgWebsite className="text-xl" />
+                    </motion.span>
+                    Sites
+                  </motion.button>
+                  <motion.button 
+                    variants={buttonVariants}
+                    whileHover="hover"
+                    whileTap="tap"
+                    onClick={() => setSelectedCategory("modelos")}
+                    className={`text-[#ccc] w-full md:w-auto ${selectedCategory === "modelos" ? "bg-indigo-600 text-white" : "hover:bg-indigo-600 hover:text-white"} duration-300 transition-all font-poppins px-6 py-3 flex items-center justify-center md:justify-start gap-2`}
+                  >
+                    <motion.span variants={iconVariants}>
+                      <CgWebsite className="text-xl" />
+                    </motion.span>
+                    Modelos
+                  </motion.button>
+                </div>
+
+                <Link 
+                  href="/projetos"
+                  className="text-indigo-600 font-medium hover:text-white group transition-colors font-poppins flex items-center gap-2"
                 >
-                  <motion.span variants={iconVariants}>
-                    <HiOutlineViewGrid className="text-xl" />
+                  Ver todos
+                  <motion.span 
+                    className="text-lg"
+                    animate={{ x: [0, 5, 0] }}
+                    transition={{ 
+                      duration: 1.5,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                  >
+                    <PiHandSwipeRightBold/>
                   </motion.span>
-                  Todos
-                </motion.button>
-                <motion.button 
-                  variants={buttonVariants}
-                  whileHover="hover"
-                  whileTap="tap"
-                  onClick={() => setSelectedCategory("sites")}
-                  className={`w-full text-[#ccc] ${selectedCategory === "sites" ? "bg-indigo-600 text-white" : "hover:bg-indigo-600 hover:text-white"} duration-300 transition-all font-poppins px-6 py-3 flex items-center justify-center sm:justify-start gap-2`}
-                >
-                  <motion.span variants={iconVariants}>
-                    <CgWebsite className="text-xl" />
-                  </motion.span>
-                  Sites
-                </motion.button>
-                <motion.button 
-                  variants={buttonVariants}
-                  whileHover="hover"
-                  whileTap="tap"
-                  onClick={() => setSelectedCategory("modelos")}
-                  className={`w-full text-[#ccc] ${selectedCategory === "modelos" ? "bg-indigo-600 text-white" : "hover:bg-indigo-600 hover:text-white"} duration-300 transition-all font-poppins px-6 py-3 flex items-center justify-center sm:justify-start gap-2`}
-                >
-                  <motion.span variants={iconVariants}>
-                    <CgWebsite className="text-xl" />
-                  </motion.span>
-                  Modelos
-                </motion.button>
+                </Link>
               </div>
 
-              <AnimatePresence mode="wait" initial={false}>
+              <AnimatePresence mode="wait">
                 <motion.div 
                   key={selectedCategory}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.15 }}
-                  className="grid grid-cols-1 md:grid-cols-12 gap-6"
+                  className="grid grid-cols-1 md:grid-cols-12 gap-6 w-full mt-8"
                 >
                   {projects[selectedCategory as keyof typeof projects].map((image: string, index: number) => (
                     <motion.div

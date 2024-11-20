@@ -32,7 +32,7 @@ const NavbarNavigation = () => {
               e.preventDefault();
               const element = document.getElementById(item.href);
               if (element) {
-                const navbarOffset = 100; // Ajuste este valor de acordo com a altura do seu header/navbar
+                const navbarOffset = 100; 
                 const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
                 
                 window.scrollTo({

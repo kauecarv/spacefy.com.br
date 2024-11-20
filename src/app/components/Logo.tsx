@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { HiMiniRocketLaunch } from "react-icons/hi2";
 
 const NavbarLogo = () => {
   return (
@@ -11,8 +12,14 @@ const NavbarLogo = () => {
       transition={{ duration: 0.5, ease: "easeOut" }}
       className="z-50"
     >
-      <Link href="/" className="font-bold !z-50 whitespace-nowrap flex-nowrap flex font-poppins text-2xl md:text-3xl text-white transition duration-300 hover:text-spacefy hover:scale-105">
-        Spacefy
+      <Link 
+        href="/" 
+        className="font-bold !z-50 whitespace-nowrap flex-nowrap flex items-center gap-3 font-poppins text-2xl md:text-3xl transition duration-300 hover:scale-105"
+      >
+        <HiMiniRocketLaunch className="text-white hover:text-indigo-500" />
+        <span className="font-poppins uppercase font-semibold text-transparent bg-clip-text bg-gradient-to-b from-white to-indigo-500">
+          SPACEFY
+        </span>
       </Link>
     </motion.div>
   );

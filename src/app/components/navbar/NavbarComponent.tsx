@@ -5,6 +5,7 @@ import NavbarLogo from "../Logo";
 import MakeBudge from "./buttons/MakeBudge";
 import MobileNavigation from "./MobileNavigation";
 import NavbarNavigation from "./Navigation";
+import ContactUs from "./buttons/ContactUs";
 
 const NavbarComponent = () => {
 
@@ -39,9 +40,9 @@ const NavbarComponent = () => {
             <NavbarNavigation />
           </div>
 
-          <div className="gap-2 hidden lg:flex">
+          <div className="gap-4 hidden lg:flex">
             <MakeBudge />
-
+            <ContactUs />
           </div>
         </div>
       </header>

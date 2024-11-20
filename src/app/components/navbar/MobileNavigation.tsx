@@ -48,15 +48,19 @@ const MobileNavigation = () => {
   }, [isOpen]);
 
   const menuItems = [
-    "Quem Somos?",
-    "Nossos Serviços",
-    "Ver Avaliações",
-    "Projetos Entregues",
+    { name: "Quem Somos?", href: "/#about" },
+    { name: "Nossos Serviços", href: "/#services" },
+    { name: "Ver Avaliações", href: "/#reviews" },
+    { name: "Projetos Entregues", href: "/#projects" },
   ];
 
   const menuVariants = {
     hidden: { opacity: 0, x: "100%" },
     visible: { opacity: 1, x: 0 },
+  };
+
+  const handleNavigation = () => {
+    setIsOpen(false);
   };
 
   return (
@@ -98,10 +102,11 @@ const MobileNavigation = () => {
                 {menuItems.map((item, index) => (
                   <li key={index}>
                     <Link
-                      href="/"
+                      href={item.href}
                       className="text-white text-xl font-dmsans transition duration-300 hover:text-[#4F46E5]"
+                      onClick={handleNavigation}
                     >
-                      {item}
+                      {item.name}
                     </Link>
                   </li>
                 ))}
@@ -110,6 +115,7 @@ const MobileNavigation = () => {
               <div className="w-full px-4 mt-8">
                 <Link
                   href="/planejamento"
+                  onClick={handleNavigation}
                   className="w-full py-3 bg-[#4F46E5] text-white rounded-xl text-center font-poppins font-medium h-12 inline-flex items-center justify-center hover:bg-[#4338CA] transition-colors"
                 >
                   <BsCalculator className="inline mr-2" />

@@ -17,18 +17,22 @@ const Projects = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   const [ref, inView] = useInView({
-    threshold: 0.25,
+    threshold: 0.1,
     triggerOnce: false,
-    rootMargin: '-50px 0px'
+    rootMargin: '-10px 0px',
+    delay: 100
   });
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { 
+      opacity: 0, 
+      y: 15
+    },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.3,
+        duration: 0.2,
         ease: "easeOut"
       }
     }
@@ -59,13 +63,13 @@ const Projects = () => {
   const projectVariants = {
     hidden: { 
       opacity: 0,
-      y: 20
+      y: 15
     },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.4,
+        duration: 0.3,
         ease: "easeOut"
       }
     }
@@ -100,24 +104,24 @@ const Projects = () => {
   const sectionVariants = {
     hidden: { 
       opacity: 0, 
-      y: 20 
+      y: 15
     },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.8,
+        duration: 0.6,
         ease: "easeOut",
         when: "beforeChildren",
-        staggerChildren: 0.2
+        staggerChildren: 0.1
       }
     },
     exit: {
       opacity: 0,
-      y: -20,
+      y: -15,
       transition: {
         duration: 0.3,
-        ease: "easeIn"
+        ease: "easeInOut"
       }
     }
   };

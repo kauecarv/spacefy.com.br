@@ -12,26 +12,39 @@ import { useRef } from "react";
 const OurServices = () => {
   const [expandedService, setExpandedService] = useState<string | null>(null);
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: false, amount: 0.2 });
+  const isInView = useInView(ref, { 
+    once: false, 
+    amount: 0.2,
+    margin: "0px 0px -100px 0px"
+  });
 
   const containerVariants = {
-    hidden: { opacity: 0 },
+    hidden: { 
+      opacity: 0,
+      y: 20
+    },
     visible: {
       opacity: 1,
+      y: 0,
       transition: {
-        staggerChildren: 0.1, 
-        delayChildren: 0.1 
+        duration: 0.3,
+        staggerChildren: 0.05,
+        delayChildren: 0.05,
+        ease: "easeOut"
       }
     }
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { 
+      opacity: 0, 
+      y: 15
+    },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.3, // Reduzido de 0.5 para 0.3
+        duration: 0.2,
         ease: "easeOut"
       }
     }

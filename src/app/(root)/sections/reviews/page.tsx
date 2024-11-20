@@ -1,6 +1,6 @@
 "use client"
 import { motion, useAnimation } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { HiOutlineSparkles } from "react-icons/hi";
 import { TbMoodPlus } from "react-icons/tb";
@@ -44,16 +44,29 @@ const initialReviews: Review[] = [
 const Reviews = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const controls = useAnimation();
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const reviews = [...initialReviews, ...initialReviews, ...initialReviews];
 
   useEffect(() => {
     let timeoutId: NodeJS.Timeout;
+    let currentX = 0;
 
     const startAnimation = async () => {
       try {
         await controls.start({
-          x: [`0%`, `-${(100 / 3)}%`],
+          x: [`${currentX}px`, `-${(100 / 3)}%`],
           transition: {
             x: {
               repeat: Infinity,
@@ -71,60 +84,106 @@ const Reviews = () => {
     const handleVisibilityChange = () => {
       if (document.hidden) {
         controls.stop();
-      } else {
-        timeoutId = setTimeout(startAnimation, 100);
       }
     };
 
     const container = containerRef.current;
     
-    const handleMouseEnter = () => controls.stop();
-    const handleMouseLeave = () => startAnimation();
+    const handleInteraction = () => {
+      if (!isMobile) {
+        controls.stop();
+        const element = container?.firstChild as Element;
+        if (element) {
+          const transform = getComputedStyle(element).transform;
+          const matrix = new DOMMatrix(transform);
+          currentX = matrix.m41;
+        }
+      }
+    };
+    
+    const handleInteractionEnd = () => {
+      if (!isMobile) {
+        startAnimation();
+      }
+    };
 
-    container?.addEventListener('mouseenter', handleMouseEnter);
-    container?.addEventListener('mouseleave', handleMouseLeave);
+    if (!isMobile) {
+      container?.addEventListener('mouseenter', handleInteraction);
+      container?.addEventListener('mouseleave', handleInteractionEnd);
+    }
+    
+    container?.addEventListener('touchstart', handleInteraction);
+    container?.addEventListener('touchend', handleInteractionEnd);
     document.addEventListener("visibilitychange", handleVisibilityChange);
     
     startAnimation();
 
     return () => {
-      container?.removeEventListener('mouseenter', handleMouseEnter);
-      container?.removeEventListener('mouseleave', handleMouseLeave);
+      container?.removeEventListener('mouseenter', handleInteraction);
+      container?.removeEventListener('mouseleave', handleInteractionEnd);
+      container?.removeEventListener('touchstart', handleInteraction);
+      container?.removeEventListener('touchend', handleInteractionEnd);
       document.removeEventListener("visibilitychange", handleVisibilityChange);
       if (timeoutId) clearTimeout(timeoutId);
       controls.stop();
     };
-  }, [controls]);
+  }, [controls, isMobile]);
 
   return (
     <motion.section 
       className="w-full bg-black py-32 overflow-hidden"
-      initial={{ opacity: 0, y: 50 }}
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6 }}
+      viewport={{ once: false, margin: "-50px" }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
+          viewport={{ once: false, amount: 0.3 }}
+          transition={{ duration: 0.4, delay: 0.1 }}
           className="text-center mb-20"
         >
-          <span className="inline-flex items-center bg-transparent bg-opacity-20 text-[#ccc] px-3 py-1 rounded-full text-sm font-medium font-dmsans">
+          <motion.span 
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: false }}
+            transition={{ duration: 0.3, delay: 0.1 }}
+            className="inline-flex items-center bg-transparent bg-opacity-20 text-[#ccc] px-3 py-1 rounded-full text-sm font-medium font-dmsans"
+          >
             <HiOutlineSparkles className="mr-2 w-5 h-5 text-indigo-600" />
             <span className="text-md mr-1">100+</span> projetos entregues
-          </span>
-          <h2 className="text-center text-white text-3xl sm:text-5xl font-poppins font-bold mb-4 sm:mb-8">
+          </motion.span>
+          
+          <motion.h2 
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false }}
+            transition={{ duration: 0.4, delay: 0.2 }}
+            className="text-center text-white text-3xl sm:text-5xl font-poppins font-bold mb-4 sm:mb-8"
+          >
             Depoimentos <span className="text-indigo-600">Autênticos</span> de Confiança.
-          </h2>
-          <p className="text-[#ccc] text-md max-w-2xl mx-auto mb-8 sm:mb-16 font-dmsans font-normal leading-relaxed">
+          </motion.h2>
+          
+          <motion.p 
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false }}
+            transition={{ duration: 0.4, delay: 0.2 }}
+            className="text-[#ccc] text-md max-w-2xl mx-auto mb-8 sm:mb-16 font-dmsans font-normal leading-relaxed"
+          >
             Descubra como nossos clientes transformaram seus negócios através de nossas soluções. Uma média de <span className="text-indigo-600 font-semibold">97% de satisfação</span> em todos os projetos.
-          </p>
+          </motion.p>
         </motion.div>
 
-        <div className="relative w-full">
+        <motion.div 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: false, amount: 0.1 }}
+          transition={{ duration: 0.4, delay: 0.2 }}
+          className="relative w-full"
+        >
           <div className="absolute left-0 top-0 w-32 h-full bg-gradient-to-r from-black to-transparent z-10" />
           <div className="absolute right-0 top-0 w-32 h-full bg-gradient-to-l from-black to-transparent z-10" />
           
@@ -139,7 +198,7 @@ const Reviews = () => {
               ))}
             </motion.div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </motion.section>
   );
@@ -149,11 +208,15 @@ const ReviewCard = ({ text, author, role, avatar }: Review) => {
   return (
     <motion.div
       className="w-[380px] bg-[#0A0A0A] p-8 rounded-xl flex flex-col gap-6 border border-[#1a1a1a] hover:border-transparent transition-all duration-100 my-4 group"
+      initial={{ opacity: 0, scale: 0.98 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: false }}
+      transition={{ duration: 0.3 }}
       whileHover={{ 
-        y: -2,
-        scale: 1.005,
+        y: -4,
+        scale: 1.02,
         transition: {
-          duration: 0.1,
+          duration: 0.2,
           ease: "easeOut"
         }
       }}

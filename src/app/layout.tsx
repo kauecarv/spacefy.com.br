@@ -22,7 +22,7 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
-  title: "Spacefy | Transformação Digital para seu Negócio",
+  title: "Spacefy — Transformação Digital",
   description:
     "Desenvolvemos soluções digitais inovadoras que transformam negócios. Expertise em tecnologia de ponta para resultados extraordinários.",
   alternates: {
@@ -37,8 +37,8 @@ export const metadata: Metadata = {
   },
   keywords: ["spacefy", "soluções digitais", "desenvolvimento web", "transformação digital", "tecnologia empresarial"],
   openGraph: {
-    title: "Spacefy | Transformação Digital para seu Negócio",
-    siteName: "Spacefy - Excelência em Tecnologia",
+    title: "Spacefy — Transformação Digital",
+    siteName: "Spacefy — Excelência em Tecnologia",
     url: "https://spacefy.com.br",
     locale: "pt_BR",
     description:
