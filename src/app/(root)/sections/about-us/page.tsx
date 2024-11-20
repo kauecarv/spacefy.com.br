@@ -40,7 +40,6 @@ export default function AboutUs() {
     }
   };
 
-  const [hasAnimated, setHasAnimated] = useState(false);
   const [targetNumbers] = useState({
     leads: 45,
     feedback: 99,

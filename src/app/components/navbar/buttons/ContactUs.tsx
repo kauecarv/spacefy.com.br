@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { FaHeadphonesAlt } from "react-icons/fa";
-import { PiStarFourFill } from "react-icons/pi";
 
 const ContactUs = () => {
   return (
