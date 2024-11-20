@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { HiMiniRocketLaunch } from "react-icons/hi2";
 
 const NavbarLogo = () => {
   return (
