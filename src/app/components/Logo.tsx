@@ -17,7 +17,7 @@ const NavbarLogo = () => {
       >
 
 
-        <span className="font-poppins uppercase font-semibold text-transparent bg-clip-text bg-clip-text bg-gradient-to-b from-transparent to-[#4F46E8]">
+        <span className="font-poppins uppercase font-semibold text-transparent bg-clip-text bg-gradient-to-b from-[#8983F5] to-[#4F46E8]">
           SPACEFY
         </span>
       </Link>
