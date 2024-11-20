@@ -16,8 +16,9 @@ const NavbarLogo = () => {
         href="/" 
         className="font-bold !z-50 whitespace-nowrap flex-nowrap flex items-center gap-3 font-poppins text-2xl md:text-3xl transition duration-300 hover:scale-105"
       >
-        <HiMiniRocketLaunch className="text-white hover:text-indigo-500" />
-        <span className="font-poppins uppercase font-semibold text-transparent bg-clip-text bg-gradient-to-b from-white to-indigo-500">
+
+
+        <span className="font-poppins uppercase font-semibold text-transparent bg-clip-text bg-clip-text bg-gradient-to-b from-transparent to-[#4F46E8]">
           SPACEFY
         </span>
       </Link>
