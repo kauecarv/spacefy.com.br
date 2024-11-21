@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaDiscord, FaFolderOpen, FaInstagram, FaLinkedin, FaWhatsapp } from "react-icons/fa6";
+import { FaDiscord, FaInstagram, FaWhatsapp } from "react-icons/fa6";
 import { GiRoundStar } from "react-icons/gi";
 import Image from "next/image";
 import MoreSales from "./sections/more-sales/page";
@@ -14,6 +14,7 @@ import Projects from "./sections/projects/page";
 import ContactUs from "./sections/contact-us/page";
 import Footer from "../components/Footer";
 import Reviews from "./sections/reviews/page";
+import { RiMacbookLine } from "react-icons/ri";
 
 
 // const words = ["Digital.", "Exclusivo.", "Moderno.", "Eficiente."];
@@ -102,7 +103,7 @@ export default function Home() {
               <FaWhatsapp className="w-6 h-6 md:w-8 md:h-8 transition duration-300 hover:scale-110 cursor-pointer hover:text-[#717BFE]" />
             </Link>
             <Link href="/projetos" target="_blank" rel="noopener noreferrer">
-              <FaFolderOpen className="w-6 h-6 md:w-8 md:h-8 transition duration-300 hover:scale-110 cursor-pointer hover:text-[#717BFE]" />
+              <RiMacbookLine className="w-6 h-6 md:w-8 md:h-8 transition duration-300 hover:scale-110 cursor-pointer hover:text-[#717BFE]" />
             </Link>
           </motion.div>
           
@@ -206,10 +207,18 @@ export default function Home() {
             variants={fadeInUp}
             transition={{ delay: 0.3, duration: 0.8, ease: "easeOut" }}
           >
-            <FaInstagram className="w-6 h-6 md:w-8 md:h-8 transition duration-300 hover:scale-110 cursor-pointer hover:text-[#717BFE]" />
-            <FaDiscord className="w-6 h-6 md:w-8 md:h-8 transition duration-300 hover:scale-110 cursor-pointer hover:text-[#717BFE]" />
-            <FaWhatsapp className="w-6 h-6 md:w-8 md:h-8 transition duration-300 hover:scale-110 cursor-pointer hover:text-[#717BFE]" />
-            <FaLinkedin className="w-6 h-6 md:w-8 md:h-8 transition duration-300 hover:scale-110 cursor-pointer hover:text-[#717BFE]" />
+            <Link href="https://instagram.com/spacefy_digital" target="_blank" rel="noopener noreferrer">
+              <FaInstagram className="w-6 h-6 md:w-8 md:h-8 transition duration-300 hover:scale-110 cursor-pointer hover:text-[#717BFE]" />
+            </Link>
+            <Link href="https://discord.gg/Qby9JecQSW" target="_blank" rel="noopener noreferrer">
+              <FaDiscord className="w-6 h-6 md:w-8 md:h-8 transition duration-300 hover:scale-110 cursor-pointer hover:text-[#717BFE]" />
+            </Link>
+            <Link href="https://wa.me/5581997133518" target="_blank" rel="noopener noreferrer">
+              <FaWhatsapp className="w-6 h-6 md:w-8 md:h-8 transition duration-300 hover:scale-110 cursor-pointer hover:text-[#717BFE]" />
+            </Link>
+            <Link href="/projetos" target="_blank" rel="noopener noreferrer">
+              <RiMacbookLine className="w-6 h-6 md:w-8 md:h-8 transition duration-300 hover:scale-110 cursor-pointer hover:text-[#717BFE]" />
+            </Link>
           </motion.div>
         </div>
 
