@@ -8,12 +8,13 @@
   import { LuLayoutDashboard } from "react-icons/lu";
   import { TbHandClick, TbMessage2Star} from "react-icons/tb";
   import {  CgWebsite } from "react-icons/cg";
-  import { MdOutlineSwitchAccessShortcutAdd } from "react-icons/md";
+  import { MdOutlineDesignServices, MdOutlineSwitchAccessShortcutAdd } from "react-icons/md";
   import { HiOutlineViewGrid } from "react-icons/hi";
   import { LiaNetworkWiredSolid } from "react-icons/lia";
   import { BsMouseFill } from "react-icons/bs";
   import { useEffect, useState } from "react";
 import { PiHandSwipeRightBold } from "react-icons/pi";
+import { CgArrowsExpandUpRight } from "react-icons/cg";
 
 
 
@@ -23,9 +24,15 @@ import { PiHandSwipeRightBold } from "react-icons/pi";
     const [selectedCategory, setSelectedCategory] = useState("todos");
     const [hiddenTooltips, setHiddenTooltips] = useState<{[key: number]: boolean}>({});
     const [tooltipHoveredIndex, setTooltipHoveredIndex] = useState<number | null>(null);
+    const [selectedImage, setSelectedImage] = useState<string | null>(null);
+    const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
     useEffect(() => {
       setIsMounted(true);
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
     }, []);
 
 
@@ -119,7 +126,25 @@ import { PiHandSwipeRightBold } from "react-icons/pi";
         "/assets/projects/IncredibleMinecraft.avif",
         "/assets/projects/legasse.jpg",
         "/assets/projects/SpaceLabs.avif"
+      ],
+      sistemas: [
+        "/assets/projects/SpaceLabs.avif",
+        "/assets/projects/AmazingEmpresarial.avif",
+        "/assets/projects/Greenleaf.avif",
+        "/assets/projects/legasse.jpg"
       ]
+    };
+
+    const overlayVariants = {
+      hidden: { 
+        opacity: 0,
+      },
+      visible: {
+        opacity: 1,
+        transition: {
+          duration: 0.2
+        }
+      }
     };
 
     return (
@@ -348,9 +373,21 @@ import { PiHandSwipeRightBold } from "react-icons/pi";
                     className={`text-[#ccc] w-full md:w-auto ${selectedCategory === "modelos" ? "bg-indigo-600 text-white" : "hover:bg-indigo-600 hover:text-white"} duration-300 transition-all font-poppins px-6 py-3 flex items-center justify-center md:justify-start gap-2`}
                   >
                     <motion.span variants={iconVariants}>
-                      <CgWebsite className="text-xl" />
+                      <MdOutlineDesignServices className="text-xl" />
                     </motion.span>
                     Modelos
+                  </motion.button>
+                  <motion.button 
+                    variants={buttonVariants}
+                    whileHover="hover"
+                    whileTap="tap"
+                    onClick={() => setSelectedCategory("sistemas")}
+                    className={`text-[#ccc] w-full md:w-auto ${selectedCategory === "sistemas" ? "bg-indigo-600 text-white" : "hover:bg-indigo-600 hover:text-white"} duration-300 transition-all font-poppins px-6 py-3 flex items-center justify-center md:justify-start gap-2`}
+                  >
+                    <motion.span variants={iconVariants}>
+                      <LiaNetworkWiredSolid className="text-xl" />
+                    </motion.span>
+                    Sistemas
                   </motion.button>
                 </div>
 
@@ -391,15 +428,10 @@ import { PiHandSwipeRightBold } from "react-icons/pi";
                         ) : 
                         index === 2 ? 'md:col-span-4 h-[300px]' : 'md:col-span-8 h-[300px]'
                       }`}
-                      whileHover={{ 
-                        scale: 1.01,
-                        transition: {
-                          duration: 0.2,
-                          ease: "easeOut"
-                        }
-                      }}
-                      layout="position"
-                      layoutDependency={selectedCategory}
+                      onHoverStart={() => setHoveredIndex(index)}
+                      onHoverEnd={() => setHoveredIndex(null)}
+                      whileHover={{ scale: 1.02 }}
+                      onClick={() => setSelectedImage(image)}
                     >
                       <Image 
                         src={image} 
@@ -409,6 +441,24 @@ import { PiHandSwipeRightBold } from "react-icons/pi";
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         priority={index === 0}
                       />
+                      <AnimatePresence>
+                        {hoveredIndex === index && (
+                          <motion.div 
+                            className="absolute inset-0 bg-black/40 backdrop-blur-[2px] flex items-center justify-center"
+                            initial="hidden"
+                            animate="visible"
+                            exit="hidden"
+                            variants={overlayVariants}
+                          >
+                            <motion.button
+                              className="bg-indigo-600/80 p-3 rounded-full flex items-center justify-center hover:bg-indigo-500 transition-all duration-300 hover:scale-110"
+                              whileTap={{ scale: 0.95 }}
+                            >
+                              <CgArrowsExpandUpRight className="w-6 h-6 text-white" />
+                            </motion.button>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
                     </motion.div>
                   ))}
                 </motion.div>
@@ -416,6 +466,54 @@ import { PiHandSwipeRightBold } from "react-icons/pi";
             </div>
           </div>
         </div>
+
+        <AnimatePresence>
+          {selectedImage && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setSelectedImage(null)}
+              className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4 cursor-pointer"
+            >
+              <motion.div
+                initial={{ scale: 0.8 }}
+                animate={{ scale: 1 }}
+                exit={{ scale: 0.8 }}
+                className="relative max-w-4xl w-full max-h-[80vh] aspect-auto bg-black/40 rounded-xl overflow-hidden"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <Image
+                  src={selectedImage}
+                  alt="Projeto em tamanho completo"
+                  className="object-contain w-full h-full"
+                  width={1280}
+                  height={720}
+                />
+                <motion.button
+                  onClick={() => setSelectedImage(null)}
+                  className="absolute top-6 right-6 text-white bg-black/60 hover:bg-black/80 rounded-full p-3 backdrop-blur-sm transition-all duration-300 hover:scale-110 border border-white/20"
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    className="h-6 w-6" 
+                    fill="none" 
+                    viewBox="0 0 24 24" 
+                    stroke="currentColor"
+                    strokeWidth={1.5}
+                  >
+                    <path 
+                      strokeLinecap="round" 
+                      strokeLinejoin="round" 
+                      d="M6 18L18 6M6 6l12 12" 
+                    />
+                  </svg>
+                </motion.button>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </motion.section>
     );
   };

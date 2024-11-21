@@ -332,6 +332,9 @@ const FeatureCard = ({
   };
 
   const getTooltipClass = () => {
+    if (isMobile) {
+      return "fixed left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2";
+    }
     return "left-1/2 bottom-full mb-2 transform -translate-x-1/2";
   };
 
@@ -382,7 +385,7 @@ const FeatureCard = ({
       <AnimatePresence>
         {showTooltip && (
           <motion.div
-            className={`absolute ${getTooltipClass()} bg-[#121212] text-white p-3.5 rounded-md shadow-lg w-64 z-50`}
+            className={`${isMobile ? 'fixed' : 'absolute'} ${getTooltipClass()} bg-[#121212] text-white p-3.5 rounded-md shadow-lg w-64 z-50`}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}

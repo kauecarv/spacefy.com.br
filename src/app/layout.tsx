@@ -38,7 +38,7 @@ export const metadata: Metadata = {
   keywords: ["spacefy", "soluções digitais", "desenvolvimento web", "transformação digital", "tecnologia empresarial"],
   openGraph: {
     title: "Spacefy — Transformação Digital",
-    siteName: "Spacefy 2024 © Excelência em Tecnologia",
+    siteName: "Spacefy | Excelência em Tecnologia",
     url: "https://spacefy.com.br",
     locale: "pt_BR",
     description:
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
       "Desenvolvemos soluções digitais inovadoras que transformam negócios. Expertise em tecnologia de ponta para resultados extraordinários.",
     card: "summary_large_image",
     images: ["/logo/website-banner.png"],
-  },
+  }
 };
 
 export default function RootLayout({
