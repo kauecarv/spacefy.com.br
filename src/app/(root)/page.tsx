@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaDiscord, FaInstagram, FaLinkedin, FaWhatsapp } from "react-icons/fa6";
+import { FaDiscord, FaFolderOpen, FaInstagram, FaLinkedin, FaWhatsapp } from "react-icons/fa6";
 import { GiRoundStar } from "react-icons/gi";
 import Image from "next/image";
 import MoreSales from "./sections/more-sales/page";
@@ -92,10 +92,18 @@ export default function Home() {
             variants={fadeInUp}
             transition={{ delay: 0.3, duration: 0.8, ease: "easeOut" }}
           >
-            <FaInstagram className="w-6 h-6 md:w-8 md:h-8 transition duration-300 hover:scale-110 cursor-pointer hover:text-[#717BFE]" />
-            <FaDiscord className="w-6 h-6 md:w-8 md:h-8 transition duration-300 hover:scale-110 cursor-pointer hover:text-[#717BFE]" />
-            <FaWhatsapp className="w-6 h-6 md:w-8 md:h-8 transition duration-300 hover:scale-110 cursor-pointer hover:text-[#717BFE]" />
-            <FaLinkedin className="w-6 h-6 md:w-8 md:h-8 transition duration-300 hover:scale-110 cursor-pointer hover:text-[#717BFE]" />
+            <Link href="https://instagram.com/spacefy_digital" target="_blank" rel="noopener noreferrer">
+              <FaInstagram className="w-6 h-6 md:w-8 md:h-8 transition duration-300 hover:scale-110 cursor-pointer hover:text-[#717BFE]" />
+            </Link>
+            <Link href="https://discord.gg/Qby9JecQSW" target="_blank" rel="noopener noreferrer">
+              <FaDiscord className="w-6 h-6 md:w-8 md:h-8 transition duration-300 hover:scale-110 cursor-pointer hover:text-[#717BFE]" />
+            </Link>
+            <Link href="https://wa.me/5581997133518" target="_blank" rel="noopener noreferrer">
+              <FaWhatsapp className="w-6 h-6 md:w-8 md:h-8 transition duration-300 hover:scale-110 cursor-pointer hover:text-[#717BFE]" />
+            </Link>
+            <Link href="/projetos" target="_blank" rel="noopener noreferrer">
+              <FaFolderOpen className="w-6 h-6 md:w-8 md:h-8 transition duration-300 hover:scale-110 cursor-pointer hover:text-[#717BFE]" />
+            </Link>
           </motion.div>
           
           <div className="flex flex-col sm:flex-row sm:items-start sm:justify-start md:hidden mx-auto lg:mx-0 items-center justify-center text-center gap-2">

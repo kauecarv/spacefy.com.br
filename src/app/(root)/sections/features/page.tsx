@@ -333,7 +333,7 @@ const FeatureCard = ({
 
   const getTooltipClass = () => {
     if (isMobile) {
-      return "fixed left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2";
+      return "fixed left-1/2 bottom-[30%] transform -translate-x-1/2";
     }
     return "left-1/2 bottom-full mb-2 transform -translate-x-1/2";
   };
@@ -351,7 +351,7 @@ const FeatureCard = ({
   return (
     <motion.div
       id={title}
-      className={`feature-card bg-[#121212] p-[8px] px-4 rounded-lg inline-flex items-center justify-center cursor-pointer ${
+      className={`feature-card bg-[#121212] p-[8px] px-4 rounded-lg inline-flex items-center justify-center cursor-pointer select-none ${
         className || ""
       }`}
       variants={{
@@ -385,7 +385,9 @@ const FeatureCard = ({
       <AnimatePresence>
         {showTooltip && (
           <motion.div
-            className={`${isMobile ? 'fixed' : 'absolute'} ${getTooltipClass()} bg-[#121212] text-white p-3.5 rounded-md shadow-lg w-64 z-50`}
+            className={`${
+              isMobile ? 'fixed' : 'absolute'
+            } ${getTooltipClass()} bg-[#121212] text-white p-3.5 rounded-md shadow-lg w-64 z-[9999] select-none pointer-events-none`}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
