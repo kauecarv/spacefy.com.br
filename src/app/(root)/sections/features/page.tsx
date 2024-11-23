@@ -333,7 +333,7 @@ const FeatureCard = ({
 
   const getTooltipClass = () => {
     if (isMobile) {
-      return "fixed left-1/2 bottom-[30%] transform -translate-x-1/2";
+      return "fixed left-[20%] bottom-[30%] transform -translate-x-1/2";
     }
     return "left-1/2 bottom-full mb-2 transform -translate-x-1/2";
   };
