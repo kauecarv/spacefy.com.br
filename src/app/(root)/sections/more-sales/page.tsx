@@ -67,7 +67,7 @@ const MoreSales = () => {
           className="text-white text-center text-3xl md:text-5xl lg:text-6xl font-poppins font-semibold leading-tight max-w-5xl mx-auto"
         >
           <motion.span variants={textVariants} className="inline-block">
-            Aumente suas vendas em até <span className="text-[#4F46E5] font-bold text-7xl">60%</span> com um site impactante!
+            Aumente seu público em até <span className="text-[#4F46E5] font-bold text-7xl">60%</span> com um site impactante!
           </motion.span>
         </motion.div>
       </div>

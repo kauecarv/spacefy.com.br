@@ -283,7 +283,7 @@ const Projects = () => {
                       variants={overlayVariants}
                     >
                       <motion.button
-                        className="bg-indigo-600/80 p-3 rounded-full flex items-center justify-center hover:bg-indigo-500 transition-all duration-300 hover:scale-110"
+                        className="bg-indigo-700 p-3 rounded-full flex items-center justify-center hover:bg-indigo-500 transition-all duration-300 hover:scale-110"
                         whileTap={{ scale: 0.95 }}
                       >
                         <CgArrowsExpandUpRight className="w-6 h-6 text-white" />
