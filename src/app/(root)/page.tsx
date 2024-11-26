@@ -99,14 +99,16 @@ export default function Home() {
             <Link href="https://discord.gg/Qby9JecQSW" target="_blank" rel="noopener noreferrer">
               <FaDiscord className="w-6 h-6 md:w-8 md:h-8 transition duration-300 hover:scale-110 cursor-pointer hover:text-[#717BFE]" />
             </Link>
-            <Link href="https://wa.me/5581997133518" target="_blank" rel="noopener noreferrer">
+
+            <Link href="https://wa.me/+556281615951?text=Olá, gostaria de falar com vocês."
+            target="_blank">
               <FaWhatsapp className="w-6 h-6 md:w-8 md:h-8 transition duration-300 hover:scale-110 cursor-pointer hover:text-[#717BFE]" />
             </Link>
             <Link href="/projetos" target="_blank" rel="noopener noreferrer">
               <RiMacbookLine className="w-6 h-6 md:w-8 md:h-8 transition duration-300 hover:scale-110 cursor-pointer hover:text-[#717BFE]" />
             </Link>
           </motion.div>
-          
+
           <div className="flex flex-col sm:flex-row sm:items-start sm:justify-start md:hidden mx-auto lg:mx-0 items-center justify-center text-center gap-2">
             <div className="relative -mt-1 flex -space-x-3">
               <Link href="#avaliacoes">
@@ -162,7 +164,7 @@ export default function Home() {
               <GiRoundStar className="text-spacefy" />
               <GiRoundStar className="text-spacefy" />
               <GiRoundStar className="text-spacefy" />
-              
+
               <motion.span
                 className="text-[#fff9] text-xs font-dmsans font-normal"
                 initial={{ opacity: 0, y: 20 }}
@@ -303,18 +305,18 @@ export default function Home() {
             Somos especialistas em design e desenvolvimento web, criando soluções únicas que impulsionam seu negócio e encantam seus clientes.
           </p>
 
-         
+
         </motion.div>
       </section>
 
-        <MoreSales />
-        <AboutUs />
-        <Features/>
-        <OurServices />
-        <Projects />
-        <Reviews />
-        <ContactUs />
-        <Footer />
-         </main>
+      <MoreSales />
+      <AboutUs />
+      <Features />
+      <OurServices />
+      <Projects />
+      <Reviews />
+      <ContactUs />
+      <Footer />
+    </main>
   );
 }

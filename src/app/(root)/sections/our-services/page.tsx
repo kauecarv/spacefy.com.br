@@ -1,13 +1,13 @@
 "use client"
 import { FiSmile } from "react-icons/fi";
 import { useState } from "react";
-import { CgArrowsExpandUpRight } from "react-icons/cg";
 import { motion, AnimatePresence, useInView } from "framer-motion";
+import Image from "next/image";
+import { useRef } from "react";
+import { AiOutlineRight } from "react-icons/ai";
 import { MdOutlineEmojiPeople } from "react-icons/md";
 import { RiTimerLine } from "react-icons/ri";
 import { TbEyeShare } from "react-icons/tb";
-import Image from "next/image";
-import { useRef } from "react";
 
 const OurServices = () => {
   const [expandedService, setExpandedService] = useState<string | null>(null);
@@ -55,33 +55,36 @@ const OurServices = () => {
       number: "01",
       title: "Sites",
       description: "Criamos sites personalizados e responsivos que refletem a identidade da sua marca e oferecem uma experiência excepcional ao usuário.",
-      image: "/assets/projects/legasse.jpg",      time: "34 dias",
-      client: "Andrea Montini", 
-      views: "27.2K+"
+      image: "/assets/projects/legasse.jpg",      
+      time: "27 dias",
+      client: "Legasse",
+      views: "32.6K+"
     },
     {
       number: "02",
       title: "Sistemas",
       description: "Desenvolvemos sistemas robustos e escaláveis para otimizar seus processos de negócio e aumentar a eficiência operacional.",
-      image: "/assets/projects/SpaceLabs.avif",      time: "60 dias",
-      client: "TechCorp Ltda.",
-      views: "15.8K+"
+      image: "/assets/projects/LabsPainelDeControle.avif",
+      time: "34 dias",
+      client: "SpaceLabs",
+      views: "46.2K+"
     },
     {
       number: "03", 
       title: "Modelos Estáticos",
       description: "Oferecemos modelos estáticos elegantes e de alto desempenho, perfeitos para apresentar informações de forma clara e eficaz.",
-      image: "/assets/projects/LabsPainelDeControle.avif",      time: "21 dias",
-      client: "Design Studio",
-      views: "42.5K+"
+      image: "/assets/projects/renato.png",
+      time: "16 dias",
+      client: "Renato Amaral",
+      views: "25.8K+"
     },
     {
       number: "04",
       title: "Modelos Interativos",
       description: "Nossos modelos interativos proporcionam uma experiência envolvente e dinâmica, permitindo que seus usuários interajam de forma intuitiva com seu conteúdo.",
       image: "/assets/projects/Greenleaf.avif",
-      time: "45 dias",
-      client: "Interativa S.A.",
+      time: "22 dias",
+      client: "Greenleaf",
       views: "38.9K+"
     },
   ];
@@ -151,12 +154,17 @@ const ServiceItem = ({ number, title, description, image, time, client, views, i
   isExpanded: boolean;
   onToggle: () => void;
 }) => {
+  const [showFullImage, setShowFullImage] = useState(false);
+
+  const handleCloseModal = () => {
+    setShowFullImage(false);
+  };
+
   return (
     <motion.div 
       className={`group flex flex-col w-full sm:w-screen sm:max-w-4xl rounded-xl px-4 sm:px-8 py-4 sm:py-6 transition-all duration-500 border bg-[#111111] border-[#181818] ${isExpanded ? '' : 'hover:bg-indigo-600'}`}
       layout
       transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
-      whileHover={{ scale: isExpanded ? 1 : 1.02 }}
     >
       <div className="flex justify-between items-center w-full cursor-pointer" onClick={onToggle}>
         <div className="flex items-center w-full">
@@ -174,8 +182,8 @@ const ServiceItem = ({ number, title, description, image, time, client, views, i
           transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
           whileHover={{ scale: 1.1 }}
         >
-          <CgArrowsExpandUpRight size={20} className="sm:hidden" />
-          <CgArrowsExpandUpRight size={28} className="hidden sm:block" />
+          <AiOutlineRight size={20} className="sm:hidden text-white" />
+          <AiOutlineRight size={28} className="hidden sm:block text-white" />
         </motion.div>
       </div>
       <AnimatePresence mode="wait">
@@ -199,16 +207,18 @@ const ServiceItem = ({ number, title, description, image, time, client, views, i
                 </motion.p>
                 <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
                   <motion.div 
-                    className="aspect-w-16 aspect-h-9 relative w-full sm:w-3/4 h-[200px] sm:h-[340px]"
-                    whileHover={{ scale: 1.05 }}
+                    className="aspect-w-16 aspect-h-9 relative w-full sm:w-3/4 h-[200px] sm:h-[340px] transition-opacity duration-300 group-hover:opacity-70"
+                    whileHover={{ opacity: 0.7 }}
                     transition={{ duration: 0.3, ease: "easeInOut" }}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
+                    initial={{ opacity: 1 }}
+                    animate={{ opacity: 1 }}
                   >
                     <Image 
                       src={image}
                       alt={title} 
-                      layout="fill"
+                      layout="responsive"
+                      width={800}
+                      height={450}
                       objectFit="cover"
                       className="rounded-lg"
                     />

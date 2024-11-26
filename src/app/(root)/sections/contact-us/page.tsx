@@ -122,7 +122,7 @@ const ContactUs = () => {
             }}
           >
             <Link
-              href="https://wa.me/5511999999999"
+              href="https://calendly.com/spacefy/30min"
               target="_blank"
               className="py-3 px-6 inline-flex items-center justify-center w-full sm:w-auto gap-2 bg-white text-black font-poppins font-normal text-sm rounded-xl"
             >

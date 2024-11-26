@@ -5,7 +5,8 @@ import { motion } from 'framer-motion';
 
 const WhatsAppButton = () => {
   return (
-    <Link href="https://wa.me/55XXXXXXXXXX" target="_blank" >
+    <Link href="https://wa.me/+556281615951?text=Olá, gostaria de falar com vocês."
+    target="_blank" >
       <motion.div
         className="fixed right-8 bottom-6 z-50 bg-white text-black rounded-full p-4 shadow-lg transition duration-300 hover:bg-[#101010] hover:text-white"
         initial={{ opacity: 0, x: 100 }} 

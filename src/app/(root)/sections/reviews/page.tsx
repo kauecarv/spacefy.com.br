@@ -136,6 +136,7 @@ const Reviews = () => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: false, margin: "-50px" }}
       transition={{ duration: 0.5, ease: "easeOut" }}
+      id="reviews"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div

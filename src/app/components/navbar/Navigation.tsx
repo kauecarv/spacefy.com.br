@@ -9,7 +9,7 @@ const NavbarNavigation = () => {
     { label: "Quem Somos?", href: "about-us" },
     { label: "Nossos Serviços", href: "services" },
     { label: "Projetos Entregues", href: "projects" },
-    { label: "Fale Conosco", href: "contact-us" }
+    { label: "Ver Avaliações", href: "reviews" }
   ];
 
   return (
