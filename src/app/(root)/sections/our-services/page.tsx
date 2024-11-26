@@ -154,11 +154,7 @@ const ServiceItem = ({ number, title, description, image, time, client, views, i
   isExpanded: boolean;
   onToggle: () => void;
 }) => {
-  const [showFullImage, setShowFullImage] = useState(false);
 
-  const handleCloseModal = () => {
-    setShowFullImage(false);
-  };
 
   return (
     <motion.div 

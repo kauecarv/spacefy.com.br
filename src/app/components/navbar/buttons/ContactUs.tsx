@@ -12,7 +12,7 @@ const ContactUs = () => {
       transition={{ duration: 0.3, ease: "easeOut" }}
       className="z-50"  
     >
-      <a
+      <Link
         href="https://wa.me/+556281615951?text=Olá, gostaria de falar com vocês."
         target="_blank"
         className="py-2 px-4 md:py-3 md:px-5 hidden sm:inline-flex bg-white text-black rounded-xl text-sm font-poppins font-medium items-center gap-2 transition duration-300 hover:scale-105 hover:bg-black hover:text-white"  
@@ -20,7 +20,7 @@ const ContactUs = () => {
   
           <FaHeadphonesAlt />
         <span className="whitespace-nowrap">Fale Conosco</span> 
-      </a>
+      </Link>
     </motion.div>
   );
 };
