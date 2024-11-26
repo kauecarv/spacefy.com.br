@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/react"
 import NavbarComponent from "./components/navbar/NavbarComponent";
 import WhatsAppButton from "./components/Whatsapp";
 import { DM_Sans, Poppins } from "next/font/google";
@@ -66,6 +67,7 @@ export default function RootLayout({
         {children}
         <ScrollToTop />
         <WhatsAppButton />
+        <Analytics />
       </body>
     </html>
   );
