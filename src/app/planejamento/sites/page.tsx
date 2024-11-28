@@ -83,7 +83,7 @@ const Sites = () => {
 
   const handleSendRequest = async () => {
     const response = await axios.post(
-      "https://www.renato-amaral.com/briefing/emit",
+      "https://spacefy.shop/briefing/emit",
       { ...formData, from: "sites" }
     );
     return response;
