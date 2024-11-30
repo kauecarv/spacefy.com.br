@@ -303,7 +303,7 @@ const Modelos = () => {
       handleSendRequest().then(() => {
         setIsLoading(false);
         setShowSuccess(true);
-        handleSendRequest();
+        
 
         setTimeout(() => {
           setShowSuccess(false);

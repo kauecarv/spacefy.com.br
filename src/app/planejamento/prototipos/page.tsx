@@ -285,7 +285,7 @@ const Prototipos = () => {
       handleSendRequest().then(() => {
         setIsLoading(false);
         setShowSuccess(true);
-        handleSendRequest();
+        
 
         // Após 3.5 segundos, esconde o tooltip e mostra a tela de agradecimento
         setTimeout(() => {
