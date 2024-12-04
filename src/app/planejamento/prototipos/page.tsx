@@ -58,6 +58,7 @@ const Prototipos = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [showThanks, setShowThanks] = useState(false);
+  const [showErrors, setShowErrors] = useState(false);
   const [formData, setFormData] = useState({
     nome: "",
     telefone: "",
@@ -77,6 +78,8 @@ const Prototipos = () => {
     left: number;
     width: number;
   } | null>(null);
+
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   const handleSendRequest = async () => {
     const response = await axios.post(
@@ -274,24 +277,93 @@ const Prototipos = () => {
     }
   };
 
-  const handleNext = () => {
-    if (!isCurrentStepValid()) {
-      return;
+  const validateEmail = (email: string) => {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+  };
+
+  const validatePhone = (phone: string) => {
+    const re = /^[0-9]+$/;
+    return re.test(phone);
+  };
+
+  const showToast = (message: string) => {
+    setToastMessage(message);
+    setTimeout(() => setToastMessage(null), 3000);
+  };
+
+  // Variantes de animação para o toast
+  const toastVariants = {
+    initial: { 
+      opacity: 0,
+      x: 50,
+      scale: 0.95,
+      filter: "blur(8px)"
+    },
+    animate: { 
+      opacity: 1,
+      x: 0,
+      scale: 1,
+      filter: "blur(0px)",
+      transition: {
+        duration: 0.3,
+        ease: "easeOut"
+      }
+    },
+    exit: { 
+      opacity: 0,
+      x: 50,
+      scale: 0.95,
+      filter: "blur(8px)",
+      transition: {
+        duration: 0.2,
+        ease: "easeIn"
+      }
     }
+  };
+
+  const handleNext = () => {
+    setShowErrors(true);
+
+    if (currentStep === 0) {
+      if (!validateEmail(formData.email) || !validatePhone(formData.telefone)) {
+        if (!validateEmail(formData.email)) {
+          showToast("Por favor, insira um e-mail válido");
+        }
+        if (!validatePhone(formData.telefone)) {
+          showToast("Por favor, insira um número de telefone válido");
+        }
+        return;
+      }
+    }
+
+    if (currentStep === 1) {
+      if (formData.referencia === "nao") {
+        setFormData(prev => ({
+          ...prev,
+          referenciaLink: "sem_referencia"
+        }));
+      }
+
+      if (!formData.objetivo || 
+          !formData.referencia || 
+          (formData.referencia === "sim" && !formData.referenciaLink.trim())) {
+        showToast("Por favor, preencha todos os campos obrigatórios");
+        return;
+      }
+    }
+
+    setShowErrors(false);
 
     if (currentStep === steps.length - 1) {
       setIsLoading(true);
-      // Simular uma requisição bem-sucedida
       handleSendRequest().then(() => {
         setIsLoading(false);
         setShowSuccess(true);
-        
 
-        // Após 3.5 segundos, esconde o tooltip e mostra a tela de agradecimento
         setTimeout(() => {
           setShowSuccess(false);
           setShowThanks(true);
-          // Adicionar scroll para o topo
           window.scrollTo({ top: 0, behavior: "smooth" });
         }, 3500);
       });
@@ -1078,6 +1150,99 @@ const Prototipos = () => {
             <span className="font-poppins font-medium">
               Formulário enviado com sucesso!
             </span>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {toastMessage && (
+          <motion.div
+            variants={toastVariants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            className="fixed top-4 right-4 z-50"
+          >
+            <div className="flex items-center gap-3 bg-[#0D0D0E]/95 backdrop-blur-lg border border-red-500/20 
+              px-5 py-4 rounded-xl shadow-[0_8px_32px_rgba(239,68,68,0.15)] min-w-[320px]"
+            >
+              <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-red-500/10">
+                <motion.svg
+                  initial={{ scale: 0.5, opacity: 0 }}
+                  animate={{ 
+                    scale: 1, 
+                    opacity: 1,
+                    transition: { delay: 0.2, duration: 0.2 }
+                  }}
+                  className="w-5 h-5 text-red-500"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </motion.svg>
+              </div>
+
+              <div className="flex-1">
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ 
+                    opacity: 1, 
+                    y: 0,
+                    transition: { delay: 0.1, duration: 0.2 }
+                  }}
+                  className="flex flex-col gap-0.5"
+                >
+                  <span className="text-red-500 font-poppins font-medium text-sm">
+                    Erro de Validação
+                  </span>
+                  <span className="text-gray-400 font-dmsans text-sm">
+                    {toastMessage}
+                  </span>
+                </motion.div>
+              </div>
+
+              <motion.button
+                initial={{ scale: 0.5, opacity: 0 }}
+                animate={{ 
+                  scale: 1, 
+                  opacity: 0.5,
+                  transition: { delay: 0.3, duration: 0.2 }
+                }}
+                whileHover={{ opacity: 1 }}
+                onClick={() => setToastMessage(null)}
+                className="text-gray-500 hover:text-gray-300 transition-colors"
+              >
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </motion.button>
+            </div>
+
+            {/* Linha de progresso animada */}
+            <div className="relative w-full h-0.5 bg-red-500/10 mt-1 rounded-full overflow-hidden">
+              <motion.div
+                initial={{ width: "100%" }}
+                animate={{ width: "0%" }}
+                transition={{ duration: 3, ease: "linear" }}
+                className="absolute top-0 left-0 h-full bg-red-500/50"
+              />
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

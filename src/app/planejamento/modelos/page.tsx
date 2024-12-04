@@ -89,6 +89,8 @@ const Modelos = () => {
     left: number;
     width: number;
   } | null>(null);
+  const [showErrors, setShowErrors] = useState(false);
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   const handleSendRequest = async () => {
     const response = await axios.post(
@@ -148,7 +150,7 @@ const Modelos = () => {
       fields: [
         {
           Icon: HiOutlineViewGrid,
-          placeholder: "Ex: Home, Sobre, Serviços, Blog...",
+          placeholder: "Quantas páginas você quer? Ex: 5",
           type: "text",
           name: "paginas",
           description:
@@ -156,7 +158,7 @@ const Modelos = () => {
         },
         {
           Icon: CgWebsite,
-          placeholder: "Ex: Hero, Galeria, Depoimentos, FAQ...",
+          placeholder: "Quantas seções você gostaria de ter? Ex: 3",
           type: "text",
           name: "secoes",
           description:
@@ -272,10 +274,24 @@ const Modelos = () => {
     },
   };
 
+  const validateEmail = (email: string) => {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+  };
+
+  const validatePhone = (phone: string) => {
+    const re = /^[0-9]+$/;
+    return re.test(phone);
+  };
+
   const isCurrentStepValid = () => {
     switch (currentStep) {
       case 0:
-        return formData.nome && formData.telefone && formData.email;
+        return (
+          formData.nome &&
+          validatePhone(formData.telefone) &&
+          validateEmail(formData.email)
+        );
       case 1:
         return formData.descricao && formData.descricao.trim().length > 0;
       case 2:
@@ -294,17 +310,45 @@ const Modelos = () => {
   };
 
   const handleNext = () => {
-    if (!isCurrentStepValid()) {
-      return;
+    setShowErrors(true);
+    
+    if (currentStep === 0) {
+      if (!validateEmail(formData.email) || !validatePhone(formData.telefone)) {
+        if (!validateEmail(formData.email)) {
+          showToast("Por favor, insira um e-mail válido");
+        }
+        if (!validatePhone(formData.telefone)) {
+          showToast("Por favor, insira um número de telefone válido");
+        }
+        return;
+      }
     }
 
+    if (currentStep === 2) {
+      if (formData.referencia === "nao") {
+        setFormData(prev => ({
+          ...prev,
+          referenciaLink: "sem_referencia"
+        }));
+      }
+      
+      if (!formData.paginas.trim() || 
+          !formData.secoes.trim() || 
+          !formData.referencia || 
+          (formData.referencia === "sim" && !formData.referenciaLink.trim())) {
+        showToast("Por favor, preencha todos os campos obrigatórios");
+        return;
+      }
+    }
+
+    setShowErrors(false);
+    
     if (currentStep === steps.length - 1) {
       setIsLoading(true);
       handleSendRequest().then(() => {
         setIsLoading(false);
         setShowSuccess(true);
         
-
         setTimeout(() => {
           setShowSuccess(false);
           setShowThanks(true);
@@ -457,6 +501,41 @@ const Modelos = () => {
     });
 
     setActiveSelect(fieldName);
+  };
+
+  const showToast = (message: string) => {
+    setToastMessage(message);
+    setTimeout(() => setToastMessage(null), 3000);
+  };
+
+  // Variantes de animação para o toast
+  const toastVariants = {
+    initial: { 
+      opacity: 0,
+      x: 50,
+      scale: 0.95,
+      filter: "blur(8px)"
+    },
+    animate: { 
+      opacity: 1,
+      x: 0,
+      scale: 1,
+      filter: "blur(0px)",
+      transition: {
+        duration: 0.3,
+        ease: "easeOut"
+      }
+    },
+    exit: { 
+      opacity: 0,
+      x: 50,
+      scale: 0.95,
+      filter: "blur(8px)",
+      transition: {
+        duration: 0.2,
+        ease: "easeIn"
+      }
+    }
   };
 
   if (showThanks) {
@@ -643,6 +722,99 @@ const Modelos = () => {
 
   return (
     <div className="flex flex-col items-center w-full min-h-screen pt-10">
+      <AnimatePresence>
+        {toastMessage && (
+          <motion.div
+            variants={toastVariants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            className="fixed top-4 right-4 z-50"
+          >
+            <div className="flex items-center gap-3 bg-[#0D0D0E]/95 backdrop-blur-lg border border-red-500/20 
+              px-5 py-4 rounded-xl shadow-[0_8px_32px_rgba(239,68,68,0.15)] min-w-[320px]"
+            >
+              <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-red-500/10">
+                <motion.svg
+                  initial={{ scale: 0.5, opacity: 0 }}
+                  animate={{ 
+                    scale: 1, 
+                    opacity: 1,
+                    transition: { delay: 0.2, duration: 0.2 }
+                  }}
+                  className="w-5 h-5 text-red-500"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </motion.svg>
+              </div>
+
+              <div className="flex-1">
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ 
+                    opacity: 1, 
+                    y: 0,
+                    transition: { delay: 0.1, duration: 0.2 }
+                  }}
+                  className="flex flex-col gap-0.5"
+                >
+                  <span className="text-red-500 font-poppins font-medium text-sm">
+                    Erro de Validação
+                  </span>
+                  <span className="text-gray-400 font-dmsans text-sm">
+                    {toastMessage}
+                  </span>
+                </motion.div>
+              </div>
+
+              <motion.button
+                initial={{ scale: 0.5, opacity: 0 }}
+                animate={{ 
+                  scale: 1, 
+                  opacity: 0.5,
+                  transition: { delay: 0.3, duration: 0.2 }
+                }}
+                whileHover={{ opacity: 1 }}
+                onClick={() => setToastMessage(null)}
+                className="text-gray-500 hover:text-gray-300 transition-colors"
+              >
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </motion.button>
+            </div>
+
+            {/* Linha de progresso animada */}
+            <div className="relative w-full h-0.5 bg-red-500/10 mt-1 rounded-full overflow-hidden">
+              <motion.div
+                initial={{ width: "100%" }}
+                animate={{ width: "0%" }}
+                transition={{ duration: 3, ease: "linear" }}
+                className="absolute top-0 left-0 h-full bg-red-500/50"
+              />
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <div className="flex items-center justify-center">
         <p className="font-poppins uppercase font-semibold text-transparent bg-clip-text bg-gradient-to-b from-transparent via-[#4F46E8]/70 to-[#4F46E8] text-[90px] sm:text-[110px] md:text-[300px] lg:text-[316px] leading-[0.9] whitespace-nowrap">
           SPACEFY
@@ -851,15 +1023,24 @@ const Modelos = () => {
                                 [field.name]: e.target.value,
                               })
                             }
-                            className="w-full pl-12 pr-4 py-4 rounded-xl bg-[#0A0A0B]/80 backdrop-blur-sm
-                            border-2 border-[#151516] text-white placeholder-gray-500
+                            className={`w-full pl-12 pr-4 py-4 rounded-xl bg-[#0A0A0B]/80 backdrop-blur-sm
+                            border-2 ${
+                              showErrors && field.name === "email" && !validateEmail(formData.email)
+                                ? "border-red-500"
+                                : "border-[#151516]"
+                            } ${
+                              showErrors && field.name === "telefone" && !validatePhone(formData.telefone)
+                                ? "border-red-500"
+                                : "border-[#151516]"
+                            }
+                            text-white placeholder-gray-500
                             transition-all duration-300 ease-out
                             font-dmsans text-sm
                             focus:outline-none focus:ring-0 focus:ring-offset-0
                             focus:border-spacefy focus:bg-[#0D0D0E]
                             focus:shadow-[0_0_20px_rgba(79,70,232,0.15)]
                             hover:border-spacefy/50 hover:bg-[#0C0C0D]
-                            disabled:opacity-50 disabled:cursor-not-allowed"
+                            disabled:opacity-50 disabled:cursor-not-allowed`}
                           />
                         </div>
                       </motion.div>
@@ -1038,15 +1219,24 @@ const Modelos = () => {
                               [field.name]: e.target.value,
                             })
                           }
-                          className="w-full pl-12 pr-4 py-4 rounded-xl bg-[#0A0A0B]/80 backdrop-blur-sm
-                            border-2 border-[#151516] text-white placeholder-gray-500
+                          className={`w-full pl-12 pr-4 py-4 rounded-xl bg-[#0A0A0B]/80 backdrop-blur-sm
+                            border-2 ${
+                              showErrors && field.name === "email" && !validateEmail(formData.email)
+                                ? "border-red-500"
+                                : "border-[#151516]"
+                            } ${
+                              showErrors && field.name === "telefone" && !validatePhone(formData.telefone)
+                                ? "border-red-500"
+                                : "border-[#151516]"
+                            }
+                            text-white placeholder-gray-500
                             transition-all duration-300 ease-out
                             font-dmsans text-sm
                             focus:outline-none focus:ring-0 focus:ring-offset-0
                             focus:border-spacefy focus:bg-[#0D0D0E]
                             focus:shadow-[0_0_20px_rgba(79,70,232,0.15)]
                             hover:border-spacefy/50 hover:bg-[#0C0C0D]
-                            disabled:opacity-50 disabled:cursor-not-allowed"
+                            disabled:opacity-50 disabled:cursor-not-allowed`}
                         />
                       )}
                     </motion.div>
@@ -1080,14 +1270,12 @@ const Modelos = () => {
               whileHover="hover"
               whileTap="tap"
               onClick={handleNext}
-              disabled={!isCurrentStepValid() || showSuccess}
+              disabled={showSuccess}
               className={`flex-1 px-8 py-4 rounded-xl text-white font-poppins flex items-center justify-center gap-2 text-sm transition-all duration-300 
                 ${
-                  isCurrentStepValid()
-                    ? showSuccess
-                      ? "bg-green-500/50 cursor-not-allowed"
-                      : "bg-spacefy hover:bg-white hover:text-black hover:shadow-[0_0_25px_rgba(79,70,232,0.25)] hover:-translate-y-1"
-                    : "bg-[#0A0A0B]/90 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0"
+                  showSuccess
+                    ? "bg-green-500/50 cursor-not-allowed"
+                    : "bg-spacefy hover:bg-white hover:text-black hover:shadow-[0_0_25px_rgba(79,70,232,0.25)] hover:-translate-y-1"
                 }`}
             >
               <span className="font-medium tracking-wide">
