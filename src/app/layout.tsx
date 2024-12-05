@@ -44,14 +44,27 @@ export const metadata: Metadata = {
     locale: "pt_BR",
     description:
       "Desenvolvemos soluções digitais inovadoras que transformam negócios. Expertise em tecnologia de ponta para resultados extraordinários.",
-    images: ["/logo/website-banner.png"],
+    images: [{
+      url: 'https://spacefy.com.br/logo/website-banner.png',
+      width: 1200,
+      height: 630,
+      alt: 'Spacefy - Transformação Digital',
+      type: 'image/png',
+      secureUrl: 'https://spacefy.com.br/logo/website-banner.png',
+    }],
+    type: 'website',
   },
   twitter: {
     title: "Spacefy | Transformação Digital",
     description:
       "Desenvolvemos soluções digitais inovadoras que transformam negócios. Expertise em tecnologia de ponta para resultados extraordinários.",
     card: "summary_large_image",
-    images: ["/logo/website-banner.png"],
+    images: [{
+      url: 'https://spacefy.com.br/logo/website-banner.png',
+      width: 1200,
+      height: 630,
+      alt: 'Spacefy - Transformação Digital',
+    }],
   }
 };
 
@@ -62,6 +75,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-br" className={`${poppins.variable} ${dmsans.variable}`}>
+      <head>
+        <meta property="og:image:secure_url" content="https://spacefy.com.br/logo/website-banner.png" />
+      </head>
       <body className={`${poppins.variable} ${dmsans.variable}`}>
         <NavbarComponent />
         {children}
