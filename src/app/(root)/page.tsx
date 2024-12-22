@@ -15,7 +15,7 @@ import ContactUs from "./sections/contact-us/page";
 import Footer from "../components/Footer";
 import Reviews from "./sections/reviews/page";
 import { RiMacbookLine } from "react-icons/ri";
-
+import { FaHeadphonesAlt } from "react-icons/fa";
 
 // const words = ["Digital.", "Exclusivo.", "Moderno.", "Eficiente."];
 
@@ -27,7 +27,7 @@ export default function Home() {
   // //     setCurrentWordIndex((prevIndex) =>
   // //       prevIndex === words.length - 1 ? 0 : prevIndex + 1
   // //     );
-  // //   }, 4500); 
+  // //   }, 4500);
 
   // //   return () => clearInterval(interval);
   // // }, []);
@@ -45,11 +45,11 @@ export default function Home() {
   const wordAnimation = {
     initial: { opacity: 0, y: 20 },
     animate: { opacity: 1, y: 0 },
-    exit: { opacity: 0, y: -20 }
+    exit: { opacity: 0, y: -20 },
   };
 
   const [reviewCount, setReviewCount] = useState(1000);
-  const targetValue = 1876;
+  const targetValue = 2172;
 
   useEffect(() => {
     let currentCount = reviewCount;
@@ -72,7 +72,7 @@ export default function Home() {
 
   return (
     <main className="flex flex-col items-center justify-between relative min-h-screen bg-black overflow-hidden">
-      <section className="flex flex-col md:flex-row justify-start w-full max-w-5xl mx-auto items-center py-4 px-4 min-h-fit relative ">
+      <section className="flex flex-col md:flex-row justify-start w-full max-w-5xl mx-auto items-center py-6 px-4 min-h-fit relative ">
         <motion.div
           className="absolute inset-0 flex items-center justify-center z-0 translate-y-[190px]"
           initial="hidden"
@@ -93,19 +93,29 @@ export default function Home() {
             variants={fadeInUp}
             transition={{ delay: 0.3, duration: 0.8, ease: "easeOut" }}
           >
-            <Link href="https://instagram.com/spacefy_digital" target="_blank" rel="noopener noreferrer">
-              <FaInstagram className="w-6 h-6 md:w-8 md:h-8 transition duration-300 hover:scale-110 cursor-pointer hover:text-[#717BFE]" />
-            </Link>
-            <Link href="https://discord.gg/Qby9JecQSW" target="_blank" rel="noopener noreferrer">
+            <Link
+              href="https://discord.gg/Qby9JecQSW"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <FaDiscord className="w-6 h-6 md:w-8 md:h-8 transition duration-300 hover:scale-110 cursor-pointer hover:text-[#717BFE]" />
             </Link>
 
-            <Link href="https://wa.me/+556281615951?text=Olá, gostaria de falar com vocês."
-            target="_blank">
+            <Link
+              href="https://wa.me/+556281615951?text=Olá, gostaria de falar com vocês."
+              target="_blank"
+            >
               <FaWhatsapp className="w-6 h-6 md:w-8 md:h-8 transition duration-300 hover:scale-110 cursor-pointer hover:text-[#717BFE]" />
             </Link>
             <Link href="/projetos" target="_blank" rel="noopener noreferrer">
               <RiMacbookLine className="w-6 h-6 md:w-8 md:h-8 transition duration-300 hover:scale-110 cursor-pointer hover:text-[#717BFE]" />
+            </Link>
+            <Link
+              href="https://wa.me/+556281615951?text=Olá, gostaria de falar com vocês."
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaHeadphonesAlt className="w-6 h-6 md:w-8 md:h-8 transition duration-300 hover:scale-110 cursor-pointer hover:text-[#717BFE]" />
             </Link>
           </motion.div>
 
@@ -137,7 +147,6 @@ export default function Home() {
                   height={40}
                   src="https://randomuser.me/api/portraits/men/52.jpg"
                   alt="Avatar Cliente Nº 3"
-
                   className="w-10 h-10 transition duration-200 hover:border-spacefy rounded-full border-2 border-[#101010]"
                 />
               </Link>
@@ -148,14 +157,13 @@ export default function Home() {
                   height={40}
                   src="https://randomuser.me/api/portraits/men/64.jpg"
                   alt="Avatar Cliente Nº 4"
-
                   className="w-10 h-10 transition duration-200 hover:border-spacefy rounded-full border-2 border-[#101010]"
                 />
               </Link>
             </div>
 
             <motion.div
-              className="flex items-center mb-4 py-2 px-3 max-w-[160px] gap-1 bg-[#101010] rounded-xl"
+              className="flex items-center mb-4 py-2 px-3 max-w-[160px] gap-1 border border-[#222222] bg-[#101010] rounded-xl"
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.3, ease: "easeOut" }}
             >
@@ -209,17 +217,29 @@ export default function Home() {
             variants={fadeInUp}
             transition={{ delay: 0.3, duration: 0.8, ease: "easeOut" }}
           >
-            <Link href="https://instagram.com/spacefy_digital" target="_blank" rel="noopener noreferrer">
-              <FaInstagram className="w-6 h-6 md:w-8 md:h-8 transition duration-300 hover:scale-110 cursor-pointer hover:text-[#717BFE]" />
-            </Link>
-            <Link href="https://discord.gg/Qby9JecQSW" target="_blank" rel="noopener noreferrer">
+            <Link
+              href="https://discord.gg/Qby9JecQSW"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <FaDiscord className="w-6 h-6 md:w-8 md:h-8 transition duration-300 hover:scale-110 cursor-pointer hover:text-[#717BFE]" />
             </Link>
-            <Link href="https://wa.me/5581997133518" target="_blank" rel="noopener noreferrer">
+            <Link
+              href="https://wa.me/5581997133518"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <FaWhatsapp className="w-6 h-6 md:w-8 md:h-8 transition duration-300 hover:scale-110 cursor-pointer hover:text-[#717BFE]" />
             </Link>
             <Link href="/projetos" target="_blank" rel="noopener noreferrer">
               <RiMacbookLine className="w-6 h-6 md:w-8 md:h-8 transition duration-300 hover:scale-110 cursor-pointer hover:text-[#717BFE]" />
+            </Link>
+            <Link
+              href="https://wa.me/+556281615951?text=Olá, gostaria de falar com vocês."
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaHeadphonesAlt className="w-6 h-6 md:w-8 md:h-8 transition duration-300 hover:scale-110 cursor-pointer hover:text-[#717BFE]" />
             </Link>
           </motion.div>
         </div>
@@ -239,7 +259,6 @@ export default function Home() {
                   height={40}
                   src="https://randomuser.me/api/portraits/men/32.jpg"
                   alt="Avatar Cliente Nº 1"
-
                   className="w-10 h-10 transition duration-200 hover:border-spacefy rounded-full border-2 border-[#101010]"
                 />
               </Link>
@@ -250,7 +269,6 @@ export default function Home() {
                   height={40}
                   src="https://randomuser.me/api/portraits/women/44.jpg"
                   alt="Avatar Cliente Nº 2"
-
                   className="w-10 h-10  transition duration-200 hover:border-spacefy rounded-full border-2 border-[#101010]"
                 />
               </Link>
@@ -261,7 +279,6 @@ export default function Home() {
                   height={40}
                   src="https://randomuser.me/api/portraits/men/52.jpg"
                   alt="Avatar Cliente Nº 3"
-
                   className="w-10 h-10 transition duration-200 hover:border-spacefy rounded-full border-2 border-[#101010]"
                 />
               </Link>
@@ -272,14 +289,13 @@ export default function Home() {
                   height={40}
                   src="https://randomuser.me/api/portraits/men/64.jpg"
                   alt="Avatar Cliente Nº 4"
-
                   className="w-10 h-10 transition duration-200 hover:border-spacefy rounded-full border-2 border-[#101010]"
                 />
               </Link>
             </div>
 
             <motion.div
-              className="flex items-center mb-4 py-2 px-3 max-w-[160px] gap-1 bg-[#101010] rounded-xl"
+              className="flex items-center mb-4 py-2 px-3 max-w-[160px] border border-[#222222] gap-1 bg-[#101010] rounded-xl"
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.3, ease: "easeOut" }}
             >
@@ -302,10 +318,10 @@ export default function Home() {
           </div>
 
           <p className="font-poppins font-normal text-center sm:text-start text-sm leading-tight w-full max-w-lg text-[#A3A3A3] mb-4">
-            Somos especialistas em design e desenvolvimento web, criando soluções únicas que impulsionam seu negócio e encantam seus clientes.
+            Somos especialistas em design e desenvolvimento web, criando
+            soluções únicas que impulsionam seu negócio e encantam seus
+            clientes.
           </p>
-
-
         </motion.div>
       </section>
 

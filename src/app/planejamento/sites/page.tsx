@@ -1,6 +1,5 @@
 "use client";
 
-import axios from "axios";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -84,11 +83,28 @@ const Sites = () => {
   const [showErrors, setShowErrors] = useState(false);
 
   const handleSendRequest = async () => {
-    const response = await axios.post(
-      "https://spacefy.shop/briefing/emit",
-      { ...formData, from: "sites" }
-    );
-    return response;
+    try {
+      const response = await fetch('/api/submit-form', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ ...formData, from: 'sites' })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        throw new Error('Erro ao enviar formulário');
+      }
+
+      setShowSuccess(true);
+      return data;
+    } catch (error) {
+      console.error('Erro ao enviar formulário:', error);
+      setToastMessage('Erro ao enviar formulário. Tente novamente.');
+      throw error;
+    }
   };
 
   const steps: Step[] = [
@@ -318,53 +334,28 @@ const Sites = () => {
     setTimeout(() => setToastMessage(null), 3000);
   };
 
-  const handleNext = () => {
-    setShowErrors(true);
-
-    if (currentStep === 0) {
-      if (!validateEmail(formData.email) || !validatePhone(formData.telefone)) {
-        if (!validateEmail(formData.email)) {
-          showToast("Por favor, insira um e-mail válido");
-        }
-        if (!validatePhone(formData.telefone)) {
-          showToast("Por favor, insira um número de telefone válido");
-        }
-        return;
-      }
-    }
-
-    if (currentStep === 1) {
-      if (formData.referencia === "nao") {
-        setFormData(prev => ({
-          ...prev,
-          referenciaLink: "sem_referencia"
-        }));
-      }
-
-      if (!formData.referencia || 
-          (formData.referencia === "sim" && !formData.referenciaLink.trim())) {
-        showToast("Por favor, preencha todos os campos obrigatórios");
-        return;
-      }
-    }
-
-    setShowErrors(false);
-
+  const handleNext = async () => {
     if (currentStep === steps.length - 1) {
-      setIsLoading(true);
-      handleSendRequest().then(() => {
-        setIsLoading(false);
+      try {
+        setIsLoading(true);
+        await handleSendRequest();
         setShowSuccess(true);
-
+        
         setTimeout(() => {
           setShowSuccess(false);
           setShowThanks(true);
           window.scrollTo({ top: 0, behavior: "smooth" });
         }, 3500);
-      });
+      } catch (error) {
+        console.error('Erro ao enviar:', error);
+      } finally {
+        setIsLoading(false);
+      }
       return;
     }
+    
 
+    setShowErrors(false);
     setDirection(1);
     setCurrentStep((prev) => prev + 1);
   };

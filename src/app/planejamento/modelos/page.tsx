@@ -93,11 +93,28 @@ const Modelos = () => {
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   const handleSendRequest = async () => {
-    const response = await axios.post(
-      "https://spacefy.shop/briefing/emit",
-      { ...formData, from: "modelos" }
-    );
-    return response;
+    try {
+      const response = await fetch('/api/submit-form', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ ...formData, from: 'modelos' })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        throw new Error('Erro ao enviar formulário');
+      }
+
+      setShowSuccess(true);
+      return data;
+    } catch (error) {
+      console.error('Erro ao enviar formulário:', error);
+      setToastMessage('Erro ao enviar formulário. Tente novamente.');
+      throw error;
+    }
   };
 
   const steps: Step[] = [

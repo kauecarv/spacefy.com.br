@@ -47,6 +47,32 @@ interface OptionType {
   value: string;
 }
 
+const toastVariants = {
+  initial: {
+    opacity: 0,
+    y: -20,
+    scale: 0.95
+  },
+  animate: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.2,
+      ease: "easeOut"
+    }
+  },
+  exit: {
+    opacity: 0,
+    y: -20,
+    scale: 0.95,
+    transition: {
+      duration: 0.2,
+      ease: "easeIn"
+    }
+  }
+};
+
 const Prototipos = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [direction, setDirection] = useState(0);
@@ -73,13 +99,31 @@ const Prototipos = () => {
     left: number;
     width: number;
   } | null>(null);
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   const handleSendRequest = async () => {
-    const response = await axios.post(
-      "https://spacefy.shop/briefing/emit",
-      { ...formData, from: "sistemas" }
-    );
-    return response;
+    try {
+      const response = await fetch('/api/submit-form', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ ...formData, from: 'sistemas' })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        throw new Error('Erro ao enviar formulário');
+      }
+
+      setShowSuccess(true);
+      return data;
+    } catch (error) {
+      console.error('Erro ao enviar formulário:', error);
+      setToastMessage('Erro ao enviar formulário. Tente novamente.');
+      throw error;
+    }
   };
 
   const steps: Step[] = [
@@ -1102,6 +1146,98 @@ const Prototipos = () => {
             <span className="font-poppins font-medium">
               Formulário enviado com sucesso!
             </span>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {toastMessage && (
+          <motion.div
+            variants={toastVariants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            className="fixed top-4 right-4 z-50"
+          >
+            <div className="flex items-center gap-3 bg-[#0D0D0E]/95 backdrop-blur-lg border border-red-500/20 
+              px-5 py-4 rounded-xl shadow-[0_8px_32px_rgba(239,68,68,0.15)] min-w-[320px]"
+            >
+              <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-red-500/10">
+                <motion.svg
+                  initial={{ scale: 0.5, opacity: 0 }}
+                  animate={{ 
+                    scale: 1, 
+                    opacity: 1,
+                    transition: { delay: 0.2, duration: 0.2 }
+                  }}
+                  className="w-5 h-5 text-red-500"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </motion.svg>
+              </div>
+
+              <div className="flex-1">
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ 
+                    opacity: 1, 
+                    y: 0,
+                    transition: { delay: 0.1, duration: 0.2 }
+                  }}
+                  className="flex flex-col gap-0.5"
+                >
+                  <span className="text-red-500 font-poppins font-medium text-sm">
+                    Erro de Validação
+                  </span>
+                  <span className="text-gray-400 font-dmsans text-sm">
+                    {toastMessage}
+                  </span>
+                </motion.div>
+              </div>
+
+              <motion.button
+                initial={{ scale: 0.5, opacity: 0 }}
+                animate={{ 
+                  scale: 1, 
+                  opacity: 0.5,
+                  transition: { delay: 0.3, duration: 0.2 }
+                }}
+                whileHover={{ opacity: 1 }}
+                onClick={() => setToastMessage(null)}
+                className="text-gray-500 hover:text-gray-300 transition-colors"
+              >
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </motion.button>
+            </div>
+
+            <div className="relative w-full h-0.5 bg-red-500/10 mt-1 rounded-full overflow-hidden">
+              <motion.div
+                initial={{ width: "100%" }}
+                animate={{ width: "0%" }}
+                transition={{ duration: 3, ease: "linear" }}
+                className="absolute top-0 left-0 h-full bg-red-500/50"
+              />
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

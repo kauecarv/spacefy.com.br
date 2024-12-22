@@ -14,16 +14,15 @@ const NavbarNavigation = () => {
 
   return (
     <motion.ul
-      className="hidden xl:flex text-white w-full max-w-4xl bg-[#101010] rounded-full border border-[#272727] py-4 px-6 z-50"
+      className="hidden xl:flex text-white w-full max-w-4xl  py-4 px-6 z-50"
       initial={{ opacity: 0, y: 20, scale: 0.95 }}  
       animate={{ opacity: 1, y: 0, scale: 1 }}  
       transition={{ duration: 0.3, ease: "easeOut" }}
-      whileHover={{ scale: 1.04, borderColor: "#383838" }}  
     >
       {navItems.map((item, index) => (
         <li
           key={index}
-          className="px-4 "  
+          className="px-4 hover:-translate-y-1 transition duration-300"  
         >
           <Link 
             href={`#${item.href}`}
