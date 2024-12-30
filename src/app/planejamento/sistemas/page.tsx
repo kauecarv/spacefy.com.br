@@ -139,7 +139,7 @@ const Prototipos = () => {
         },
         {
           Icon: RiPhoneLine,
-          placeholder: "Seu melhor número para contato",
+          placeholder: "DDD + Número do WhatsApp",
           type: "tel",
           name: "telefone",
           description: "Para atualizações importantes sobre o desenvolvimento.",
